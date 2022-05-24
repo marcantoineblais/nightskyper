@@ -5,8 +5,26 @@ class PagesController < ApplicationController
   end
 
   def search
+    @markers = Marker.all
+    if @markers.geocoded
+      @map_markers = @markers.geocoded.map do |marker|
+        {
+          latitude: marker.latitude,
+          longitude: marker.longitude
+        }
+      end
+    end
   end
 
   def result
+    @markers = Marker.all
+    if @markers.geocoded
+      @map_markers = @markers.geocoded.map do |marker|
+        {
+          latitude: marker.latitude,
+          longitude: marker.longitude
+        }
+      end
+    end
   end
 end
