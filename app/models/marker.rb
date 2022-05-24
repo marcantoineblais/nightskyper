@@ -7,4 +7,6 @@ class Marker < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
 
+  validates :user, :title, :description, presence: true
+  validates :latitude, :longitude, uniqueness: true, presence: true
 end
