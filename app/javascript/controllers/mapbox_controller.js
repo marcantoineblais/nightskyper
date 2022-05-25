@@ -5,7 +5,9 @@ import mapboxgl from "mapbox-gl"
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    bounds: Array,
+    markers: Array,
+    center: Array
   }
 
   connect() {
@@ -18,24 +20,25 @@ export default class extends Controller {
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'));
       if (this.markersValue) {
-        this.#addMarkersToMap()
-        this.#fitMapToMarkers()
+        this.#fitMapToBoundaries()
+        this.#addMarkersToMap(this.markersValue, 'pin-marker')
+        this.#addMarkersToMap([this.centerValue], 'search-marker')
       }
     })
-
   }
 
 
 
-  #addMarkersToMap() {
-    this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker().setLngLat([marker.longitude, marker.latitude]).addTo(this.map)
+  #addMarkersToMap(markers, cssClass) {
+    markers.forEach((marker) => {
+      const markerDiv = document.createElement('div');
+      markerDiv.className = cssClass;
+      new mapboxgl.Marker(markerDiv).setLngLat(marker).addTo(this.map)
     })
   }
 
-  #fitMapToMarkers() {
-    const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([marker.longitude, marker.latitude]))
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 1000 })
+  #fitMapToBoundaries() {
+    const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
+    this.map.fitBounds(bounds, { padding: 15, maxZoom: 12, duration: 1000 })
   }
 }
