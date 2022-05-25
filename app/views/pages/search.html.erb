@@ -8,6 +8,6 @@
     <%= render 'marker-card' %>
   </div>
   <div class="map-container">
-    <%= render 'map', map_boundaries: @map_boundaries, map_markers: @map_markers, key: ENV['MAPBOX_API_KEY'] %>
+    <%= render 'map', center: @center, map_boundaries: @map_boundaries, map_markers: @map_markers, key: ENV['MAPBOX_API_KEY'] %>
   </div>
 </div>
