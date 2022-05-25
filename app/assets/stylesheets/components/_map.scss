@@ -6,4 +6,20 @@
     width: 100%;
     height: 100%;
   }
+
+  .search-marker {
+    background: url("search-marker.png");
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .pin-marker {
+    background: url("pin-marker.png");
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
 }

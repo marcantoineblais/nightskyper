@@ -2,5 +2,5 @@
 
 <%= form_with url: search_path, method: 'GET' do |f| %>
   <%= f.text_field :query, class: 'form-control', placeholder: 'Search an area' %>
-  <%= f.button :submit %>
+  <%= f.submit 'Search', name: nil %>
 <% end %>
