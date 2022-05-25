@@ -6,7 +6,8 @@ export default class extends Controller {
   static values = {
     apiKey: String,
     bounds: Array,
-    markers: Array
+    markers: Array,
+    center: Array
   }
 
   connect() {
@@ -19,7 +20,7 @@ export default class extends Controller {
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'));
       if (this.markersValue) {
-        this.#fitMapToMarkers()
+        this.#fitMapToBoundaries()
         this.#addMarkersToMap()
       }
     })
@@ -30,12 +31,12 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker().setLngLat([marker.longitude, marker.latitude]).addTo(this.map)
+      new mapboxgl.Marker().setLngLat(marker).addTo(this.map)
     })
   }
 
-  #fitMapToMarkers() {
+  #fitMapToBoundaries() {
     const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 12, duration: 1000 })
+    this.map.fitBounds(bounds, { padding: 15, maxZoom: 12, duration: 1000 })
   }
 }
