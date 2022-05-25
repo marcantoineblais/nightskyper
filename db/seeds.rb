@@ -44,8 +44,8 @@ end
 
 30.times do |i|
   Review.create!(
-    user_id: user_list.sample.id,
-    marker_id: i + 1,
+    user: user_list.sample,
+    marker: Marker.all.reject { |m| m.reviews.any?{ |r| r.marker == m } }.sample,
     rating: rand(1..5),
     content: "lorem #{i}",
     date: Date.today
