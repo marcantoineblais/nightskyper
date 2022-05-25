@@ -7,9 +7,16 @@ class PagesController < ApplicationController
   end
 
   def search
-    if params[:query].present?
-      search_by_address
-      @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
+    respond_to do |format|
+      format.html {
+        if params[:query].present?
+          search_by_address
+          @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
+        end
+      }
+      format.json {
+        raise
+      }
     end
   end
 

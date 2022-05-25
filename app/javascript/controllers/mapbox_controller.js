@@ -25,12 +25,17 @@ export default class extends Controller {
         this.#addMarkersToMap([this.centerValue], 'search-marker')
       }
 
-      this.map.on('click', (e) => {
-        const marker = [e.lngLat.lng, e.lngLat.lat]
-        document.querySelector('.search-marker').outerHTML = ""
-        this.#addMarkersToMap([marker], 'search-marker')
-        this.#recenterMapToBondaries(marker)
-      });
+    })
+    this.map.on('click', (e) => {
+      const marker = [e.lngLat.lng, e.lngLat.lat]
+      document.querySelector('.search-marker').outerHTML = ""
+      this.#addMarkersToMap([marker], 'search-marker')
+      this.#recenterMapToBondaries(marker)
+    })
+
+    this.map.on('moveend', () => {
+      this.#getBoundariesCoordinates()
+      this.#updateMarkers()
     })
   }
 
@@ -51,5 +56,23 @@ export default class extends Controller {
   #recenterMapToBondaries(marker) {
     const bounds = new mapboxgl.LngLatBounds([marker, marker])
     this.map.fitBounds(bounds, { zoom: this.map.getZoom(), duration: 1000 })
+  }
+
+  #getBoundariesCoordinates() {
+    const bounds = this.map.getBounds()
+    this.boundaries = [bounds._ne.lng, bounds._ne.lat, bounds._sw.lng, bounds._sw.lat]
+  }
+
+  #updateMarkers() {
+
+    fetch('http://localhost:3000/search', {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: JSON.stringify({ mapBoundaries: this.boundaries })
+    })
+    .then(response => JSON.parse(response))
+    .then((data) => {
+      console.log(data)
+    })
   }
 }
