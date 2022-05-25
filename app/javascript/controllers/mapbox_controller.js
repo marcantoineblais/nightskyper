@@ -5,6 +5,7 @@ import mapboxgl from "mapbox-gl"
 export default class extends Controller {
   static values = {
     apiKey: String,
+    bounds: Array,
     markers: Array
   }
 
@@ -18,8 +19,8 @@ export default class extends Controller {
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'));
       if (this.markersValue) {
-        this.#addMarkersToMap()
         this.#fitMapToMarkers()
+        this.#addMarkersToMap()
       }
     })
 
@@ -34,8 +35,7 @@ export default class extends Controller {
   }
 
   #fitMapToMarkers() {
-    const bounds = new mapboxgl.LngLatBounds()
-    this.markersValue.forEach(marker => bounds.extend([marker.longitude, marker.latitude]))
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 1000 })
+    const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
+    this.map.fitBounds(bounds, { padding: 70, maxZoom: 12, duration: 1000 })
   }
 }
