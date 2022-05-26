@@ -2,21 +2,23 @@ require 'open-uri'
 
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home result search]
+  skip_before_action :verify_authenticity_token
+
 
   def home
   end
 
   def search
     respond_to do |format|
-      format.html {
+      format.html do
         if params[:query].present?
           search_by_address
           @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
         end
-      }
-      format.json {
-        raise
-      }
+      end
+
+      format.json do
+      end
     end
   end
 

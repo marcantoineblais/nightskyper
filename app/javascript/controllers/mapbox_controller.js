@@ -5,6 +5,7 @@ import mapboxgl from "mapbox-gl"
 export default class extends Controller {
   static values = {
     apiKey: String,
+    searchPath: String,
     bounds: Array,
     markers: Array,
     center: Array
@@ -60,19 +61,14 @@ export default class extends Controller {
 
   #getBoundariesCoordinates() {
     const bounds = this.map.getBounds()
-    this.boundaries = [bounds._ne.lng, bounds._ne.lat, bounds._sw.lng, bounds._sw.lat]
+    this.boundsValue = [bounds._ne.lng, bounds._ne.lat, bounds._sw.lng, bounds._sw.lat]
   }
 
   #updateMarkers() {
-
-    fetch('http://localhost:3000/search', {
+    fetch(this.searchPathValue, {
       method: "POST",
-      headers: { "Accept": "application/json" },
-      body: JSON.stringify({ mapBoundaries: this.boundaries })
-    })
-    .then(response => JSON.parse(response))
-    .then((data) => {
-      console.log(data)
+      headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
+      body: JSON.stringify({ mapBoundaries: this.boundsValue })
     })
   }
 }
