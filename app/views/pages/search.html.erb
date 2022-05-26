@@ -3,16 +3,16 @@
 <%= render 'overview', today: @today %>
 
 
-<div class="d-flex">
+<%# <div class="d-flex"> %>
   <div class="cards flex-grow-1">
     <%= render 'marker-card', markers: @markers %>
   </div>
-  <div class="map-container">
+  <%# <div class="map-container">
     <%=
       render 'map',
       search_path: search_path,
       map_boundaries: @map_boundaries,
       center: @center,
       key: ENV['MAPBOX_API_KEY'] %>
-  </div>
-</div>
+  <%# </div>
+</div> %>
