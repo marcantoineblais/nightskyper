@@ -23,6 +23,7 @@ class PagesController < ApplicationController
         render json: { map_markers: @map_markers }
       end
     end
+    @markers = Marker.all
   end
 
   def result
