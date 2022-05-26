@@ -6,6 +6,7 @@ class PagesController < ApplicationController
 
 
   def home
+    @dnone = "d-none"
   end
 
   def search
