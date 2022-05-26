@@ -27,9 +27,11 @@ class PagesController < ApplicationController
   end
 
   def result
-    if params[:query].present?
-      search_by_address
-      markers_by_location
+    coordinates = JSON.parse(params[:coordinates])
+    if coordinates
+      # search_by_address
+      # markers_by_location
+      load_weather_by_address(coordinates[0], coordinates[1])
     end
   end
 

@@ -2,15 +2,35 @@
 
 <h1>result page</h1>
 
-<%= render 'overview' %>
-
-<%= render 'prediction-card' %>
+<div class="col-6">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>"datetime":<%= @today[:datetime] %></li>
+          <li>"tempmax":<%= @today[:tempmax] %></li>
+          <li>"tempmin":<%= @today[:tempmin] %></li>
+          <li>"temp":<%= @today[:temp] %></li>
+          <li>"humidity":<%= @today[:humidity] %></li>
+          <li>"cloudcover":<%= @today[:cloudcover] %></li>
+          <li>"sunrise":<%= @today[:sunrise] %></li>
+          <li>"sunset":<%= @today[:sunset] %></li>
+          <li>"moonphase":<%= @today[:moonphase] %></li>
+          <li>"moonrise":<%= @today[:moonrise] %></li>
+          <li>"moonset":<%= @today[:moonset] %></li>
+          <li>"conditions":<%= @today[:conditions] %></li>
+          <li>"description":<%= @today[:description] %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="d-flex">
   <div class="reviews flex-grow-1">
     <%= render 'review-card' %>
   </div>
-  <div class="map-container">
+  <%# <div class="map-container">
     <%= render 'map', center: @center, map_boundaries: @map_boundaries, map_markers: @map_markers, key: ENV['MAPBOX_API_KEY'] %>
-  </div>
+  <%# </div> %>
 </div>

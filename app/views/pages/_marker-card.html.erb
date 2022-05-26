@@ -2,6 +2,6 @@
 
 <ul>
 <% markers.each do |marker| %>
-  <li><%= link_to marker.title, result_path(marker) %></li>
+  <li><%= link_to marker.title, result_path(coordinates: [marker.latitude, marker.longitude].to_json) %></li>
 <% end %>
 </ul>
