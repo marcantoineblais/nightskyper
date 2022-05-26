@@ -24,9 +24,15 @@ export default class extends Controller {
         this.#addMarkersToMap(this.markersValue, 'pin-marker')
         this.#addMarkersToMap([this.centerValue], 'search-marker')
       }
+
+      this.map.on('click', (e) => {
+        const marker = [e.lngLat.lng, e.lngLat.lat]
+        document.querySelector('.search-marker').outerHTML = ""
+        this.#addMarkersToMap([marker], 'search-marker')
+        this.#recenterMapToBondaries(marker)
+      });
     })
   }
-
 
 
   #addMarkersToMap(markers, cssClass) {
@@ -40,5 +46,10 @@ export default class extends Controller {
   #fitMapToBoundaries() {
     const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
     this.map.fitBounds(bounds, { padding: 15, maxZoom: 12, duration: 1000 })
+  }
+
+  #recenterMapToBondaries(marker) {
+    const bounds = new mapboxgl.LngLatBounds([marker, marker])
+    this.map.fitBounds(bounds, { zoom: this.map.getZoom(), duration: 1000 })
   }
 }
