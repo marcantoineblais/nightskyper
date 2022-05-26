@@ -44,4 +44,14 @@ class PagesController < ApplicationController
     @markers = Marker.where('longitude < ? AND latitude < ? AND longitude > ? AND latitude > ?', *@map_boundaries)
     @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
   end
+
+  def load_weather_by_address(longitude, latitude)
+    weather_url = "https://api.openweathermap.org/data/2.5/weather?appid=#{ENV['open_weather']}&lat=#{latitude}&lon=#{longitude}"
+    doc = JSON.parse(URI.open(weather_url).read)
+    # Varible to show
+    weather_temp = doc['main']['temp']
+    @weather_descrip = doc['weather'].first['description']
+    @weather_humidity = doc['main']['humidity']
+    @temp_in_degre = ((weather_temp - 273.15) * 1.000000).round(2)
+  end
 end
