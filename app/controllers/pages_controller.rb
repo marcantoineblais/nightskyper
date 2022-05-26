@@ -14,6 +14,7 @@ class PagesController < ApplicationController
       format.html do
         if params[:query].present?
           search_by_address
+          load_weather_by_address(*@center)
         end
       end
 
@@ -21,10 +22,12 @@ class PagesController < ApplicationController
         @map_boundaries = params[:map_boundaries]
         @center = params[:center]
         markers_by_location
-        render json: { map_markers: @map_markers }
+        load_weather_by_address(*@center)
+        marker_cards = render_to_string partial: '/pages/marker-card.html.erb', locals: { markers: @markers.first(10) }, layout: false
+        overview = render_to_string partial: '/pages/overview.html.erb', locals: { today: @today }, layout: false
+        render json: { mapMarkers: @map_markers, overview: overview, markerCards: marker_cards }
       end
     end
-    @markers = Marker.all
   end
 
   def result

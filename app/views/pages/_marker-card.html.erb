@@ -1,7 +1,9 @@
-<h3>This is a card</h3>
+<div id="marker-cards" class="cards">
+  <h3>This is a card</h3>
 
-<ul>
-<% markers.each do |marker| %>
-  <li><%= link_to marker.title, result_path(marker) %></li>
-<% end %>
-</ul>
+  <div class="markers d-flex flex-column">
+    <% markers&.each do |marker| %>
+      <div class="card"><%= link_to marker.title, search_path %></div>
+    <% end %>
+  </div>
+</div>
