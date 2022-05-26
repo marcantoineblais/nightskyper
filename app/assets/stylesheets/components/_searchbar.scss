@@ -1,3 +1,23 @@
+.searchbar-form {
+  width: 40%;
+}
+
+.searchbar-input {
+  height: 2rem;
+  border-radius: 8px;
+  ::placeholder {
+    font-family: $body-font;
+  }
+}
+
 .search-btn {
-  border-radius: 5px;
+  margin-left: 0.1rem;
+  font-family: $body-font;
+  color: $NS-darkblue;
+  background-color: $NS-orange;
+  height: 2rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
+
 }

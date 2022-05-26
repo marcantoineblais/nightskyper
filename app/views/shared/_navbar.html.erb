@@ -1,17 +1,16 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "NightSkyper", search_path, class: "navbar-home ps-3" %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon <%= @dnone %>">
+  <div class="container-fluid d-flex align-items-center">
+    <%= link_to "NightSkyper", search_path, class: "navbar-home ps-5" %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <%= form_with url: search_path, class: "d-flex", method: 'GET' do |f| %>
-      <%= f.text_field :query, class: 'form-control', placeholder: 'Search an area' %>
+    <%= form_with url: search_path, class: "d-flex searchbar-form ", method: 'GET' do |f| %>
+      <%= f.text_field :query, class: 'form-control searchbar-input', placeholder: 'Enter a destination' %>
       <%= f.submit 'Search', class: "search-btn", name: nil %>
     <% end %>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <%# <li class="nav-item active">
@@ -20,11 +19,11 @@
           <%# <li class="nav-item">
             <%= link_to "Messages", "#", class: "nav-link" %>
           <%# </li> %>
-          <li class="nav-item dropdown pe-3">
+          <li class="nav-item dropdown pe-5">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "My profile", "#", class: "dropdown-item" %>
-              <%= link_to "My favorites", "#", class: "dropdown-item" %>
+              <%= link_to "My favorites", favorite_path, class: "dropdown-item" %>
               <%= link_to "My reviews", "#", class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
