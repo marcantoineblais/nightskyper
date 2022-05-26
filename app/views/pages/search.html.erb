@@ -5,12 +5,19 @@
 
 <div class="d-flex">
   <div class="cards flex-grow-1">
-    <%= render 'marker-card' %>
+    <%= render 'marker-card', markers: @markers %>
   </div>
   <div class="map-container">
-    <%= render 'map', center: @center, map_boundaries: @map_boundaries, map_markers: @map_markers, key: ENV['MAPBOX_API_KEY'] %>
+    <%=
+      render 'map',
+      search_path: search_path,
+      map_boundaries: @map_boundaries,
+      center: @center,
+      key: ENV['MAPBOX_API_KEY'] %>
+
     <p>Temperature is: <%=  "#{@temp_in_degre}℃" %></p>
     <p>Humidity: <%=  @weather_humidity %> %</p>
     <p>It's: <%=  @weather_descrip %></p>
+
   </div>
 </div>
