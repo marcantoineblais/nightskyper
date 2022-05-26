@@ -2,22 +2,33 @@ require 'open-uri'
 
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home result search]
+  skip_before_action :verify_authenticity_token
+
 
   def home
   end
 
   def search
-    if params[:query].present?
-      search_by_address
-      load_weather_by_address(@center[0], @center[1])
-      @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
+    respond_to do |format|
+      format.html do
+        if params[:query].present?
+          search_by_address
+        end
+      end
+
+      format.json do
+        @map_boundaries = params[:map_boundaries]
+        @center = params[:center]
+        markers_by_location
+        render json: { map_markers: @map_markers }
+      end
     end
   end
 
   def result
     if params[:query].present?
       search_by_address
-      @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
+      markers_by_location
     end
   end
 
@@ -27,7 +38,11 @@ class PagesController < ApplicationController
     @center = doc['features'].first['center']
     bounds = doc['features'].first['bbox']
     @map_boundaries = bounds || [@center[0] - 0.022, @center[1] - 0.022, @center[0] + 0.022, @center[1] + 0.022]
-    @markers = Marker.where('longitude > ? AND latitude > ? AND longitude < ? AND latitude < ?', *@map_boundaries)
+  end
+
+  def markers_by_location
+    @markers = Marker.where('longitude < ? AND latitude < ? AND longitude > ? AND latitude > ?', *@map_boundaries)
+    @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
   end
 
   def load_weather_by_address(longitude, latitude)
