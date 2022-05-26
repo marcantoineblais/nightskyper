@@ -1,6 +1,6 @@
 <h2>Search page</h2>
 
-<%= render 'overview' %>
+<%= render 'overview', today: @today %>
 
 
 <div class="d-flex">
@@ -14,10 +14,5 @@
       map_boundaries: @map_boundaries,
       center: @center,
       key: ENV['MAPBOX_API_KEY'] %>
-
-    <p>Temperature is: <%=  "#{@temp_in_degre}℃" %></p>
-    <p>Humidity: <%=  @weather_humidity %> %</p>
-    <p>It's: <%=  @weather_descrip %></p>
-
   </div>
 </div>

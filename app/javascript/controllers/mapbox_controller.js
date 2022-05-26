@@ -73,7 +73,8 @@ export default class extends Controller {
       document.querySelectorAll('.pin-marker').forEach((marker) => {
         marker.outerHTML=""
       })
-      this.#addMarkersToMap(data.map_markers, 'pin-marker')
+      this.#addMarkersToMap(data.mapMarkers, 'pin-marker')
+      console.log(data.overview);
     })
   }
 }

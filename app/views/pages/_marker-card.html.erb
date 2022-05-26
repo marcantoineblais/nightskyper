@@ -1,7 +1,7 @@
 <h3>This is a card</h3>
 
 <ul>
-<% markers.each do |marker| %>
-  <li><%= link_to marker.title, result_path(marker) %></li>
-<% end %>
+  <% markers&.each do |marker| %>
+    <li><%= link_to marker.title, result_path(marker) %></li>
+  <% end %>
 </ul>
