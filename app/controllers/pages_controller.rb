@@ -11,6 +11,7 @@ class PagesController < ApplicationController
       search_by_address
       @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
     end
+    @markers = Marker.all
   end
 
   def result
