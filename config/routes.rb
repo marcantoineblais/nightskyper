@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/search', to: 'pages#search', as: :search
   post '/search', to: 'pages#search'
   get '/result', to: 'pages#result', as: :result
+  resources :favorites, only: %i[index create destroy]
 end
