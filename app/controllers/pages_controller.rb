@@ -15,6 +15,9 @@ class PagesController < ApplicationController
         if params[:query].present?
           search_by_address
           load_weather_by_address(*@center)
+        else
+          @center = [0, 0]
+          @map_boundaries = []
         end
       end
 
@@ -47,7 +50,9 @@ class PagesController < ApplicationController
 
   def markers_by_location
     @markers = Marker.where('longitude < ? AND latitude < ? AND longitude > ? AND latitude > ?', *@map_boundaries)
-    @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
+    @map_markers = @markers.map do |marker|
+      { lon: marker.longitude, lat: marker.latitude, info_window: render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: marker }) }
+    end
   end
 
   def load_weather_by_address(longitude, latitude)
