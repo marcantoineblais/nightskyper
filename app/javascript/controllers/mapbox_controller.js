@@ -7,11 +7,11 @@ export default class extends Controller {
     apiKey: String,
     searchPath: String,
     bounds: Array,
-    markers: Array,
     center: Array
   }
 
   connect() {
+    console.log(document.getElementById('meteo'));
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
@@ -19,27 +19,22 @@ export default class extends Controller {
     })
 
     window.addEventListener("load", () => {
-      window.dispatchEvent(new Event('resize'));
-      if (this.markersValue) {
-        this.#fitMapToBoundaries()
-        this.#addMarkersToMap(this.markersValue, 'pin-marker')
-        this.#addMarkersToMap([this.centerValue], 'search-marker')
-      }
-
+      window.dispatchEvent(new Event('resize'))
+      this.#fitMapToBoundaries()
+      this.#addMarkersToMap([this.centerValue], 'search-marker')
+      this.map.on('moveend', () => {
+        this.#getBoundariesCoordinates()
+        this.#updateMarkers()
+      })
     })
+
     this.map.on('click', (e) => {
-      const marker = [e.lngLat.lng, e.lngLat.lat]
+      this.centerValue = [e.lngLat.lng, e.lngLat.lat]
       document.querySelector('.search-marker').outerHTML = ""
-      this.#addMarkersToMap([marker], 'search-marker')
-      this.#recenterMapToBondaries(marker)
-    })
-
-    this.map.on('moveend', () => {
-      this.#getBoundariesCoordinates()
-      this.#updateMarkers()
+      this.#addMarkersToMap([this.centerValue], 'search-marker')
+      this.#recenterMapToBondaries(this.centerValue)
     })
   }
-
 
   #addMarkersToMap(markers, cssClass) {
     markers.forEach((marker) => {
@@ -68,7 +63,17 @@ export default class extends Controller {
     fetch(this.searchPathValue, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
-      body: JSON.stringify({ mapBoundaries: this.boundsValue })
+      body: JSON.stringify({
+        map_boundaries: this.boundsValue,
+        center: this.centerValue
+      })
+    })
+    .then(res => res.json())
+    .then((data) => {
+      document.querySelectorAll('.pin-marker').forEach((marker) => {
+        marker.outerHTML=""
+      })
+      this.#addMarkersToMap(data.map_markers, 'pin-marker')
     })
   }
 }
