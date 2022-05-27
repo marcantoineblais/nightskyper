@@ -45,9 +45,12 @@ export default class extends Controller {
       .setLngLat([marker.lon, marker.lat])
       .setPopup(popup)
       .addTo(this.map)
-      mapMarker.getElement().addEventListener('click', (e) => {
-        this.#getMarkerInfos([marker.lon, marker.lat])
-      })
+
+      if (cssClass == 'pin-marker') {
+        mapMarker.getElement().addEventListener('click', (e) => {
+          this.#getMarkerInfos([marker.lon, marker.lat])
+        })
+      }
     })
   }
 
