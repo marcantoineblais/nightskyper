@@ -42,16 +42,6 @@ letter_array.each do |letter|
   end
 end
 
-30.times do |i|
-  Review.create!(
-    user: user_list.sample,
-    marker: Marker.all.reject { |m| m.reviews.any?{ |r| r.marker == m } }.sample,
-    rating: rand(1..5),
-    content: "lorem #{i}",
-    date: Date.today
-  )
-end
-
 Marker.all.each do |marker|
   rand(3..5).times do
     Review.create(user: User.all.sample, marker: marker, rating: rand(3..5), content: ['Nice place!', 'Good location', 'Very enjoyable!', 'I took so many pictures!', 'Very wow'].sample, date: Date.today)
