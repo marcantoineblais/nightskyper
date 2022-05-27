@@ -1,4 +1,43 @@
 <div id="overview">
   <h2>Overview</h2>
-  <p><%= today %></p>
+ <div class="cards d-flex flex-column ">
+    <div class="card mb-4 box-shadow">
+      <div class="card-body">
+        <div class="text-center mb-3">
+          <% if Date.parse(today[:datetime]) === Date.today %>
+          <h4>Today</h4>
+          <div>datetime: <%= today[:datetime] %></div>
+          <% elsif Date.parse(today[:datetime]) === Date.tomorrow %>
+           <h4>Tomorrow</h4>
+          <div>datetime: <%= today[:datetime] %></div>
+          <% else %>
+          <h4><%= Date::DAYNAMES[Date.parse(today[:datetime]).wday] %></h4>
+          <div>datetime: <%= today[:datetime] %></div>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+            <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+            <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+            <div>humidity: <%= today[:humidity] %> %</div>
+            <div>cloudcover: <%= today[:cloudcover] %> %</div>
+          </div>
+          <div class="col-4">
+            <div>sunrise: <%= today[:sunrise] %></div>
+            <div>sunset: <%= today[:sunset] %></div>
+            <div>moonphase: <%= today[:moonphase] %></div>
+            <div>moonrise: <%= today[:moonrise] %></div>
+            <div>moonset: <%= today[:moonset] %></div>
+          </div>
+          <div class="col-4">
+            <div>conditions: <%= today[:conditions] %></div>
+            <div>description: <%= today[:description] %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
 </div>
