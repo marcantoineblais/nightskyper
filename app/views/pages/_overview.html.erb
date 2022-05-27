@@ -1,20 +1,21 @@
 <div id="overview">
+<% if today %>
   <h2>Overview</h2>
  <div class="cards d-flex flex-column ">
     <% if today %>
     <div class="card mb-4 box-shadow">
       <div class="card-body">
         <div class="text-center mb-3">
-          <% if Date.parse(today[:datetime]) === Date.today %>
-          <h4>Today</h4>
-          <div>datetime: <%= today[:datetime] %></div>
-          <% elsif Date.parse(today[:datetime]) === Date.tomorrow %>
-           <h4>Tomorrow</h4>
-          <div>datetime: <%= today[:datetime] %></div>
-          <% else %>
-          <h4><%= Date::DAYNAMES[Date.parse(today[:datetime]).wday] %></h4>
-          <div>datetime: <%= today[:datetime] %></div>
-          <% end %>
+            <% if Date.parse(today[:datetime]) === Date.today %>
+            <h4>Today</h4>
+            <div>datetime: <%= today[:datetime] %></div>
+            <% elsif Date.parse(today[:datetime]) === Date.tomorrow %>
+            <h4>Tomorrow</h4>
+            <div>datetime: <%= today[:datetime] %></div>
+            <% else %>
+            <h4><%= Date::DAYNAMES[Date.parse(today[:datetime]).wday] %></h4>
+            <div>datetime: <%= today[:datetime] %></div>
+            <% end %>
         </div>
         <div class="row">
           <div class="col-4">
@@ -40,6 +41,5 @@
     </div>
   <% end %>
 </div>
-
-
+<% end %>
 </div>
