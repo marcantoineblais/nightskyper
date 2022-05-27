@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   resources :favorites, only: %i[index create destroy]
 
-  resources :markers, only: %i[new create]
+  resources :markers, only: %i[new create] do
+    resources :reviews, only: %i[new create]
+  end
 end

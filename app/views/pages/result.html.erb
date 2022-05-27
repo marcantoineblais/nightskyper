@@ -10,4 +10,11 @@
   <div class="reviews flex-grow-1">
     <%= render 'review-card' %>
   </div>
+  <div>
+    <% if @marker  %>
+      <%= link_to 'Add a review', new_marker_review_path(@marker) %>
+    <% else %>
+      <p> No marker</p>
+    <% end %>
+  </div>
 </div>
