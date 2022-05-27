@@ -16,12 +16,14 @@ export default class extends Controller {
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10",
     })
-    this.#fitMapToBoundaries()
 
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'))
+      if (this.boundsValue.length != 0) {
+        this.#fitMapToBoundaries()
       }
-    )
+    })
+
 
     this.map.doubleClickZoom.disable()
 
