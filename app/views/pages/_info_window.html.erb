@@ -1,3 +1,8 @@
 <div>
-  <h3><%= marker.title %></h3>
+  <p><%= marker.title %></p>
+  <% if marker.description %>
+    <%= link_to 'Show more', result_path(coordinates: [marker.longitude, marker.latitude]) %>
+  <% else %>
+    <%= link_to 'Add this marker', new_marker_path(coordinates: [marker.longitude, marker.latitude]) %>
+  <% end %>
 </div>

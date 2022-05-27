@@ -1,1 +1,9 @@
 <h2>prediction card</h2>
+
+<div class="cards d-flex flex-column">
+  <% meteo_prediction.each do |jour| %>
+    <div class="card">
+      <%= jour %>
+    </div>
+  <% end %>
+</div>
