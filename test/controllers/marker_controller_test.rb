@@ -1,6 +1,6 @@
 require "test_helper"
 
-class MarkerControllerTest < ActionDispatch::IntegrationTest
+class MarkersControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
