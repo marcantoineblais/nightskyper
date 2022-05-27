@@ -3,17 +3,18 @@
   background-size: cover;
   height: 100vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hero-title {
-  padding: 100px;
+.hero-title h1 {
   color: $NS-orange;
-
-  & p {
-    color: white
-  }
+  font-size: 63px;
+  padding-bottom: 40px;
 }
 
-.search-bar {
-
+.hero-title p {
+  color: white;
+  font-size: 20px;
 }
