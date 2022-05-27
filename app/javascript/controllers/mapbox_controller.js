@@ -56,12 +56,12 @@ export default class extends Controller {
 
   #fitMapToBoundaries() {
     const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
-    this.map.fitBounds(bounds, { padding: 15, maxZoom: 12, duration: 1000 })
+    this.map.fitBounds(bounds, { padding: 15, duration: 1000 })
   }
 
-  #recenterMapToBondaries(marker) {
+  #recenterMapToBondaries(marker, zoom) {
     const bounds = new mapboxgl.LngLatBounds([marker.lon, marker.lat], [marker.lon, marker.lat])
-    this.map.fitBounds(bounds, { zoom: this.map.getZoom(), duration: 1000 })
+    this.map.fitBounds(bounds, { zoom: zoom, duration: 1000 })
   }
 
   #getBoundariesCoordinates() {
@@ -105,8 +105,8 @@ export default class extends Controller {
       if (document.querySelector('.search-marker')) {
         document.querySelector('.search-marker').outerHTML = ""
       }
-
-      this.#recenterMapToBondaries(data.customMarker)
+      const zoom = this.map.getZoom()
+      this.#recenterMapToBondaries(data.customMarker, zoom)
       this.#addMarkersToMap([data.customMarker], 'search-marker')
 
       if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
@@ -129,7 +129,16 @@ export default class extends Controller {
         document.querySelector('.search-marker').outerHTML = ""
       }
 
-      this.#recenterMapToBondaries(data.customMarker)
+      let zoom
+      if (this.map.getZoom() == 14) {
+        zoom = 18
+      } else if (this.map.getZoom() == 18) {
+        zoom = 10
+      } else {
+        zoom = 14
+      }
+
+      this.#recenterMapToBondaries(data.customMarker, zoom)
 
       if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
         document.getElementById('overview').outerHTML = data.overview
