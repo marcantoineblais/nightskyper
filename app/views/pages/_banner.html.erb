@@ -1,6 +1,14 @@
-<h2>BANNER</h2>
-
-<%= form_with url: search_path, method: 'GET' do |f| %>
-  <%= f.text_field :query, class: 'form-control', placeholder: 'Search an area' %>
-  <%= f.submit 'Search', name: nil %>
-<% end %>
+<div class= "hero-banner">
+  <div class="hero-content">
+    <div class="hero-title">
+      <h1>Nightskyper</h1>
+      <p> Find the perfect place to shoot the stars in the best conditions.</p>
+    </div>
+    <div class="container">
+      <%= form_with url: search_path, method: 'GET' do |f| %>
+        <%= f.text_field :query, class: 'form-control searchbar-input', placeholder: 'Search an area' %>
+        <%= f.submit 'Search', name: nil %>
+      <% end %>
+    </div>
+  </div>
+</div>
