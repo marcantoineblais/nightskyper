@@ -40,6 +40,17 @@
       </div>
     </div>
   <% end %>
+
 </div>
 <% end %>
+  <% if today %>
+    <div class="view-details d-flex justify-content-center <%= @nodetails %>">
+      <%= link_to "View details", "#", class:"NS-button" %>
+    </div>
+  <% end %>
+  <% if today %>
+    <div class="add-favorites d-flex justify-content-center <%= @noaddfav %>">
+      <%= link_to "Add to favorites", favorites_path, class:"NS-button" %>
+    </div>
+  <% end %>
 </div>

@@ -1,3 +1,5 @@
+<% @noaddfav %>
+
 <%= link_to "Back to Search page", search_path %>
 
 <h1>result page</h1>
@@ -12,7 +14,7 @@
   </div>
   <div>
     <% if @marker  %>
-      <%= link_to 'Add a review', new_marker_review_path(@marker) %>
+      <%= link_to 'Add a review', new_marker_review_path(@marker), class: "NS-button" %>
     <% else %>
       <p> No marker</p>
     <% end %>
