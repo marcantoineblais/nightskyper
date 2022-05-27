@@ -1,9 +1,9 @@
+Review.destroy_all
+puts "Reviews detroyed"
 Marker.destroy_all
 puts "Markers destroyed"
 User.destroy_all
 puts "Users destroyed"
-Review.destroy_all
-puts "Reviews detroyed"
 # Favorite.destroy_all
 # puts "Favorites destroyed"
 
