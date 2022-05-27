@@ -16,15 +16,13 @@ export default class extends Controller {
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10",
     })
-    this.#fitMapToBoundaries()
 
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'))
-      }
-    )
+    })
 
+    this.#fitMapToBoundaries()
     this.map.doubleClickZoom.disable()
-
     this.map.on('moveend', () => {
       this.#getBoundariesCoordinates()
       this.#updateMarkers()
@@ -42,23 +40,27 @@ export default class extends Controller {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window)
       markerDiv.className = cssClass;
       const mapMarker = new mapboxgl.Marker(markerDiv)
-      .setLngLat([marker.lon, marker.lat])
-      .setPopup(popup)
-      .addTo(this.map)
+    .setLngLat([marker.lon, marker.lat])
+    .setPopup(popup)
+    .addTo(this.map)
+
+    if (cssClass == 'pin-marker') {
       mapMarker.getElement().addEventListener('click', (e) => {
         this.#getMarkerInfos([marker.lon, marker.lat])
       })
-    })
+    }})
   }
 
   #fitMapToBoundaries() {
+    console.log(this.boundsValue)
     const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
-    this.map.fitBounds(bounds, { padding: 15, maxZoom: 12, duration: 1000 })
+    console.log(bounds)
+    this.map.fitBounds(bounds, { padding: 0, duration: 0 })
   }
 
-  #recenterMapToBondaries(marker) {
+  #recenterMapToBondaries(marker, zoom) {
     const bounds = new mapboxgl.LngLatBounds([marker.lon, marker.lat], [marker.lon, marker.lat])
-    this.map.fitBounds(bounds, { zoom: this.map.getZoom(), duration: 1000 })
+    this.map.fitBounds(bounds, { zoom: zoom, duration: 1000 })
   }
 
   #getBoundariesCoordinates() {
@@ -102,8 +104,8 @@ export default class extends Controller {
       if (document.querySelector('.search-marker')) {
         document.querySelector('.search-marker').outerHTML = ""
       }
-
-      this.#recenterMapToBondaries(data.customMarker)
+      const zoom = this.map.getZoom()
+      this.#recenterMapToBondaries(data.customMarker, zoom)
       this.#addMarkersToMap([data.customMarker], 'search-marker')
 
       if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
@@ -126,7 +128,18 @@ export default class extends Controller {
         document.querySelector('.search-marker').outerHTML = ""
       }
 
-      this.#recenterMapToBondaries(data.customMarker)
+      let zoom
+      if (this.map.getZoom() < 12) {
+        zoom = 12
+      } else if (this.map.getZoom() < 16) {
+        zoom = 16
+      } else if (this.map.getZoom() < 18) {
+        zoom = 18
+      } else {
+        zoom = this.map.getZoom()
+      }
+
+      this.#recenterMapToBondaries(data.customMarker, zoom)
 
       if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
         document.getElementById('overview').outerHTML = data.overview
