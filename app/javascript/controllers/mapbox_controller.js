@@ -15,16 +15,14 @@ export default class extends Controller {
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10",
-      pitch: 60,
-      bearing: -60,
     })
+    this.#fitMapToBoundaries()
 
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'))
       }
     )
 
-    this.#fitMapToBoundaries()
     this.map.doubleClickZoom.disable()
 
     this.map.on('moveend', () => {
@@ -34,27 +32,7 @@ export default class extends Controller {
 
     this.map.on('dblclick', (e) => {
       const coordinates = [e.lngLat.lng, e.lngLat.lat]
-      fetch(this.customMarkerPathValue, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
-        body: JSON.stringify({
-          coordinates: coordinates
-        })
-      })
-      .then(res => res.json())
-      .then((data) => {
-        console.log(data);
-        if (document.querySelector('.search-marker')) {
-          document.querySelector('.search-marker').outerHTML = ""
-        }
-
-        this.#addMarkersToMap([data.customMarker], 'search-marker')
-        this.#recenterMapToBondaries(data.customMarker)
-
-        if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
-          document.getElementById('overview').outerHTML = data.overview
-        }
-      })
+      this.#updateCustomMarker(coordinates)
     })
   }
 
@@ -63,7 +41,13 @@ export default class extends Controller {
       const markerDiv = document.createElement('div');
       const popup = new mapboxgl.Popup().setHTML(marker.info_window)
       markerDiv.className = cssClass;
-      new mapboxgl.Marker(markerDiv).setLngLat([marker.lon, marker.lat]).setPopup(popup).addTo(this.map)
+      const mapMarker = new mapboxgl.Marker(markerDiv)
+      .setLngLat([marker.lon, marker.lat])
+      .setPopup(popup)
+      .addTo(this.map)
+      mapMarker.getElement().addEventListener('click', (e) => {
+        this.#getMarkerInfos([marker.lon, marker.lat])
+      })
     })
   }
 
@@ -101,6 +85,51 @@ export default class extends Controller {
 
       if (document.getElementById('marker-cards') && data.markerCards != document.getElementById('marker-cards').outerHTML) {
         document.getElementById('marker-cards').outerHTML = data.markerCards
+      }
+    })
+  }
+
+  #updateCustomMarker(coordinates) {
+    fetch(this.customMarkerPathValue, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
+      body: JSON.stringify({
+        coordinates: coordinates
+      })
+    })
+    .then(res => res.json())
+    .then((data) => {
+      if (document.querySelector('.search-marker')) {
+        document.querySelector('.search-marker').outerHTML = ""
+      }
+
+      this.#recenterMapToBondaries(data.customMarker)
+      this.#addMarkersToMap([data.customMarker], 'search-marker')
+
+      if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
+        document.getElementById('overview').outerHTML = data.overview
+      }
+    })
+  }
+
+  #getMarkerInfos(coordinates) {
+    fetch(this.customMarkerPathValue, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
+      body: JSON.stringify({
+        coordinates: coordinates
+      })
+    })
+    .then(res => res.json())
+    .then((data) => {
+      if (document.querySelector('.search-marker')) {
+        document.querySelector('.search-marker').outerHTML = ""
+      }
+
+      this.#recenterMapToBondaries(data.customMarker)
+
+      if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
+        document.getElementById('overview').outerHTML = data.overview
       }
     })
   }
