@@ -2,8 +2,7 @@
   <h3>This is a card</h3>
   <div class="markers d-flex flex-column">
     <% markers&.each do |marker| %>
-      <div class="card"><%= link_to marker.title, search_path %></div>
+      <div class="card"><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></div>
     <% end %>
   </div>
 </div>
-
