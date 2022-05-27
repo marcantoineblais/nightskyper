@@ -2,15 +2,12 @@
 
 <h1>result page</h1>
 
-<%= render 'overview' %>
+<%= render 'overview', today: @meteo_prediction.first %>
 
-<%= render 'prediction-card' %>
+<%= render 'prediction-card', meteo_prediction: @meteo_prediction %>
 
 <div class="d-flex">
   <div class="reviews flex-grow-1">
     <%= render 'review-card' %>
-  </div>
-  <div class="map-container">
-    <%= render 'map', center: @center, map_boundaries: @map_boundaries, map_markers: @map_markers, key: ENV['MAPBOX_API_KEY'] %>
   </div>
 </div>
