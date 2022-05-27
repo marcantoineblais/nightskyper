@@ -21,10 +21,10 @@ def select_title_data(inst)
   end
 end
 
-unless User.count.positive? do
-  a = User.create!(email: 'a@a.com', username: 'Atest', password: '123456')
-  b = User.create!(email: 'b@b.com', username: 'Btest', password: '123456')
-  c = User.create!(email: 'c@c.com', username: 'Ctest', password: '123456')
+unless User.count.positive?
+  User.create!(email: 'a@a.com', username: 'Atest', password: '123456')
+  User.create!(email: 'b@b.com', username: 'Btest', password: '123456')
+  User.create!(email: 'c@c.com', username: 'Ctest', password: '123456')
 end
 
 user_list = [User.first, User.second, User.last]
