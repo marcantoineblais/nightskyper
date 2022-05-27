@@ -15,7 +15,7 @@ class PagesController < ApplicationController
           search_by_address
           load_weather_by_address(*@center)
         else
-          @map_boundaries = []
+          @map_boundaries = [-200, -73, 200, 73]
         end
       end
 

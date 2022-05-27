@@ -19,14 +19,10 @@ export default class extends Controller {
 
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'))
-      if (this.boundsValue.length != 0) {
-        this.#fitMapToBoundaries()
-      }
     })
 
-
+    this.#fitMapToBoundaries()
     this.map.doubleClickZoom.disable()
-
     this.map.on('moveend', () => {
       this.#getBoundariesCoordinates()
       this.#updateMarkers()
@@ -44,21 +40,22 @@ export default class extends Controller {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window)
       markerDiv.className = cssClass;
       const mapMarker = new mapboxgl.Marker(markerDiv)
-      .setLngLat([marker.lon, marker.lat])
-      .setPopup(popup)
-      .addTo(this.map)
+    .setLngLat([marker.lon, marker.lat])
+    .setPopup(popup)
+    .addTo(this.map)
 
-      if (cssClass == 'pin-marker') {
-        mapMarker.getElement().addEventListener('click', (e) => {
-          this.#getMarkerInfos([marker.lon, marker.lat])
-        })
-      }
-    })
+    if (cssClass == 'pin-marker') {
+      mapMarker.getElement().addEventListener('click', (e) => {
+        this.#getMarkerInfos([marker.lon, marker.lat])
+      })
+    }})
   }
 
   #fitMapToBoundaries() {
+    console.log(this.boundsValue)
     const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
-    this.map.fitBounds(bounds, { padding: 15, duration: 1000 })
+    console.log(bounds)
+    this.map.fitBounds(bounds, { padding: 0, duration: 0 })
   }
 
   #recenterMapToBondaries(marker, zoom) {
@@ -132,12 +129,14 @@ export default class extends Controller {
       }
 
       let zoom
-      if (this.map.getZoom() == 14) {
+      if (this.map.getZoom() < 12) {
+        zoom = 12
+      } else if (this.map.getZoom() < 16) {
+        zoom = 16
+      } else if (this.map.getZoom() < 18) {
         zoom = 18
-      } else if (this.map.getZoom() == 18) {
-        zoom = 10
       } else {
-        zoom = 14
+        zoom = this.map.getZoom()
       }
 
       this.#recenterMapToBondaries(data.customMarker, zoom)
