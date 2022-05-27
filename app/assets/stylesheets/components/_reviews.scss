@@ -1,0 +1,45 @@
+.review-container {
+  width: 100%;
+  height: auto;
+  background-color: $NS-offwhite;
+  border-radius: 4px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-family: $body-font;
+
+    h2 {
+      color: $NS-darkblue;
+      font-size: 20px;
+      margin: 0;
+      padding-top: 5px;
+      margin-left: 10px;
+    }
+
+    .review-username {
+      margin-bottom: 20px;
+    }
+
+    .review-content {
+      margin-left: 30px;
+    }
+
+    h3 {
+      font-size: 13px;
+      font-weight: lighter;
+      font-style: italic;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .review-image {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+}

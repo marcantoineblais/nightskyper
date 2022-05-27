@@ -6,6 +6,12 @@
 
 <%= render 'prediction-card', meteo_prediction: @meteo_prediction[1..-1].first(6) %>
 
+
+<div class="review-header d-flex justify-content-between">
+<h2>Reviews</h2>
+<a href="#"> Add a review</a>
+</div>
+
 <div class="d-flex">
   <div class="reviews flex-grow-1">
     <%= render 'review-card' %>
