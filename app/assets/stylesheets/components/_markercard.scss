@@ -1,0 +1,48 @@
+.marker-container {
+  height: 119px;
+  width: 819px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+    & h2 {
+      color: $NS-darkblue;
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    & h3 {
+      font-size: 18px
+    }
+
+    & p {
+      font-size: 14px;
+    }
+
+    & h2, h3, p {
+    font-family: $body-font;
+    }
+}
+
+.marker-content {
+  width: 100%;
+}
+
+.marker-card {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.marker-img {
+  width: 202px;
+  height: 119px;
+  margin-right: 1.8rem;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.marker-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating {
+  margin-right: 5rem;
+}
