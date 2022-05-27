@@ -1,24 +1,19 @@
 <div id="marker-cards" class="cards">
-
-
-<div class="marker-container d-flex">
-  <img class= "marker-img"src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
-  <div class="marker-card">
-    <div class="marker-content">
-      <h2>Title</h2>
-      <h3>Description of the marker</h3>
-      <p><em>Location of the marker</em></p>
+  <% markers&.each do |marker| %>
+    <div class="markers d-flex flex-column">
+      <div class="marker-container d-flex">
+        <img class= "marker-img"src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+        <div class="marker-card">
+          <div class="marker-content">
+            <h2><%= link_to marker.title, search_path(marker) %></h2>
+            <h3>Description of the marker</h3>
+              <div class="marker-bottom">
+                <p><em>Location of the marker</em></p>
+                <p class= "rating">Rating</p>
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class= "marker-text">Rating</p>
-  </div>
-</div>
-
-
-
-
-  <div class="markers d-flex flex-column">
-    <% markers&.each do |marker| %>
-      <div class="card"><%= link_to marker.title, search_path %></div>
-    <% end %>
-  </div>
+  <% end %>
 </div>

@@ -21,6 +21,10 @@
     }
 }
 
+.marker-content {
+  width: 100%;
+}
+
 .marker-card {
   display: flex;
   flex-grow: 1;
@@ -32,4 +36,13 @@
   height: 119px;
   margin-right: 1.8rem;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.marker-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating {
+  margin-right: 5rem;
 }
