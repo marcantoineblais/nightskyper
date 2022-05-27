@@ -52,6 +52,11 @@ end
   )
 end
 
+Marker.all.each do |marker|
+  rand(3..5).times do
+    Review.create(user: User.all.sample, marker: marker, rating: rand(3..5), content: ['Nice place!', 'Good location', 'Very enjoyable!', 'I took so many pictures!', 'Very wow'].sample, date: Date.today)
+  end
+end
 
 # http://api.positionstack.com/v1/forward?access_key=a5f3e8675d5ca91c470e9bbdcc288a62&country=CA&query=que
 # http://api.positionstack.com/v1/
