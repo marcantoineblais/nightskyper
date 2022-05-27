@@ -1,11 +1,11 @@
 require 'open-uri'
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[home result search]
+  skip_before_action :authenticate_user!, only: %i[home result search custom_marker]
   skip_before_action :verify_authenticity_token
 
-
   def home
+    @dnone = "d-none"
   end
 
   def search
@@ -13,26 +13,24 @@ class PagesController < ApplicationController
       format.html do
         if params[:query].present?
           search_by_address
+          load_weather_by_address(*@center)
+        else
+          @map_boundaries = []
         end
       end
 
       format.json do
         @map_boundaries = params[:map_boundaries]
-        @center = params[:center]
         markers_by_location
-        render json: { map_markers: @map_markers }
+        marker_cards = render_to_string partial: '/pages/marker-card.html.erb', locals: { markers: @markers.first(10) }, layout: false
+        render json: { mapMarkers: @map_markers, markerCards: marker_cards }
       end
     end
-    @markers = Marker.all
   end
 
   def result
-    coordinates = JSON.parse(params[:coordinates])
-    if coordinates
-      # search_by_address
-      # markers_by_location
-      load_weather_by_address(coordinates[0], coordinates[1])
-    end
+    @coordinates = params[:coordinates]
+    load_weather_by_address(*@coordinates)
   end
 
   def search_by_address
@@ -45,7 +43,27 @@ class PagesController < ApplicationController
 
   def markers_by_location
     @markers = Marker.where('longitude < ? AND latitude < ? AND longitude > ? AND latitude > ?', *@map_boundaries)
-    @map_markers = @markers.map { |marker| [marker.longitude, marker.latitude] }
+    @map_markers = @markers.map do |marker|
+      { lon: marker.longitude, lat: marker.latitude, info_window: render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: marker }) }
+    end
+  end
+
+  def custom_marker
+    respond_to do |format|
+      format.json do
+        coordinates = params[:coordinates]
+        load_weather_by_address(*coordinates)
+        marker_info = { title: 'Custom marker', longitude: coordinates[0], latitude: coordinates[1] }
+        info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: Marker.new(marker_info) })
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { today: @meteo_prediction.first })
+        custom_marker = {
+          lon: coordinates[0],
+          lat: coordinates[1],
+          info_window: info_window
+        }
+        render json: { customMarker: custom_marker, overview: overview }
+      end
+    end
   end
 
   def load_weather_by_address(longitude, latitude)
@@ -53,15 +71,7 @@ class PagesController < ApplicationController
     optional_element = "datetime,moonphase,sunrise,sunset,moonrise,moonset,temp,humidity,conditions,description,tempmax,tempmin,cloudcover"
     visualcrossing_url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/#{latitude},#{longitude}?key=#{api_key}&include=days&elements=#{optional_element}"
     doc = JSON.parse(URI.open(visualcrossing_url).read)
-    data_from_visualcrossing = doc['days']
-    # Variable for every day
-    @today = data_from_visualcrossing[0].symbolize_keys
-    @tomorrow = data_from_visualcrossing[1].symbolize_keys
-    @today_plus_two = data_from_visualcrossing[2].symbolize_keys
-    @today_plus_three = data_from_visualcrossing[3].symbolize_keys
-    @today_plus_four = data_from_visualcrossing[4].symbolize_keys
-    @today_plus_five = data_from_visualcrossing[5].symbolize_keys
-    @today_plus_six = data_from_visualcrossing[6].symbolize_keys
-    @today_plus_seven = data_from_visualcrossing[7].symbolize_keys
+    # index 0 is today - index 14 is in 2 weeks
+    @meteo_prediction = doc['days'].map(&:symbolize_keys)
   end
 end

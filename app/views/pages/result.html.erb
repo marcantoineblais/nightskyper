@@ -2,87 +2,12 @@
 
 <h1>result page</h1>
 
-<div class="row">
-  <div class="col-6">
-    <div class="card-deck mb-3 text-center">
-      <div class="card mb-4 box-shadow">
-        <div class="card-body">
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>"datetime":<%= @today[:datetime] %></li>
-            <li>"tempmax":<%= @today[:tempmax] %>℃</li>
-            <li>"tempmin":<%= @today[:tempmin] %>℃</li>
-            <li>"temp":<%= @today[:temp] %>℃</li>
-            <li>"humidity":<%= @today[:humidity] %></li>
-            <li>"cloudcover":<%= @today[:cloudcover] %></li>
-            <li>"sunrise":<%= @today[:sunrise] %></li>
-            <li>"sunset":<%= @today[:sunset] %></li>
-            <li>"moonphase":<%= @today[:moonphase] %></li>
-            <li>"moonrise":<%= @today[:moonrise] %></li>
-            <li>"moonset":<%= @today[:moonset] %></li>
-            <li>"conditions":<%= @today[:conditions] %></li>
-            <li>"description":<%= @today[:description] %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-6">
-    <div class="card-deck mb-3 text-center">
-      <div class="card mb-4 box-shadow">
-        <div class="card-body">
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>"datetime":<%= @tomorrow[:datetime] %></li>
-            <li>"tempmax":<%= @tomorrow[:tempmax] %>℃</li>
-            <li>"tempmin":<%= @tomorrow[:tempmin] %>℃</li>
-            <li>"temp":<%= @tomorrow[:temp] %>℃</li>
-            <li>"humidity":<%= @tomorrow[:humidity] %></li>
-            <li>"cloudcover":<%= @tomorrow[:cloudcover] %></li>
-            <li>"sunrise":<%= @tomorrow[:sunrise] %></li>
-            <li>"sunset":<%= @tomorrow[:sunset] %></li>
-            <li>"moonphase":<%= @tomorrow[:moonphase] %></li>
-            <li>"moonrise":<%= @tomorrow[:moonrise] %></li>
-            <li>"moonset":<%= @tomorrow[:moonset] %></li>
-            <li>"conditions":<%= @tomorrow[:conditions] %></li>
-            <li>"description":<%= @tomorrow[:description] %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-6">
-    <div class="card-deck mb-3 text-center">
-      <div class="card mb-4 box-shadow">
-        <div class="card-body">
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>"datetime":<%= @today_plus_two[:datetime] %></li>
-            <li>"tempmax":<%= @today_plus_two[:tempmax] %></li>
-            <li>"tempmin":<%= @today_plus_two[:tempmin] %></li>
-            <li>"temp":<%= @today_plus_two[:temp] %></li>
-            <li>"humidity":<%= @today_plus_two[:humidity] %></li>
-            <li>"cloudcover":<%= @today_plus_two[:cloudcover] %></li>
-            <li>"sunrise":<%= @today_plus_two[:sunrise] %></li>
-            <li>"sunset":<%= @today_plus_two[:sunset] %></li>
-            <li>"moonphase":<%= @today_plus_two[:moonphase] %></li>
-            <li>"moonrise":<%= @today_plus_two[:moonrise] %></li>
-            <li>"moonset":<%= @today_plus_two[:moonset] %></li>
-            <li>"conditions":<%= @today_plus_two[:conditions] %></li>
-            <li>"description":<%= @today_plus_two[:description] %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'overview', today: @meteo_prediction.first %>
+
+<%= render 'prediction-card', meteo_prediction: @meteo_prediction %>
 
 <div class="d-flex">
   <div class="reviews flex-grow-1">
     <%= render 'review-card' %>
   </div>
-  <%# <div class="map-container">
-    <%= render 'map', center: @center, map_boundaries: @map_boundaries, map_markers: @map_markers, key: ENV['MAPBOX_API_KEY'] %>
-  <%# </div> %>
 </div>
