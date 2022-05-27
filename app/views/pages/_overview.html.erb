@@ -1,4 +1,44 @@
 <div id="overview">
-  <h2>Overview</h2>
-  <p><%= today %></p>
+
+<div class="overview-info d-flex justify-content-between">
+
+  <h2><%= today[:datetime] %></h2>
+
 </div>
+
+  <div class="overview-container d-flex justify-content-center">
+
+    <div class="overview-card">
+      <h3>Weather</h3>
+      <p><%= today[:description] %></p>
+      <% temp = (today[:temp] * 5/9) %>
+      <p>Temp : <%= temp.round(1)  %>°c</p>
+    </div>
+
+    <div class="overview-card">
+      <h3>Moon Phase</h3>
+      <% moon = today[:moonphase] * 100 %>
+      <p><% if moon > 90  %>
+          <%= "Full Moon"  %></p>
+        <% elsif moon > 70 %>
+          <%= "Last Quarter" %>
+        <% elsif moon > 40 %>
+          <%= "Half-Moon" %>
+        <% elsif moon > 20 %>
+          <%= "First Quarter" %>
+        <% else %>
+          <%= "New Moon" %>
+        <% end %>
+    </div>
+
+    <div class="overview-card">
+      <h3>Luminosity</h3>
+      <p>Pretty good!</p>
+    </div>
+
+
+
+  </div>
+</div>
+
+<%# call today as variable to get infos %>
