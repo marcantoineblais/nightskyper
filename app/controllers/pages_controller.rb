@@ -30,7 +30,12 @@ class PagesController < ApplicationController
 
   def result
     @coordinates = params[:coordinates]
+    @long = @coordinates.first.to_f
+    @lat = @coordinates.last.to_f
+
+    @marker = Marker.find_by_coordinates(@long, @lat).first
     load_weather_by_address(*@coordinates)
+    # raise
   end
 
   def search_by_address

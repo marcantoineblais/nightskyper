@@ -11,6 +11,10 @@
     <%= render 'review-card' %>
   </div>
   <div>
-  <%= link_to 'Add a review', new_marker_review_path(@marker) %>
+    <% if @marker  %>
+      <%= link_to 'Add a review', new_marker_review_path(@marker) %>
+    <% else %>
+      <p> No marker</p>
+    <% end %>
   </div>
 </div>

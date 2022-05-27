@@ -9,4 +9,6 @@ class Marker < ApplicationRecord
 
   validates :user, :title, :description, presence: true
   validates :latitude, :longitude, uniqueness: true, presence: true
+
+  scope :find_by_coordinates, ->(long, lat) { where('longitude = ? AND latitude = ?', long, lat) }
 end
