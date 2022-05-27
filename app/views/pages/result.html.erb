@@ -8,13 +8,15 @@
 
 <div class="d-flex">
   <div class="reviews flex-grow-1">
-    <%= render 'review-card' %>
-  </div>
-  <div>
-    <% if @marker  %>
-      <%= link_to 'Add a review', new_marker_review_path(@marker) %>
-    <% else %>
-      <p> No marker</p>
-    <% end %>
+    <div>
+      <% if @marker  %>
+        <%= link_to 'Add a review', new_marker_review_path(@marker) %>
+        <% @marker.reviews.each do |review|%>
+          <%= render 'review-card', review: review %>
+        <% end %>
+      <% else %>
+        <p> No marker</p>
+      <% end %>
+      </div>
   </div>
 </div>
