@@ -105,8 +105,8 @@ export default class extends Controller {
       }
       this.#addMarkersToMap(data.mapMarkers, 'pin-marker')
 
-      if (document.getElementById('marker-cards') && data.markerCards != document.getElementById('marker-cards').outerHTML) {
-        document.getElementById('marker-cards').outerHTML = data.markerCards
+      if (document.getElementById('marker-cards') && data.markerCards != document.getElementById('marker-cards').innerHTML) {
+        document.getElementById('marker-cards').innerHTML = data.markerCards
       }
     })
   }
