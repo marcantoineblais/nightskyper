@@ -13,9 +13,13 @@
     <div class="review-underline"></div>
     <%# Images Placeholders to not break the view until we have a seed with images %>
     <div class="review-images d-flex">
+      <% if review.photo.attached? %>
+        <%= cl_image_tag @review.photo.key, class:"review-image" %>
+      <% else %>
       <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
       <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
       <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
+      <% end %>
     </div>
   </div>
 </div>

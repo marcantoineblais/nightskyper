@@ -17,13 +17,13 @@
     }
 
     & h3 {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 400;
 
     }
 
     & p {
-      font-size: 14px;
+      font-size: 12px;
     }
 
     & h2, h3, p {
@@ -32,7 +32,10 @@
 }
 
 .marker-content {
+  display: flex;
   width: 100%;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .marker-card {
