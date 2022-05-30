@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'nokogiri'
 
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home result search custom_marker]
@@ -18,6 +19,7 @@ class PagesController < ApplicationController
         if params[:query].present?
           search_by_address
           load_weather_by_coordinates(*@center)
+          fetch_bortle(@center.last, @center.first)
         else
           @map_boundaries = [-200, -73, 200, 73]
         end
@@ -40,6 +42,8 @@ class PagesController < ApplicationController
     # find assiciated marker with coordinates
     @marker = Marker.find_by_coordinates(*@coordinates).first
     load_weather_by_coordinates(*@coordinates)
+    # fetch bortle class infos
+    fetch_bortle(@coordinates.last, @coordinates.first)
   end
 
   def search_by_address
@@ -69,7 +73,7 @@ class PagesController < ApplicationController
         load_weather_by_coordinates(*coordinates)
         marker_info = { title: 'Custom marker', longitude: coordinates[0], latitude: coordinates[1] }
         info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: Marker.new(marker_info) })
-        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { today: @meteo_prediction.first })
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { today: @meteo_prediction.first }, bortle: @bortle)
         custom_marker = {
           lon: coordinates[0],
           lat: coordinates[1],
@@ -79,7 +83,6 @@ class PagesController < ApplicationController
       end
     end
   end
-
 
   # uses API to get weather predictions for 14 days
   def load_weather_by_coordinates(longitude, latitude)
@@ -91,9 +94,22 @@ class PagesController < ApplicationController
     @meteo_prediction = doc['days'].map(&:symbolize_keys)
   end
 
+  def fetch_bortle(latitude, longitude)
+    bortle_url = "https://clearoutside.com/forecast/#{latitude}/#{longitude}"
+
+    # bortle_url = "https://clearoutside.com/forecast/#{@coordinates.last}/#{@coordinates.first}"
+
+    selector = "span[class*=btn-bortle] strong:nth-child(3)"
+    html_file = URI.open(bortle_url).read
+    html_doc = Nokogiri::HTML(html_file)
+
+    @bortle = html_doc.search(selector).text.strip
+  end
+
   def marker_partials
     @markers.first(10).map do |marker|
       render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker }, layout: false
     end
+
   end
 end
