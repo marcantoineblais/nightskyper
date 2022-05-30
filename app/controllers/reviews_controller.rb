@@ -1,4 +1,8 @@
 class ReviewsController < ApplicationController
+  def index
+    @reviews = current_user.reviews
+  end
+
   def new
     @review = Review.new
     @marker = Marker.find(params[:marker_id])
@@ -20,6 +24,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :content, :date, :photo)
+    params.require(:review).permit(:rating, :content, :date, :photos)
   end
 end

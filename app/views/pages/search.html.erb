@@ -1,12 +1,20 @@
+<% @nodetails %>
+
 <h2>Search page</h2>
 
 <%= render 'overview', today: @meteo_prediction&.first %>
 
 <div class="d-flex">
+
   <div class="cards cards-container flex-grow-1">
 
-  <%= render 'marker-card', markers: @markers %>
+    <div id="marker-cards" class="cards">
+      <% @markers&.each do |marker| %>
+        <%= render 'marker-card', marker: marker %>
+      <% end %>
+    </div>
   </div>
+
   <div class="map-container">
     <%=
       render 'map',
