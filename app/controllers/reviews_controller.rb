@@ -1,4 +1,8 @@
 class ReviewsController < ApplicationController
+  def index
+    @reviews = current_user.reviews
+  end
+
   def new
     @review = Review.new
     @marker = Marker.find(params[:marker_id])
