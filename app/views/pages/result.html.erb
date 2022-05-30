@@ -1,12 +1,12 @@
 <%= link_to "Back to Search page", search_path %>
 
+<%= @bortle %>
+
 <h1>result page</h1>
 
 <%= render 'overview', today: @meteo_prediction.first %>
 
 <%= render 'prediction-card', meteo_prediction: @meteo_prediction[1..-1] %>
-
-<%= render 'light-pollution' %>
 
 <div class="d-flex">
   <div class="reviews flex-grow-1">

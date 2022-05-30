@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'nokogiri'
 
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home result search custom_marker]
@@ -31,6 +32,17 @@ class PagesController < ApplicationController
   def result
     @coordinates = params[:coordinates]
     load_weather_by_address(*@coordinates)
+    fetch_bortle
+  end
+
+  def fetch_bortle
+    url = "https://clearoutside.com/forecast/#{@coordinates.last.to_f}/#{@coordinates.first.to_f}"
+    selector = ".btn-bortle-8 strong:nth-child(3)"
+
+    html_file = URI.open(url).read
+    html_doc = Nokogiri::HTML(html_file)
+
+    @bortle = html_doc.search(selector).text.strip
   end
 
   def search_by_address
