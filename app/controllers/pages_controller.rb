@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   end
 
   def search
+    @noaddfav = "d-none"
     respond_to do |format|
       format.html do
         if params[:query].present?
@@ -29,6 +30,7 @@ class PagesController < ApplicationController
   end
 
   def result
+    @nodetails = "d-none"
     @coordinates = params[:coordinates]
     @long = @coordinates.first.to_f
     @lat = @coordinates.last.to_f
