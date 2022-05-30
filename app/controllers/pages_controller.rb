@@ -83,7 +83,6 @@ class PagesController < ApplicationController
     end
   end
 
-
   # uses API to get weather predictions for 14 days
   def load_weather_by_coordinates(longitude, latitude)
     api_key = ENV['visual_crossing']
@@ -96,11 +95,11 @@ class PagesController < ApplicationController
 
   def fetch_bortle
     url = "https://clearoutside.com/forecast/#{@coordinates.last}/#{@coordinates.first}"
-    selector = ".btn-bortle-8 strong:nth-child(3)"
-
+    selector = "span[class*=btn-bortle] strong:nth-child(3)"
     html_file = URI.open(url).read
     html_doc = Nokogiri::HTML(html_file)
 
     @bortle = html_doc.search(selector).text.strip
+    #raise
   end
 end
