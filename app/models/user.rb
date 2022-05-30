@@ -9,8 +9,4 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  def favorite_markers
-    favorites.map(&:marker)
-  end
 end
