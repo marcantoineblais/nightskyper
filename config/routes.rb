@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :markers, only: %i[new create] do
     resources :reviews, only: %i[new create]
   end
+
+  resources :favorites, only: %i[index create edit update destroy]
 end

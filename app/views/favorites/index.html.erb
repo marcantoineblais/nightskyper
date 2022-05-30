@@ -1,0 +1,7 @@
+<h1>My favorite locations</h1>
+
+<%= render '/pages/marker-card', markers: @markers %>
+
+<% if @favorite.note.present? %>
+  <h3>Personnal notes: </h3>
+  <p><%= favorite.note %></p>
