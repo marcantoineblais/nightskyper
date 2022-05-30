@@ -17,17 +17,21 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10",
     })
 
+    // Resize the map after page load (solve display bug)
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'))
     })
 
     this.#fitMapToBoundaries()
+    // fit the map to the boundaries
+    // When done moving, load the markers
     this.map.doubleClickZoom.disable()
     this.map.on('moveend', () => {
       this.#getBoundariesCoordinates()
       this.#updateMarkers()
     })
 
+    // add custom marker on double click
     this.map.on('dblclick', (e) => {
       const coordinates = [e.lngLat.lng, e.lngLat.lat]
       this.#updateCustomMarker(coordinates)
@@ -35,6 +39,14 @@ export default class extends Controller {
   }
 
   #addMarkersToMap(markers, cssClass) {
+    // after search, show the first batch of markers from that given location
+    // if the marker is not a custom marker :
+    // - on marker click, recenter the map aroung marker
+    // - load the surrounding markers with new boundaries
+    // - adjust the zoom level on that marker (3 levels)
+    // - remove custom marker if one was pinned
+    // - update the page with infos from the current location
+
     markers.forEach((marker) => {
       const markerDiv = document.createElement('div');
       const popup = new mapboxgl.Popup().setHTML(marker.info_window)
@@ -52,23 +64,31 @@ export default class extends Controller {
   }
 
   #fitMapToBoundaries() {
-    console.log(this.boundsValue)
+    // fit the map with the given boundaries and adjust zoom level
+
     const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
     console.log(bounds)
     this.map.fitBounds(bounds, { padding: 0, duration: 0 })
   }
 
   #recenterMapToBondaries(marker, zoom) {
+    // when clicking or pinning a marker, recenter the map aroung that marker by creating new boundaries
+
     const bounds = new mapboxgl.LngLatBounds([marker.lon, marker.lat], [marker.lon, marker.lat])
     this.map.fitBounds(bounds, { zoom: zoom, duration: 1000 })
   }
 
   #getBoundariesCoordinates() {
+    // ask the map for its current boundaries
+
     const bounds = this.map.getBounds()
     this.boundsValue = [bounds._ne.lng, bounds._ne.lat, bounds._sw.lng, bounds._sw.lat]
   }
 
   #updateMarkers() {
+    // when navigating in the map, dynamicly load the visible markers
+    // remove the markers that are not visible anymore
+
     fetch(this.searchPathValue, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
@@ -92,6 +112,9 @@ export default class extends Controller {
   }
 
   #updateCustomMarker(coordinates) {
+    // when pinning a new custom marker, remove the old one
+    // recenter the map and update the page accordingly
+
     fetch(this.customMarkerPathValue, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
@@ -115,6 +138,9 @@ export default class extends Controller {
   }
 
   #getMarkerInfos(coordinates) {
+  // get the popup and coordinates of the updated markers visible on the map.
+  // control the zoom level when clicking same marker multiple times
+
     fetch(this.customMarkerPathValue, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
