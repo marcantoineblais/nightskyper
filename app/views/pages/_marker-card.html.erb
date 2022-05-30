@@ -1,7 +1,19 @@
-<h3>This is a card</h3>
-
-<ul>
-<% markers.each do |marker| %>
-  <li><%= link_to marker.title, result_path(marker) %></li>
-<% end %>
-</ul>
+<div id="marker-cards" class="cards">
+  <% markers&.each do |marker| %>
+    <div class="markers d-flex flex-column">
+      <div class="marker-container d-flex">
+        <img class= "marker-img"src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+        <div class="marker-card">
+          <div class="marker-content">
+            <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
+            <h3>Description of the marker</h3>
+              <div class="marker-bottom">
+                <p><em>Location of the marker</em></p>
+                <p class= "rating">Rating</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
