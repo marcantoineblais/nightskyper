@@ -104,6 +104,7 @@ class PagesController < ApplicationController
     html_doc = Nokogiri::HTML(html_file)
 
     @bortle = html_doc.search(selector).text.strip
+  end
 
   def marker_partials
     @markers.first(10).map do |marker|
