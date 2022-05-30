@@ -1,7 +1,15 @@
 <h1>My favorite locations</h1>
 
-<%= render '/pages/marker-card', markers: @markers %>
-
-<% if @favorite.note.present? %>
-  <h3>Personnal notes: </h3>
-  <p><%= favorite.note %></p>
+<% if @favorites.present? %>
+  <div class="cards"></div>
+  <% @favorites.each do |favorite| %>
+    <%= render '/pages/marker-card', marker: favorite.marker %>
+    <% if favorite.note.present? %>
+      <h3>Personnal notes: </h3>
+      <p><%= marker.favorite.note %></p>
+    <% end %>
+  <% end %>
+<% else %>
+  <h3>No favorites yet.</h3>
+  <p>Go explore the map and find some new locations to add!</p>
+<% end %>
