@@ -1,11 +1,13 @@
+<% @nodetails %>
+
 <h2>Search page</h2>
 
 <%= render 'overview', today: @meteo_prediction&.first %>
 
-
 <div class="d-flex">
   <div class="cards flex-grow-1">
-    <%= render 'marker-card', markers: @markers %>
+
+  <%= render 'marker-card', markers: @markers %>
   </div>
   <div class="map-container">
     <%=

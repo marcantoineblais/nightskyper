@@ -1,13 +1,13 @@
 <div class= "hero-banner">
-  <div class="hero-content">
-    <div class="hero-title">
+  <div class="hero-content container">
+    <div class="hero-title w-100 pb-5">
       <h1>Nightskyper</h1>
-      <p> Find the perfect place to shoot the stars in the best conditions.</p>
+      <p>Find the perfect place to shoot the stars in the best conditions.</p>
     </div>
-    <div class="container">
-      <%= form_with url: search_path, method: 'GET' do |f| %>
+    <div class='pt-5 d-flex justify-content-end'>
+      <%= form_with class:'w-50 d-flex text-end', url: search_path, method: 'GET' do |f| %>
         <%= f.text_field :query, class: 'form-control searchbar-input', placeholder: 'Search an area' %>
-        <%= f.submit 'Search', name: nil %>
+        <%= f.submit 'Search', name: nil, class:'search-btn' %>
       <% end %>
     </div>
   </div>

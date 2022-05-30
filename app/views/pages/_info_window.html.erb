@@ -3,6 +3,9 @@
   <% if marker.description %>
     <%= link_to 'Show more', result_path(coordinates: [marker.longitude, marker.latitude]) %>
   <% else %>
-    <%= link_to 'Add this marker', new_marker_path(coordinates: [marker.longitude, marker.latitude]) %>
+    <div class="d-flex flex-column">
+      <%= link_to 'Show more', result_path(coordinates: [marker.longitude, marker.latitude]) %>
+      <%= link_to 'Add this marker', new_marker_path(coordinates: [marker.longitude, marker.latitude]) %>
+    </div>
   <% end %>
 </div>

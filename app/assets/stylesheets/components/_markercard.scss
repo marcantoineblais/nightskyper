@@ -1,6 +1,7 @@
 .marker-container {
+  flex-grow: 2;
   height: 119px;
-  width: 819px;
+  width: 100%;
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
     & h2 {
       color: $NS-darkblue;

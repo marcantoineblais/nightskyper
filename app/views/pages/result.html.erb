@@ -1,3 +1,5 @@
+<% @noaddfav %>
+
 <%= link_to "Back to Search page", search_path %>
 
 <%= @bortle %>
@@ -6,10 +8,19 @@
 
 <%= render 'overview', today: @meteo_prediction.first %>
 
-<%= render 'prediction-card', meteo_prediction: @meteo_prediction[1..-1] %>
+<%= render 'prediction-card', meteo_prediction: @meteo_prediction[1..-1].first(6) %>
 
 <div class="d-flex">
   <div class="reviews flex-grow-1">
-    <%= render 'review-card' %>
+    <div>
+      <% if @marker  %>
+        <%= link_to 'Add a review', new_marker_review_path(@marker), class: "NS-button" %>
+        <% @marker.reviews.each do |review|%>
+          <%= render 'review-card', review: review %>
+        <% end %>
+      <% else %>
+        <p> No marker</p>
+      <% end %>
+      </div>
   </div>
 </div>
