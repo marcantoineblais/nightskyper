@@ -10,7 +10,7 @@
         <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
         <h3><%= marker.description %></h3>
           <div class="marker-bottom">
-            <p><em>Longitude: <%= marker.longitude %> | Latitude: <%= marker.latitude %></em></p>
+            <p><em>Long: <%= marker.longitude %> | Lat: <%= marker.latitude %></em></p>
             <p class= "rating">Ratings: <%= marker.average_rating %></p>
           </div>
       </div>
