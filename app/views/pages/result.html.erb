@@ -1,3 +1,5 @@
+<% @noaddfav %>
+
 <%= link_to "Back to Search page", search_path %>
 
 <h1>result page</h1>
@@ -10,7 +12,7 @@
   <div class="reviews flex-grow-1">
     <div>
       <% if @marker  %>
-        <%= link_to 'Add a review', new_marker_review_path(@marker) %>
+        <%= link_to 'Add a review', new_marker_review_path(@marker), class: "NS-button" %>
         <% @marker.reviews.each do |review|%>
           <%= render 'review-card', review: review %>
         <% end %>
