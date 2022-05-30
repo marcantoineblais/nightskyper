@@ -69,7 +69,7 @@ class PagesController < ApplicationController
         load_weather_by_coordinates(*coordinates)
         marker_info = { title: 'Custom marker', longitude: coordinates[0], latitude: coordinates[1] }
         info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: Marker.new(marker_info) })
-        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { today: @meteo_prediction.first })
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { today: @meteo_prediction.first, coordinates: coordinates })
         custom_marker = {
           lon: coordinates[0],
           lat: coordinates[1],
@@ -79,7 +79,6 @@ class PagesController < ApplicationController
       end
     end
   end
-
 
   # uses API to get weather predictions for 14 days
   def load_weather_by_coordinates(longitude, latitude)

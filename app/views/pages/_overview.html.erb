@@ -43,13 +43,16 @@
 
 </div>
 <% end %>
-  <% if today %>
-    <div class="view-details d-flex justify-content-center <%= @nodetails %>">
-      <%= link_to "View details", "#", class:"NS-button" %>
+  <% if today && @center %>
+    <div class="view-details d-flex justify-content-center">
+      <%= link_to "View details", result_path(coordinates: @center), class:"NS-button" %>
     </div>
-  <% end %>
-  <% if today %>
-    <div class="add-favorites d-flex justify-content-center <%= @noaddfav %>">
+  <% elsif today && @center && !marker %>
+    <div class="view-details d-flex justify-content-center">
+      <%= link_to 'Add this marker', new_marker_path(coordinates: @center) %>
+    </div>
+  <% else %>
+    <div class="add-favorites d-flex justify-content-center">
       <%= link_to "Add to favorites", favorites_path, class:"NS-button" %>
     </div>
   <% end %>

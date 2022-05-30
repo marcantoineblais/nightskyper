@@ -1,8 +1,6 @@
-<% @nodetails %>
-
 <h2>Search page</h2>
 
-<%= render 'overview', today: @meteo_prediction&.first %>
+<%= render 'overview', today: @meteo_prediction&.first, marker: @marker%>
 
 <div class="d-flex">
   <div class="cards flex-grow-1">
