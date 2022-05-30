@@ -14,16 +14,19 @@
       font-weight: lighter;
       opacity: 0.5;
     }
+
+    .review-text {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+  }
     .review-underline {
       margin-top: 2px;
       border-bottom: 2px solid $NS-orange;
       margin-bottom: 20px;
-
-      .review-text {
-        font-size: 16px;
-        margin-bottom: 0;
-      }
+      margin-right: -25px;
     }
+
 
     .review-top {
       margin-bottom: 5px;
@@ -33,7 +36,7 @@
     .rating {
       margin-right: 0;
     }
-  }
+
 
   .review-username {
     min-width: 100px;
