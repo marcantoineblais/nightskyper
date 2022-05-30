@@ -6,10 +6,10 @@
         <div class="marker-card">
           <div class="marker-content">
             <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
-            <h3>Description of the marker</h3>
+            <h3><%= marker.description %></h3>
               <div class="marker-bottom">
-                <p><em>Location of the marker</em></p>
-                <p class= "rating">Rating</p>
+                <p><em>Longitude: <%= marker.longitude %> | Latitude: <%= marker.latitude %></em></p>
+                <p class= "rating"><%= "Ratings: #{rand(3..5)}"%></p>
               </div>
           </div>
         </div>
