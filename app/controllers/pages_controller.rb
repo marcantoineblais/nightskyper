@@ -22,7 +22,7 @@ class PagesController < ApplicationController
       format.json do
         @map_boundaries = params[:map_boundaries]
         markers_by_location
-        marker_cards = render_to_string partial: '/pages/marker-card.html.erb', locals: { markers: @markers.first(10) }, layout: false
+        marker_cards = marker_partials
         render json: { mapMarkers: @map_markers, markerCards: marker_cards }
       end
     end
@@ -78,5 +78,11 @@ class PagesController < ApplicationController
     doc = JSON.parse(URI.open(visualcrossing_url).read)
     # index 0 is today - index 14 is in 2 weeks
     @meteo_prediction = doc['days'].map(&:symbolize_keys)
+  end
+
+  def marker_partials
+    @markers.first(10).map do |marker|
+      render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker }, layout: false
+    end
   end
 end
