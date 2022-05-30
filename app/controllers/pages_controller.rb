@@ -12,6 +12,7 @@ class PagesController < ApplicationController
   def search
     # when using the search bar, get map boundaries and weather from search location
     # show whole map when no search input
+
     respond_to do |format|
       format.html do
         if params[:query].present?
