@@ -97,8 +97,6 @@ class PagesController < ApplicationController
   def fetch_bortle(latitude, longitude)
     bortle_url = "https://clearoutside.com/forecast/#{latitude}/#{longitude}"
 
-    # bortle_url = "https://clearoutside.com/forecast/#{@coordinates.last}/#{@coordinates.first}"
-
     selector = "span[class*=btn-bortle] strong:nth-child(3)"
     html_file = URI.open(bortle_url).read
     html_doc = Nokogiri::HTML(html_file)
