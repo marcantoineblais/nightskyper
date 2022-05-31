@@ -16,7 +16,7 @@ export default class extends Controller {
         fieldName: 'user[photo]',
         multiple: false
       },
-      (error, result): {
+      (error, result) => {
         console.log(error, result)
       }
     )
