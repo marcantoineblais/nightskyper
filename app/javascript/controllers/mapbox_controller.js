@@ -23,6 +23,7 @@ export default class extends Controller {
     })
 
     this.#fitMapToBoundaries()
+    this.#updateMarkers()
     // fit the map to the boundaries
     // When done moving, load the markers
     this.map.doubleClickZoom.disable()
@@ -41,7 +42,7 @@ export default class extends Controller {
   #addMarkersToMap(markers, cssClass) {
     // after search, show the first batch of markers from that given location
     // if the marker is not a custom marker :
-    // - on marker click, recenter the map aroung marker
+    // - on marker click, recenter the map around marker
     // - load the surrounding markers with new boundaries
     // - adjust the zoom level on that marker (3 levels)
     // - remove custom marker if one was pinned
