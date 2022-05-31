@@ -52,7 +52,7 @@
   <% end %>
   <% if today %>
     <div class="add-favorites d-flex justify-content-center <%= @noaddfav %>">
-      <%= link_to "Add to favorites", favorites_path, class:"NS-button" %>
+      <i class="fa-solid fa-heart fav-icon"><%= link_to "Add to favorites", favorites_path %></i>
     </div>
   <% end %>
 </div>
