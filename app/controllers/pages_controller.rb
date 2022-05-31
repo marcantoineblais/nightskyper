@@ -36,7 +36,7 @@ class PagesController < ApplicationController
   def result
     # convert coordinates from string to float, returns an array
     @coordinates = params[:coordinates].map(&:to_f)
-
+    search_by_coordinates
     # find assiciated marker with coordinates
     @marker = Marker.find_by_coordinates(*@coordinates).first
     load_weather_by_coordinates(*@coordinates)
@@ -51,6 +51,16 @@ class PagesController < ApplicationController
     @center = doc['features'].first['center']
     bounds = doc['features'].first['bbox']
     @map_boundaries = bounds || [@center[0] - 0.022, @center[1] - 0.022, @center[0] + 0.022, @center[1] + 0.022]
+  end
+
+  def search_by_coordinates
+    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{@coordinates[0]},#{@coordinates[1]}.json?access_token=#{ENV['MAPBOX_API_KEY']}"
+    doc = JSON.parse(URI.open(url).read)
+    @doc = doc['features']
+    @place_name = []
+    @doc.each do |feature|
+      @place_name << feature['place_name']
+    end
   end
 
   # uses the map boundaries to retrieve markers to display from the DB
