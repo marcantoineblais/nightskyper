@@ -1,0 +1,6 @@
+<h1>My comments</h1>
+
+<% @reviews.each do |review| %>
+  <%= render '/pages/marker-card', marker: review.marker %>
+  <%= render '/pages/review-card', review: review %>
+<% end %>

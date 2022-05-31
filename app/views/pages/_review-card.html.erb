@@ -1,10 +1,31 @@
-<h2>Review card</h2>
-<div class="cards d-flex flex-column ">
-  <div class="card mb-4 p-3 box-shadow">
-    <div class="card-body">
-      <h3>May 4th 2022</h3>
-      <p><%= review.content %></p>
-      <p><%= review.rating %></p>
+<div class="review-container">
+  <div class="review-username">
+    <% if review.user.photo.attached? %>
+      <%= cl_image_tag review.user.photo.key, class:"review-avatar" %>
+    <% else %>
+      <img class="review-avatar" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="">
+    <% end %>
+    <h2><%= review.user.username %></h2>
+  </div>
+  <div class="review-content">
+
+      <div class="review-top d-flex justify-content-between">
+        <h3><%= review.date %></h3>
+        <p class="rating"><%= review.rating %></p>
+      </div>
+      <p class="review-text"><%= review.content %></p>
+    <div class="review-underline"></div>
+    <%# Images Placeholders to not break the view until we have a seed with images %>
+    <div class="review-images d-flex">
+      <% if review.photos.attached? %>
+        <% review.photos.each do |photo| %>
+          <%= cl_image_tag photo.key, class:"review-image" %>
+        <% end %>
+      <% else %>
+      <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
+      <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
+      <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
+      <% end %>
     </div>
   </div>
 </div>

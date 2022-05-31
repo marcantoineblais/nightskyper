@@ -4,11 +4,18 @@
 
 <%= render 'overview', today: @meteo_prediction&.first, place_name: @place_name %>
 
-<div class="d-flex">
-  <div class="cards flex-grow-1">
 
-  <%= render 'marker-card', markers: @markers %>
+<div class="d-flex">
+
+  <div class="cards cards-container flex-grow-1">
+
+    <div id="marker-cards" class="cards">
+      <% @markers&.each do |marker| %>
+        <%= render 'marker-card', marker: marker %>
+      <% end %>
+    </div>
   </div>
+
   <div class="map-container">
     <%=
       render 'map',
