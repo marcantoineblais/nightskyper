@@ -38,7 +38,7 @@ class PagesController < ApplicationController
   def result
     # convert coordinates from string to float, returns an array
     @coordinates = params[:coordinates].map(&:to_f)
-
+    search_by_coordinates
     # find assiciated marker with coordinates
     @marker = Marker.find_by_coordinates(*@coordinates).first
     load_weather_by_coordinates(*@coordinates)
@@ -51,9 +51,21 @@ class PagesController < ApplicationController
     # mapbox map needs this to show the good markers
     url = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{params[:query].parameterize}.json?access_token=#{ENV['MAPBOX_API_KEY']}"
     doc = JSON.parse(URI.open(url).read)
+    @place_name = doc['features'].first['place_name']
     @center = doc['features'].first['center']
     bounds = doc['features'].first['bbox']
     @map_boundaries = bounds || [@center[0] - 0.022, @center[1] - 0.022, @center[0] + 0.022, @center[1] + 0.022]
+  end
+
+  def search_by_coordinates
+    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{@coordinates[0]},#{@coordinates[1]}.json?access_token=#{ENV['MAPBOX_API_KEY']}"
+    doc = JSON.parse(URI.open(url).read)
+    @doc = doc['features']
+    place_nam_list = []
+    @doc.each do |feature|
+      place_nam_list << feature['place_name']
+    end
+    @place_name = place_nam_list[-3]
   end
 
   # uses the map boundaries to retrieve markers to display from the DB
@@ -73,7 +85,7 @@ class PagesController < ApplicationController
         load_weather_by_coordinates(*coordinates)
         marker_info = { title: 'Custom marker', longitude: coordinates[0], latitude: coordinates[1] }
         info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: Marker.new(marker_info) })
-        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { today: @meteo_prediction.first }, bortle: @bortle)
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { today: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: coordinates })
         custom_marker = {
           lon: coordinates[0],
           lat: coordinates[1],
@@ -96,8 +108,6 @@ class PagesController < ApplicationController
 
   def fetch_bortle(latitude, longitude)
     bortle_url = "https://clearoutside.com/forecast/#{latitude}/#{longitude}"
-
-    # bortle_url = "https://clearoutside.com/forecast/#{@coordinates.last}/#{@coordinates.first}"
 
     selector = "span[class*=btn-bortle] strong:nth-child(3)"
     html_file = URI.open(bortle_url).read

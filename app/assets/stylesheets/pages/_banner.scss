@@ -1,6 +1,7 @@
 .hero-banner {
-  background-image: url(asset_path('homepage.jpg'));
-  background-size: cover;
+  background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(asset_path('home.jpg'));
+  background-position: center;
+  background-size: 100% 120%;
   height: 100vh;
   width: 100vw;
   display: flex;
