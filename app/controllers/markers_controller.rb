@@ -22,6 +22,6 @@ class MarkersController < ApplicationController
   private
 
   def marker_params
-    params.require(:marker).permit(:title, :description, :latitude, :longitude, photos: [])
+    params.require(:marker).permit(:title, :description, :latitude, :longitude, :photo)
   end
 end

@@ -107,9 +107,9 @@ class PagesController < ApplicationController
   end
 
   def marker_partials
-    @markers.first(10).map do |marker|
+    markers = @markers.first(10).map do |marker|
       render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker }, layout: false
     end
-
+    markers.join
   end
 end
