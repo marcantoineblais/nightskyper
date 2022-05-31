@@ -3,7 +3,7 @@
 <%= link_to "Back to Search page", search_path %>
 
 
-<%= render 'overview', today: @meteo_prediction.first, marker: @marker, place_name: @place_name %>
+<%= render 'overview', today: @meteo_prediction.first, marker: @coordinates, place_name: @place_name %>
 
 
 <%= render 'prediction-card', meteo_prediction: @meteo_prediction[1..-1].first(6) %>

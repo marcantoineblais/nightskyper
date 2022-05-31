@@ -1,69 +1,86 @@
 <div id="overview">
   <% if today %>
-  <div class="row mx-5 my-2">
-    <div class="col d-flex justify-content-left align-items-center ">
-      <div class="my-3">
-          <% if Date.parse(today[:datetime]) === Date.today %>
-          <h4 data-date="<%= today[:datetime] %>">Today</h4>
-          <div>datetime: <%= today[:datetime] %></div>
-          <% elsif Date.parse(today[:datetime]) === Date.tomorrow %>
-          <h4>Tomorrow</h4>
-          <div>datetime: <%= today[:datetime] %></div>
-          <% else %>
-          <h4><%= Date::DAYNAMES[Date.parse(today[:datetime]).wday] %></h4>
-          <div>datetime: <%= today[:datetime] %></div>
-          <% end %>
-      </div>
-    </div>
-    <div class="col d-flex justify-content-center align-items-center text-center">
-      <h4><%= place_name %></h4>
-    </div>
-    <div class="col d-flex justify-content-end align-items-center">
-     <p class="p-1 m-0">Long : <%= marker.longitude.round(2) %></p>
-     <p class="p-1 m-0">Lat : <%= marker.latitude.round(2) %></p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-10 border-bottom m-auto"></div>
-  </div>
-  <div class="row justify-content-around mx-3 my-5">
-  <div class="col-3">
-    <div class="card">1</div>
-  </div>
-  <div class="col-3">
-    <div class="card">2</div>
-  </div>
-  <div class="col-3">
-    <div class="card">3</div>
-  </div>
-
-
-  </div>
-    <%# <div class="card-body"> %>
-
-      <div class="row">
-        <div class="col-4">
-          <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-          <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-          <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-          <div>humidity: <%= today[:humidity] %> %</div>
-          <div>cloudcover: <%= today[:cloudcover] %> %</div>
-        </div>
-        <div class="col-4">
-          <div>sunrise: <%= today[:sunrise] %></div>
-          <div>sunset: <%= today[:sunset] %></div>
-          <div>moonphase: <%= today[:moonphase] %></div>
-          <div>moonrise: <%= today[:moonrise] %></div>
-          <div>moonset: <%= today[:moonset] %></div>
-        </div>
-        <div class="col-4">
-          <div>conditions: <%= today[:conditions] %></div>
-          <div>description: <%= today[:description] %></div>
+    <div class="row mx-5 my-2">
+      <div class="col d-flex justify-content-left align-items-center ">
+        <div class="my-3">
+            <% if Date.parse(today[:datetime]) === Date.today %>
+            <h4 data-date="<%= today[:datetime] %>">Today</h4>
+            <div>datetime: <%= today[:datetime] %></div>
+            <% elsif Date.parse(today[:datetime]) === Date.tomorrow %>
+            <h4>Tomorrow</h4>
+            <div>datetime: <%= today[:datetime] %></div>
+            <% else %>
+            <h4><%= Date::DAYNAMES[Date.parse(today[:datetime]).wday] %></h4>
+            <div>datetime: <%= today[:datetime] %></div>
+            <% end %>
         </div>
       </div>
-    <%# </div> %>
+      <div class="col d-flex justify-content-center align-items-center text-center">
+        <h4><%= place_name %></h4>
+      </div>
+      <div class="col d-flex justify-content-end align-items-center">
+      <p class="p-1 m-0">Long : <%= marker[0].round(2) %></p>
+      <p class="p-1 m-0">Lat : <%= marker[1].round(2) %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-10 border-bottom m-auto"></div>
+    </div>
+    <div class="row justify-content-around mx-3 my-5">
+      <div class="col-2">
+        <div class="flip-card text-center">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-3">
+              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+            </div>
+            <div class="flip-card-back p-3 text-center">
+              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>humidity: <%= today[:humidity] %> %</div>
+              <div>cloudcover: <%= today[:cloudcover] %> %</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="flip-card text-center">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-3">
+              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+            </div>
+            <div class="flip-card-back p-3 text-center">
+              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>humidity: <%= today[:humidity] %> %</div>
+              <div>cloudcover: <%= today[:cloudcover] %> %</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="flip-card text-center">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-3">
+              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+            </div>
+            <div class="flip-card-back p-3 text-center">
+              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>humidity: <%= today[:humidity] %> %</div>
+              <div>cloudcover: <%= today[:cloudcover] %> %</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
-</div>
+
   <% if today %>
     <div class="view-details d-flex justify-content-center <%= @nodetails %>">
       <%= link_to "View details", "#", class:"NS-button" %>
