@@ -16,6 +16,6 @@ class Marker < ApplicationRecord
   end
 
   def average_rating
-    (ratings.sum.to_f / ratings.count).round(1)
+    ratings.present? ? (ratings.sum / ratings.count).to_i : 0
   end
 end
