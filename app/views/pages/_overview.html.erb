@@ -1,6 +1,7 @@
 <div id="overview">
 <% if today %>
   <h2>Overview</h2>
+
  <div class="cards d-flex flex-column ">
     <% if today %>
     <div class="card mb-4 box-shadow">
@@ -22,19 +23,20 @@
             <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
             <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
             <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-            <div>humidity: <%= today[:humidity] %> %</div>
-            <div>cloudcover: <%= today[:cloudcover] %> %</div>
+            <div>conditions: <%= today[:conditions] %></div>
           </div>
           <div class="col-4">
-            <div>sunrise: <%= today[:sunrise] %></div>
-            <div>sunset: <%= today[:sunset] %></div>
             <div>moonphase: <%= today[:moonphase] %></div>
             <div>moonrise: <%= today[:moonrise] %></div>
             <div>moonset: <%= today[:moonset] %></div>
           </div>
           <div class="col-4">
-            <div>conditions: <%= today[:conditions] %></div>
-            <div>description: <%= today[:description] %></div>
+            <div>bortle: <%= @bortle %></div>
+            <div>
+              <p>Bortle class is a light pollution scale from 0 to 10.</p>
+              <p>0 is : pure sky without any LP</p>
+              <p>10 is : saturated sky by LP</p>
+            </div>
           </div>
         </div>
       </div>
