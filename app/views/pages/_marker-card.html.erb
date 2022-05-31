@@ -11,15 +11,13 @@
         <h3><%= marker.description %></h3>
           <div class="marker-bottom">
             <p><em>Long: <%= marker.longitude %> | Lat: <%= marker.latitude %></em></p>
+
             <div class= "rating">
-            <% if marker.ratings %>
-              <%rate = marker.average_rating %>
-              <% rounded_rate = rate.to_i %>
-              <% rounded_rate.times do %>
+              <% marker.average_rating.times do %>
                 <span class="fa fa-star checked"></span>
               <% end %>
-            <% end %>
             </div>
+
           </div>
       </div>
     </div>

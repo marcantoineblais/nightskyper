@@ -13,7 +13,7 @@ export default class extends Controller {
         uploadPreset: 'nightskyper',
         cropping: true,
         folder: 'reviews',
-        fieldName: 'review[photo]',
+        fieldName: 'review[pic]',
         croppingAspectRatio: 1.34,
         multiple: true,
         maxFiles: 6
