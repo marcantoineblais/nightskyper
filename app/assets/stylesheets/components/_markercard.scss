@@ -3,7 +3,7 @@
 }
 .marker-container {
   flex-grow: 2;
-  height: auto;
+  height: 129px;
   width: 100%;
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
@@ -19,7 +19,7 @@
     & h3 {
       font-size: 14px;
       font-weight: 400;
-
+      padding-right: 15px;
     }
 
     & p {
@@ -46,7 +46,7 @@
 
 .marker-img {
   width: auto;
-  height: 119px;
+  height: 129px;
   margin-right: 1.8rem;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
   border-radius: 8px 0 0 8px;
