@@ -7,23 +7,32 @@
 #  </div>
 
 def condition_image
-  if
-    drizzle.include?(jour[:conditions])
+  if drizzle.include?(jour[:conditions])
     image_tag "images/weather/Drizzle"
-  elsif jour[:conditions] == "Duststorm"
-    image_tag "images/weather/Drizzle"
-  elsif jour[:conditions] == "Fog"
+  elsif fog.include?(jour[:conditions] )
     image_tag "images/weather/Fog"
-  elsif jour[:conditions] == "Funnel Cloud/Tornado"
+  elsif tornado == jour[:conditions]
     image_tag "images/weather/Tornado"
-  elsif
-
-
-
+  elsif ice.include?(jour[:conditions])
+    image_tag "images/weather/Ice"
+  elsif freezing_snow_rain.include?(jour[:conditions])
+    image_tag "images/weather/Freezing_snow_rain"
+  elsif rain.include?(jour[:conditions])
+    image_tag "images/weather/Rain"
+  elsif cloudy.include?(jour[:conditions])
+    image_tag "images/weather/Cloudy"
+  elsif snow.include?(jour[:conditions])
+    image_tag "images/weather/Snow"
+  elsif squalls == jour[:conditions]
+    image_tag "images/weather/Squalls"
+  elsif thunder.include?(jour[:conditions])
+    image_tag "images/weather/Thunder"
+  elsif diamond_dust == jour[:conditions]
+    image_tag "images/weather/Diamond_dust"
+  elsif sunny == jour[:conditions]
+    image_tag "images/weather/Sunny"
+  end
 end
-
-
-
 
 # WEATHER CONDITION
 drizzle = ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "Light Drizzle/Rain"]
@@ -33,16 +42,19 @@ drizzle = ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "L
 # type_5	Heavy Drizzle/Rain
 # type_6	Light Drizzle/Rain
 
-
+fog = ["Duststorm", "Fog"]
 # type_7	Duststorm
 # type_8	Fog
 
+tornado = "Funnel Cloud/Tornado"
 # type_15	Funnel Cloud/Tornado
 
+ice = ["Hail Showers", "Ice", "Hail"]
 # type_16	Hail Showers
 # type_17	Ice
 # type_40	Hail
 
+freezing_snow_rain = ["Freezing Drizzle/Freezing Rain", "Heavy Freezing Drizzle/Freezing Rain", "Light Freezing Drizzle/Freezing Rain", "Heavy Freezing Rain", "Light Freezing Rain", "Heavy Rain And Snow", "Light Rain And Snow"]
 # type_9	Freezing Drizzle/Freezing Rain
 # type_10	Heavy Freezing Drizzle/Freezing Rain
 # type_11	Light Freezing Drizzle/Freezing Rain
@@ -51,9 +63,7 @@ drizzle = ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "L
 # type_22	Heavy Rain And Snow
 # type_23	Light Rain And Snow
 
-# type_12	Freezing Fog
-# type_1	Blowing Or Drifting Snow
-
+rain = ["Mist", "Precipitation In Vicinity", "Rain", "Rain Showers", "Heavy Rain", "Light Rain"]
 # type_19	Mist
 # type_20	Precipitation In Vicinity
 # type_21	Rain
@@ -61,28 +71,35 @@ drizzle = ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "L
 # type_25	Heavy Rain
 # type_26	Light Rain
 
+cloudy = ["Sky Coverage Decreasing", "Sky Coverage Increasing", "Smoke Or Haze", "Overcast", "Partially cloudy"]
 # type_27	Sky Coverage Decreasing
 # type_28	Sky Coverage Increasing
 # type_30	Smoke Or Haze
 # type_41	Overcast
 # type_42	Partially cloudy
-
 # type_29	Sky Unchanged
 
+snow = ["Blowing Or Drifting Snow", "Freezing Fog", "Snow", "Snow And Rain Showers", "Snow Showers", "Heavy Snow", "Light Snow"]
+# type_1	Blowing Or Drifting Snow
+# type_12	Freezing Fog
 # type_31	Snow
 # type_32	Snow And Rain Showers
 # type_33	Snow Showers
 # type_34	Heavy Snow
 # type_35	Light Snow
 
+squalls = "Squalls"
 # type_36	Squalls
 
+thunder = ["Lightning Without Thunder", "Thunderstorm", "Thunderstorm Without Precipitation"]
 # type_18	Lightning Without Thunder
 # type_37	Thunderstorm
 # type_38	Thunderstorm Without Precipitation
 
+diamond_dust = ["Diamond Dust"]
 # type_39	Diamond Dust (sparkles)
 
+sunny = "Clear"
 # type_43	Clear
 
 # MOONPHASES

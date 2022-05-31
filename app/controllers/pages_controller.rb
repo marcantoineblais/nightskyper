@@ -92,6 +92,9 @@ class PagesController < ApplicationController
     doc = JSON.parse(URI.open(visualcrossing_url).read)
     # index 0 is today - index 14 is in 2 weeks
     @meteo_prediction = doc['days'].map(&:symbolize_keys)
+    days = @meteo_prediction[1..-1].first(6)
+
+    raise
   end
 
   def fetch_bortle(latitude, longitude)
