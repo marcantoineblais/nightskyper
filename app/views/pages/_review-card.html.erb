@@ -11,7 +11,11 @@
 
       <div class="review-top d-flex justify-content-between">
         <h3><%= review.date %></h3>
-        <p class="rating"><%= review.rating %></p>
+        <p class="rating">
+        <%review.rating.times do %>
+          <span class="fa fa-star checked"></span>
+        <% end %>
+        </p>
       </div>
       <p class="review-text"><%= review.content %></p>
     <div class="review-underline"></div>
