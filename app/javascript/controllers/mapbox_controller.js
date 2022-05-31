@@ -23,6 +23,7 @@ export default class extends Controller {
     })
 
     this.#fitMapToBoundaries()
+    this.#updateMarkers()
     // fit the map to the boundaries
     // When done moving, load the markers
     this.map.doubleClickZoom.disable()
