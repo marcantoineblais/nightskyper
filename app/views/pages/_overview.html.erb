@@ -1,14 +1,10 @@
 <div id="overview">
-<% if today %>
-  <h2>Overview</h2>
-
- <div class="cards d-flex flex-column ">
-    <% if today %>
-    <div class="card mb-4 box-shadow">
-      <div class="card-body">
-        <div class="text-center mb-3">
+  <% if today %>
+    <div class="row mx-5 my-2">
+      <div class="col d-flex justify-content-left align-items-center ">
+        <div class="my-3">
             <% if Date.parse(today[:datetime]) === Date.today %>
-            <h4>Today</h4>
+            <h4 data-date="<%= today[:datetime] %>">Today</h4>
             <div>datetime: <%= today[:datetime] %></div>
             <% elsif Date.parse(today[:datetime]) === Date.tomorrow %>
             <h4>Tomorrow</h4>
@@ -18,24 +14,66 @@
             <div>datetime: <%= today[:datetime] %></div>
             <% end %>
         </div>
-        <div class="row">
-          <div class="col-4">
-            <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-            <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-            <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-            <div>conditions: <%= today[:conditions] %></div>
+      </div>
+      <div class="col d-flex justify-content-center align-items-center text-center">
+        <h4><%= place_name %></h4>
+      </div>
+      <div class="col d-flex justify-content-end align-items-center">
+      <p class="p-1 m-0">Long : <%= marker[0].round(2) %></p>
+      <p class="p-1 m-0">Lat : <%= marker[1].round(2) %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-10 border-bottom m-auto"></div>
+    </div>
+    <div class="row justify-content-around mx-3 my-5">
+      <div class="col-2">
+        <div class="flip-card text-center">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-3">
+              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+            </div>
+            <div class="flip-card-back p-3 text-center">
+              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>humidity: <%= today[:humidity] %> %</div>
+              <div>cloudcover: <%= today[:cloudcover] %> %</div>
+            </div>
           </div>
-          <div class="col-4">
-            <div>moonphase: <%= today[:moonphase] %></div>
-            <div>moonrise: <%= today[:moonrise] %></div>
-            <div>moonset: <%= today[:moonset] %></div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="flip-card text-center">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-3">
+              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+            </div>
+            <div class="flip-card-back p-3 text-center">
+              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>humidity: <%= today[:humidity] %> %</div>
+              <div>cloudcover: <%= today[:cloudcover] %> %</div>
+            </div>
           </div>
-          <div class="col-4">
-            <div>bortle: <%= @bortle %></div>
-            <div>
-              <p>Bortle class is a light pollution scale from 0 to 10.</p>
-              <p>0 is : pure sky without any LP</p>
-              <p>10 is : saturated sky by LP</p>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="flip-card text-center">
+          <div class="flip-card-inner">
+            <div class="flip-card-front p-3">
+              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+            </div>
+            <div class="flip-card-back p-3 text-center">
+              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>humidity: <%= today[:humidity] %> %</div>
+              <div>cloudcover: <%= today[:cloudcover] %> %</div>
             </div>
           </div>
         </div>
@@ -43,8 +81,6 @@
     </div>
   <% end %>
 
-</div>
-<% end %>
   <% if today %>
     <div class="view-details d-flex justify-content-center <%= @nodetails %>">
       <%= link_to "View details", "#", class:"NS-button" %>
