@@ -61,10 +61,11 @@ class PagesController < ApplicationController
     url = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{@coordinates[0]},#{@coordinates[1]}.json?access_token=#{ENV['MAPBOX_API_KEY']}"
     doc = JSON.parse(URI.open(url).read)
     @doc = doc['features']
-    @place_name = []
+    place_nam_list = []
     @doc.each do |feature|
-      @place_name << feature['place_name']
+      place_nam_list << feature['place_name']
     end
+    @place_name = place_nam_list[-3]
   end
 
   # uses the map boundaries to retrieve markers to display from the DB

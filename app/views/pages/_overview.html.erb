@@ -1,9 +1,10 @@
-<div id="overview row">
+<div id="overview">
   <% if today %>
-    <%# <div class="card-body"> %>
+  <div class="row mx-5 my-2">
+    <div class="col d-flex justify-content-left align-items-center ">
       <div class="my-3">
           <% if Date.parse(today[:datetime]) === Date.today %>
-          <h4>Today</h4>
+          <h4 data-date="<%= today[:datetime] %>">Today</h4>
           <div>datetime: <%= today[:datetime] %></div>
           <% elsif Date.parse(today[:datetime]) === Date.tomorrow %>
           <h4>Tomorrow</h4>
@@ -13,6 +14,33 @@
           <div>datetime: <%= today[:datetime] %></div>
           <% end %>
       </div>
+    </div>
+    <div class="col d-flex justify-content-center align-items-center text-center">
+      <h4><%= place_name %></h4>
+    </div>
+    <div class="col d-flex justify-content-end align-items-center">
+     <p class="p-1 m-0">Long : <%= marker.longitude.round(2) %></p>
+     <p class="p-1 m-0">Lat : <%= marker.latitude.round(2) %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 border-bottom m-auto"></div>
+  </div>
+  <div class="row justify-content-around mx-3 my-5">
+  <div class="col-3">
+    <div class="card">1</div>
+  </div>
+  <div class="col-3">
+    <div class="card">2</div>
+  </div>
+  <div class="col-3">
+    <div class="card">3</div>
+  </div>
+
+
+  </div>
+    <%# <div class="card-body"> %>
+
       <div class="row">
         <div class="col-4">
           <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
