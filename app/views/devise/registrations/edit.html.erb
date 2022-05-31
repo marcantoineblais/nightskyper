@@ -22,7 +22,7 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
-    <%= f.input :photo, as: :hidden, input_html: { data: {controller: 'cloudinary-users'}} %>
+    <%= f.input :photo, as: :hidden, value: current_user.photo, input_html: { data: {controller: 'cloudinary-users'}} %>
   </div>
 
   <div class="form-actions">

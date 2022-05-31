@@ -3,8 +3,6 @@ import { Controller } from "stimulus"
 export default class extends Controller {
 
   connect() {
-    console.log('Hello, Stimulus!')
-
     this.widget = cloudinary.applyUploadWidget(
       this.element,
       {
@@ -13,11 +11,17 @@ export default class extends Controller {
         cropping: true,
         folder: 'users',
         croppingAspectRatio: 1,
-        fieldName: 'user[photo]',
+        fieldName: 'user[pic]',
         multiple: false
       },
       (error, result) => {
-        console.log(error, result)
+        if (result.event == 'success') {
+          if (document.querySelectorAll('li.cloudinary-thumbnail').length > 1) {
+            document.querySelectorAll('li.cloudinary-thumbnail')[0].outerHTML = ""
+          }
+          this.url = (result.info.secure_url)
+          this.element.value = this.url
+        }
       }
     )
   }

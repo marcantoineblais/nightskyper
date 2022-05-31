@@ -1,7 +1,7 @@
 <div class="markers d-flex flex-column">
   <div class="marker-container d-flex">
-    <% if marker.photo %>
-      <img class="marker-img" src="https://res.cloudinary.com/diiu2j0fw/<%= marker.photo %>" alt="">
+    <% if marker.photo.present? %>
+      <img class="marker-img" src="<%= marker.photo %>" alt="">
     <% else %>
       <img class="marker-img" src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
     <% end %>
