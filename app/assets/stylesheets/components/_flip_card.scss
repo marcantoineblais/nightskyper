@@ -11,6 +11,7 @@
   text-align: center;
   transition: transform 0.8s, box-shadow 1.2s, width 1.2s, height 1.2s;
   transform-style: preserve-3d;
+  border-radius:5px;
 }
 
 .flip-card:hover .flip-card-inner {

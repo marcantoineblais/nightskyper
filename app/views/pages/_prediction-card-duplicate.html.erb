@@ -1,0 +1,42 @@
+<h2>prediction card</h2>
+
+<div class="cards d-flex flex-column ">
+  <% meteo_prediction.each do |jour| %>
+    <div class="card mb-4 box-shadow">
+      <div class="card-body">
+        <div class="text-center mb-3">
+          <% if Date.parse(jour[:datetime]) === Date.today %>
+          <h4>Today</h4>
+          <div>datetime: <%= jour[:datetime] %></div>
+          <% elsif Date.parse(jour[:datetime]) === Date.tomorrow %>
+           <h4>Tomorrow</h4>
+          <div>datetime: <%= jour[:datetime] %></div>
+          <% else %>
+          <h4><%= Date::DAYNAMES[Date.parse(jour[:datetime]).wday] %></h4>
+          <div>datetime: <%= jour[:datetime] %></div>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div>tempmax: <%= (((jour[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+            <div>tempmin: <%= (((jour[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+            <div>temp: <%= (((jour[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+            <div>humidity: <%= jour[:humidity] %> %</div>
+            <div>cloudcover: <%= jour[:cloudcover] %> %</div>
+          </div>
+          <div class="col-4">
+            <div>sunrise: <%= jour[:sunrise] %></div>
+            <div>sunset: <%= jour[:sunset] %></div>
+            <div>moonphase: <%= jour[:moonphase] %></div>
+            <div>moonrise: <%= jour[:moonrise] %></div>
+            <div>moonset: <%= jour[:moonset] %></div>
+          </div>
+          <div class="col-4">
+            <div>conditions: <%= jour[:conditions] %></div>
+            <div>description: <%= jour[:description] %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

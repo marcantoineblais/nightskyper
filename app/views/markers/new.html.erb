@@ -2,7 +2,7 @@
   <%= simple_form_for(@marker) do |f| %>
     <%= f.input :title %>
     <%= f.input :description, as: :text %>
-    <%= f.input :photo, as: :file  %>
+    <%= f.input :photo, as: :hidden, value: @marker.photo, input_html: { data: { controller: "cloudinary-markers"}} %>
     <%= f.hidden_field :longitude, value: @coordinates[0] %>
     <%= f.hidden_field :latitude, value: @coordinates[1] %>
     <%= f.button :submit %>
