@@ -2,9 +2,9 @@
 
 <%= link_to "Back to Search page", search_path %>
 
-<h1>result page</h1>
 
-<%= render 'overview', today: @meteo_prediction.first %>
+
+<%= render 'overview', today: @meteo_prediction.first, marker: @marker, place_name: @place_name %>
 
 <%= render 'prediction-card', meteo_prediction: @meteo_prediction[1..-1].first(6) %>
 
