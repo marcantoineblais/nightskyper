@@ -20,10 +20,9 @@ export default class extends Controller {
     // Resize the map after page load (solve display bug)
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'))
+      this.#fitMapToBoundaries()
+      this.#updateMarkers()
     })
-
-    this.#fitMapToBoundaries()
-    this.#updateMarkers()
     // fit the map to the boundaries
     // When done moving, load the markers
     this.map.doubleClickZoom.disable()
@@ -68,7 +67,6 @@ export default class extends Controller {
     // fit the map with the given boundaries and adjust zoom level
 
     const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
-    console.log(bounds)
     this.map.fitBounds(bounds, { padding: 0, duration: 0 })
   }
 
