@@ -1,0 +1,12 @@
+.card {
+  border-radius: 8px;
+  border-color: $NS-darkblue;
+}
+
+.card-body {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: $body-font;
+  font-size: 12px;
+  font-style: italic;
+}
