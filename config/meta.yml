@@ -1,5 +1,5 @@
 meta_product_name: "NightSkyper"
 meta_title: "NightSkyper - Find perfect spot to look the stars"
 meta_description: "NightSkyper give access to astrophotographers to great spots from where to look up to the stars and weather conditions."
-meta_image: "home.jpg" # should exist in `app/assets/images/`
+meta_image: "metaimage.jpg" # should exist in `app/assets/images/`
 twitter_account: "@product_twitter_account"   # required for Twitter Cards
