@@ -1,26 +1,26 @@
 class WeatherCondition
   def initialize
     @conditions = {
-      ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "Light Drizzle/Rain"] => "weather/Drizzle",
-      ["Partially cloudy", "Duststorm", "Fog"] => "weather/Fog",
-      ["Funnel Cloud/Tornado"] => "weather/Tornado",
-      ["Hail Showers", "Ice", "Hail"] => "weather/Ice",
-      ["Freezing Drizzle/Freezing Rain", "Heavy Freezing Drizzle/Freezing Rain", "Light Freezing Drizzle/Freezing Rain", "Heavy Freezing Rain", "Light Freezing Rain", "Heavy Rain And Snow", "Light Rain And Snow"] => "weather/Freezing_snow_rain",
-      ["Mist", "Precipitation In Vicinity", "Rain", "Rain Showers", "Heavy Rain", "Light Rain"] => "weather/Rain",
-      ["Sky Coverage Decreasing", "Sky Coverage Increasing", "Smoke Or Haze", "Overcast", "Partially cloudy"] => "weather/Cloudy",
-      ["Blowing Or Drifting Snow", "Freezing Fog", "Snow", "Snow And Rain Showers", "Snow Showers", "Heavy Snow", "Light Snow"] => "weather/Snow",
-      ["Squalls"] => "weather/Squalls",
-      ["Lightning Without Thunder", "Thunderstorm", "Thunderstorm Without Precipitation"] => "weather/Thunder",
-      ["Diamond Dust"] => "weather/Diamond_dust",
-      ["Clear"] => "weather/Clear",
-      (0..0.11) => "moonphase/New_Moon",
-      (0.12..0.24) => "moonphase/Waxing_crescent",
-      (0.25..0.36) => "moonphase/First_quarter",
-      (0.37..0.49) => "moonphase/Waxing_gibbous",
-      (0.50..0.62) => "moonphase/Full_moon",
-      (0.63..0.74) => "moonphase/Waning_gibbous",
-      (0.75..0.87) => "moonphase/Third_quarter",
-      (0.88..1) => "moonphase/New_moon1"
+      ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "Light Drizzle/Rain"] => "weather/Drizzle.svg",
+      ["Partially cloudy", "Duststorm", "Fog"] => "weather/Fog.svg",
+      ["Funnel Cloud/Tornado"] => "weather/Tornado.svg",
+      ["Hail Showers", "Ice", "Hail"] => "weather/Ice.svg",
+      ["Freezing Drizzle/Freezing Rain", "Heavy Freezing Drizzle/Freezing Rain", "Light Freezing Drizzle/Freezing Rain", "Heavy Freezing Rain", "Light Freezing Rain", "Heavy Rain And Snow", "Light Rain And Snow"] => "weather/Freezing_snow_rain.svg",
+      ["Mist", "Precipitation In Vicinity", "Rain", "Rain Showers", "Heavy Rain", "Light Rain"] => "weather/Rain.svg",
+      ["Sky Coverage Decreasing", "Sky Coverage Increasing", "Smoke Or Haze", "Overcast", "Partially cloudy"] => "weather/Cloudy.svg",
+      ["Blowing Or Drifting Snow", "Freezing Fog", "Snow", "Snow And Rain Showers", "Snow Showers", "Heavy Snow", "Light Snow"] => "weather/Snow.svg",
+      ["Squalls"] => "weather/Squalls.svg",
+      ["Lightning Without Thunder", "Thunderstorm", "Thunderstorm Without Precipitation"] => "weather/Thunder.svg",
+      ["Diamond Dust"] => "weather/Diamond_dust.svg",
+      ["Clear"] => "weather/Clear.svg",
+      (0..0.11) => "moonphase/New_Moon.svg",
+      (0.12..0.24) => "moonphase/Waxing_crescent.svg",
+      (0.25..0.36) => "moonphase/First_quarter.svg",
+      (0.37..0.49) => "moonphase/Waxing_gibbous.svg",
+      (0.50..0.62) => "moonphase/Full_moon.svg",
+      (0.63..0.74) => "moonphase/Waning_gibbous.svg",
+      (0.75..0.87) => "moonphase/Third_quarter.svg",
+      (0.88..1) => "moonphase/New_moon1.svg"
     }
 
     @moonphase = {
