@@ -13,7 +13,6 @@ class PagesController < ApplicationController
   def search
     # when using the search bar, get map boundaries and weather from search location
     # show whole map when no search input
-
     respond_to do |format|
       format.html do
         if params[:query].present?
@@ -135,8 +134,8 @@ class PagesController < ApplicationController
   end
 
   def marker_partials
-    markers = @markers.first(10).map do |marker|
-      render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker }, layout: false
+    markers = @markers.map do |marker|
+      render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
     end
     markers.join
   end

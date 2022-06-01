@@ -11,6 +11,7 @@
   overflow-y: scroll;
   overflow-x: visible;
   padding: 0.5em;
+  margin-bottom: 3em;
 }
 .cards-container {
   margin-right: 3em;
@@ -49,15 +50,15 @@
     border-bottom: none!important;
     padding-right: 0.5em;
     padding-bottom: 0.5em;
-
+    cursor: pointer;
   }
 
   .remove {
     border-bottom: none!important;
     padding-right: 0.5em;
     padding-bottom: 0.5em;
+    cursor: pointer;
   }
-
 }
 
 .marker-content {

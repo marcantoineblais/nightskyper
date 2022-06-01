@@ -12,7 +12,7 @@
 
     <div id="marker-cards" class="cards">
       <% @markers&.each do |marker| %>
-        <%= render 'marker-card', marker: marker %>
+        <%= render 'marker-card', marker: marker, path: marker_favorites_path(marker) %>
       <% end %>
     </div>
   </div>
