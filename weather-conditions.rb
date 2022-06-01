@@ -22,11 +22,27 @@ class WeatherCondition
       (0.75..0.87) => "moonphase/Third_quarter",
       (0.88..1) => "moonphase/New_moon1"
     }
+
+    @moonphase = {
+      (0..0.11) => "New Moon",
+      (0.12..0.24) => "Waxing crescent",
+      (0.25..0.36) => "First quarter",
+      (0.37..0.49) => "Waxing gibbous",
+      (0.50..0.62) => "Full moon",
+      (0.63..0.74) => "Waning gibbous",
+      (0.75..0.87) => "Third quarter",
+      (0.88..1) => "New moon"
+    }
   end
 
   def get_url(condition)
-    result = @conditions.find{ |key, value| key.include?(condition) }
+    result = @conditions.find { |key, value| key.include?(condition) }
     result[1]
+  end
+
+  def get_moonphase(phase)
+   result = @moonphase.find { |key, value| key.include?(phase) }
+   result[1]
   end
 end
 
