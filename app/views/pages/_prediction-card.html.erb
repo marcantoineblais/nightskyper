@@ -1,52 +1,49 @@
-<h2>prediction card</h2>
-
 <div class="cards d-flex flex-column ">
-  <% meteo_prediction.each do |jour| %>
-    <div class="card mb-4 box-shadow">
-      <div class="card-body text-center">
-        <div class="row">
-          <div class="col-3 text-start d-flex align-items-center">
-            <% if Date.parse(jour[:datetime]) === Date.today %>
-              <p>Today</p>
-              <div>
-              <p><%= jour[:datetime] %></p>
-              </div>
-            <% elsif Date.parse(jour[:datetime]) === Date.tomorrow %>
-              <p>Tomorrow</p>
-              <div>
-              <p><% jour[:datetime] %></p>
-              </div>
-            <% else %>
-              <div>
-              <p><%= jour[:datetime] %></p>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="col-3 d-flex flex-column align-items-center">
-            <% condition = jour[:conditions].split(",")[0]%>
-            <div class="h-75">
-            <%= image_tag("#{@weather.get_url(condition)}", width: "30%") %>
+  <div class="card mb-4 box-shadow">
+    <div class="card-body text-center">
+      <div class="row">
+        <div class="col-3 text-start d-flex align-items-center">
+          <% if Date.parse(day[:datetime]) === Date.today %>
+            <div>
+            <h5>Today</h5>
+              <p><%= day[:datetime] %></p>
             </div>
-            <%= jour[:conditions]%>
-          </div>
-
-          <div class="col-3 d-flex flex-column align-items-center">
-            <% phase = jour[:moonphase]%>
-            <div class="h-75">
-            <%= image_tag("#{@weather.get_url(phase)}", width: "45%") %>
+          <% elsif Date.parse(day[:datetime]) === Date.tomorrow %>
+            <div>
+            <h5>Tomorrow</h5>
+              <p><%= day[:datetime] %></p>
             </div>
-            <%= "#{@weather.get_moonphase(phase)}" %>
-          </div>
-
-          <div class="col-3 d-flex flex-column align-items-center">
-            <div class="h-75">
-            <%= image_tag("bortle/light-bulb", width: "24%") %>
+          <% else %>
+            <div>
+            <h5><%= Date::DAYNAMES[Date.parse(day[:datetime]).wday] %></h5>
+              <p><%= day[:datetime] %></p>
             </div>
-            bortle <%= @bortle %>
+          <% end %>
+        </div>
+
+        <div class="col-3 d-flex flex-column align-items-center">
+          <% condition = day[:conditions].split(",")[0]%>
+          <div class="h-75">
+          <%= image_tag("#{@weather.get_url(condition)}", width: "30%") %>
           </div>
+          <%= day[:conditions]%>
+        </div>
+
+        <div class="col-3 d-flex flex-column align-items-center">
+          <% phase = day[:moonphase]%>
+          <div class="h-75">
+          <%= image_tag("#{@weather.get_url(phase)}", width: "45%") %>
+          </div>
+          <%= "#{@weather.get_moonphase(phase)}" %>
+        </div>
+
+        <div class="col-3 d-flex flex-column align-items-center">
+          <div class="h-75">
+          <%= image_tag("bortle/light-bulb", width: "24%") %>
+          </div>
+          Bortle: <%= @bortle %>
         </div>
       </div>
     </div>
-  <% end %>
+  </div>
 </div>

@@ -3,10 +3,18 @@
 <%= link_to "Back to Search page", search_path %>
 
 
-<%= render 'overview', day: @meteo_prediction.first, marker: @marker, place_name: @place_name, bortle: @bortle %>
-
-
-<%= render 'prediction-card', meteo_prediction: @meteo_prediction[1..-1].first(6) %>
+<div class="result-container" data-controller="result">
+  <% @meteo_prediction.first(7).each_with_index do |day, index| %>
+    <div class="day-<%= index %>">
+      <div class="overview-result" style="display:none;" data-result-target="overview<%= index %> overviews">
+        <%= render 'overview', day: day, marker: @marker, place_name: @place_name, bortle: @bortle %>
+      </div>
+      <div class="prediction-result" data-result-target="prediction<%= index %> predictions" data-action="click->result#toggleOverviewPrediction">
+        <%= render 'prediction-card', day: day %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <div class="d-flex">
   <div class="reviews flex-grow-1">
@@ -19,6 +27,6 @@
       <% else %>
         <p> No marker</p>
       <% end %>
-      </div>
+    </div>
   </div>
 </div>
