@@ -5,14 +5,14 @@
 
 <div class="result-container" data-controller="result">
   <% @meteo_prediction.first(7).each_with_index do |day, index| %>
-  <div class="day-<%= index %>">
-    <div class="overview-result" style="display:none;" data-result-target="overview<%= index %> overviews">
-      <%= render 'overview', day: day, marker: @coordinates, place_name: @place_name, bortle: @bortle %>
+    <div class="day-<%= index %>">
+      <div class="overview-result" style="display:none;" data-result-target="overview<%= index %> overviews">
+        <%= render 'overview', day: day, marker: @marker, place_name: @place_name, bortle: @bortle %>
+      </div>
+      <div class="prediction-result" data-result-target="prediction<%= index %> predictions" data-action="click->result#toggleOverviewPrediction">
+        <%= render 'prediction-card', day: day %>
+      </div>
     </div>
-    <div class="prediction-result" data-result-target="prediction<%= index %> predictions" data-action="click->result#toggleOverviewPrediction">
-      <%= render 'prediction-card', day: day %>
-    </div>
-  </div>
   <% end %>
 </div>
 
@@ -27,6 +27,6 @@
       <% else %>
         <p> No marker</p>
       <% end %>
-      </div>
+    </div>
   </div>
 </div>

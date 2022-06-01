@@ -2,7 +2,9 @@
 
 <h2>Search page</h2>
 
-<%= render 'overview', day: @meteo_prediction&.first, marker: @center, place_name: @place_name, bortle: @bortle %>
+<% if @meteo_prediction.present? %>
+  <%= render 'overview', day: @meteo_prediction.first, marker: @marker, place_name: @place_name, bortle: @bortle %>
+<% end %>
 
 <div class="d-flex justify-content-between">
 
@@ -19,7 +21,7 @@
     <%=
       render 'map',
       search_path: search_path,
-      custom_marker_path: custom_marker_path,
+      marker_info_path: marker_info_path,
       map_boundaries: @map_boundaries,
       key: ENV['MAPBOX_API_KEY'] %>
   </div>

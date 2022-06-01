@@ -7,14 +7,25 @@
     <% end %>
     <div class="marker-card">
       <div class="marker-content">
-        <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
+        <div class="d-flex justify-content-between">
+          <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
+          <% if marker.id && !marker.favorite?(current_user) %>
+            <a href="<%= marker_favorites_path(marker) %>" data-method="post" class="add"><i class="fa-regular fa-heart fav-icon"></i></a>
+          <% elsif marker.id && marker.favorite?(current_user) %>
+            <a href="<%= marker_favorites_path(marker) %>" class="remove" data-method="delete" data-confirm="Delete this marker from you favorites?"> <i class="fa-solid fa-heart fav-icon"></i></a>
+          <% end %>
+        </div>
         <h3><%= marker.description %></h3>
           <div class="marker-bottom">
-            <p><em>Long: <%= marker.longitude %> | Lat: <%= marker.latitude %></em></p>
+            <p> <%= marker.address.split(", ")[-6] %> - <%= marker.address.split(", ")[-3] %> - <%= marker.address.split(", ")[-2] %></p>
 
             <div class= "rating">
               <% marker.average_rating.times do %>
                 <span class="fa fa-star checked"></span>
+              <% end %>
+              <% unchecked = 5 - marker.average_rating %>
+              <% unchecked.times do %>
+                <span class="fa-solid fa-star unchecked"></span>
               <% end %>
             </div>
 
@@ -23,6 +34,3 @@
     </div>
   </div>
 </div>
-
-
-<i class="fa-solid fa-star-half-stroke"></i>
