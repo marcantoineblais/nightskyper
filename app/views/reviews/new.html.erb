@@ -1,9 +1,12 @@
-<div class="container">
+<div class="row align-items-center justify-content-center p-5">
+  <div class="col-6 mx-auto">
   <%= simple_form_for([@marker, @review]) do |f| %>
     <%= f.input :rating, collection: (1..5).to_a %>
     <%= f.input :date, as: :date, html5: true %>
     <%= f.input :content, as: :text %>
     <%= f.input :photos, as: :hidden, value: @review.photos, input_html: { data: { controller: 'cloudinary-reviews' } } %>
+
     <%= f.button :submit %>
   <% end %>
+  </div>
 </div>
