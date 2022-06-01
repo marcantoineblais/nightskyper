@@ -25,15 +25,24 @@
   position: absolute;
   top: 8px;
   right: 10.2%;
+}
 
 .home-btn {
-    text-decoration: none;
-    font-family: $body-font;
-    color: $NS-offwhite;
-    font-weight: bolder;
+  margin-bottom: 50px;
+  text-decoration: none;
+  font-family: $body-font;
+  color: $NS-orange;
+  font-weight: bolder;
 
-    &:hover {
-      color: $NS-orange;
-    }
+  &:hover {
+    color: $NS-offwhite;
   }
+}
+
+.hero-container {
+  height: 500px;
+}
+
+.avatar-btn {
+  margin-bottom: 50px;
 }
