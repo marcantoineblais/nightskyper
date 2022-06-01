@@ -1,17 +1,17 @@
 <div id="overview">
-  <% if today %>
+  <% if day %>
     <div class="row mx-5 my-2">
       <div class="col d-flex justify-content-left align-items-center ">
         <div class="my-3">
-            <% if Date.parse(today[:datetime]) === Date.today %>
-            <h4 data-date="<%= today[:datetime] %>">Today</h4>
-            <div>datetime: <%= today[:datetime] %></div>
-            <% elsif Date.parse(today[:datetime]) === Date.tomorrow %>
+            <% if Date.parse(day[:datetime]) === Date.today %>
+            <h4 data-date="<%= day[:datetime] %>">Today</h4>
+            <div>datetime: <%= day[:datetime] %></div>
+            <% elsif Date.parse(day[:datetime]) === Date.tomorrow %>
             <h4>Tomorrow</h4>
-            <div>datetime: <%= today[:datetime] %></div>
+            <div>datetime: <%= day[:datetime] %></div>
             <% else %>
-            <h4><%= Date::DAYNAMES[Date.parse(today[:datetime]).wday] %></h4>
-            <div>datetime: <%= today[:datetime] %></div>
+            <h4><%= Date::DAYNAMES[Date.parse(day[:datetime]).wday] %></h4>
+            <div>datetime: <%= day[:datetime] %></div>
             <% end %>
         </div>
       </div>
@@ -32,14 +32,14 @@
           <div class="flip-card-inner">
             <div class="flip-card-front p-3">
               <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
             </div>
             <div class="flip-card-back p-3 text-center">
-              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>humidity: <%= today[:humidity] %> %</div>
-              <div>cloudcover: <%= today[:cloudcover] %> %</div>
+              <div>tempmax: <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>tempmin: <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>temp: <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>humidity: <%= day[:humidity] %> %</div>
+              <div>cloudcover: <%= day[:cloudcover] %> %</div>
             </div>
           </div>
         </div>
@@ -49,14 +49,14 @@
           <div class="flip-card-inner">
             <div class="flip-card-front p-3">
               <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
             </div>
             <div class="flip-card-back p-3 text-center">
-              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>humidity: <%= today[:humidity] %> %</div>
-              <div>cloudcover: <%= today[:cloudcover] %> %</div>
+              <div>tempmax: <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>tempmin: <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>temp: <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+              <div>humidity: <%= day[:humidity] %> %</div>
+              <div>cloudcover: <%= day[:cloudcover] %> %</div>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
           <div class="flip-card-inner">
             <div class="flip-card-front p-3">
               <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
             </div>
             <div class="flip-card-back p-3 text-center">
               <div>bortle: <%= @bortle %></div>
@@ -80,12 +80,12 @@
     </div>
   <% end %>
 
-  <% if today %>
+  <% if day %>
     <div class="view-details d-flex justify-content-center <%= @nodetails %>">
       <%= link_to "View details", "#", class:"NS-button" %>
     </div>
   <% end %>
-  <% if today %>
+  <% if day %>
     <div class="add-favorites d-flex justify-content-center <%= @noaddfav %>">
       <a href=<%=favorites_path %>> <i class="fa-solid fa-heart fav-icon"></i></a>
     </div>
