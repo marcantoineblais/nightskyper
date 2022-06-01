@@ -131,8 +131,8 @@ export default class extends Controller {
       this.#recenterMapToBondaries(data.customMarker, zoom)
       this.#addMarkersToMap([data.customMarker], 'search-marker')
 
-      if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
-        document.getElementById('overview').outerHTML = data.overview
+      if (document.getElementById('overview') && data.overview != document.getElementById('overview').innerHTML) {
+        document.getElementById('overview').innerHTML = data.overview
       }
     })
   }
@@ -167,8 +167,8 @@ export default class extends Controller {
 
       this.#recenterMapToBondaries(data.marker, zoom)
 
-      if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
-        document.getElementById('overview').outerHTML = data.overview
+      if (document.getElementById('overview') && data.overview != document.getElementById('overview').innerHTML) {
+        document.getElementById('overview').innerHTML = data.overview
       }
     })
   }

@@ -14,7 +14,11 @@ export default class extends Controller {
       })
       .then(res => res.json())
       .then((data) => {
-        this.element.parentElement.parentElement.parentElement.parentElement.parentElement.outerHTML = data.markerCard
+        if (data.saved) {
+          this.element.parentElement.parentElement.parentElement.parentElement.parentElement.outerHTML = data.render
+        } else {
+          window.location.replace(data.render)
+        }
       })
     })
   }

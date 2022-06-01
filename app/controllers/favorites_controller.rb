@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :create
   skip_before_action :verify_authenticity_token
 
   def index
@@ -21,14 +22,16 @@ class FavoritesController < ApplicationController
       end
 
       format.json do
-        if current_user
-          marker = Marker.find(params[:marker_id])
-          Favorite.create(marker: marker, user: current_user)
-          marker_card = render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
-          render json: { markerCard: marker_card }
+        marker = Marker.find(params[:marker_id])
+        favorite = Favorite.new(marker: marker, user: current_user)
+        if favorite.save
+          render = render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
+          saved = true
         else
-          redirect_to new_user_session_path
+          render = new_user_session_path
+          saved = false
         end
+        render json: { saved: saved, render: render }
       end
     end
   end
