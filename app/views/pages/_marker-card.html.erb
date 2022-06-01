@@ -1,7 +1,7 @@
 <div class="markers d-flex flex-column">
   <div class="marker-container d-flex">
-    <% if marker.photo.attached? %>
-      <%= cl_image_tag marker.photo.key, class: 'marker-img' %>
+    <% if marker.photo %>
+      <%= cl_image_tag marker.photo, class: 'marker-img' %>
     <% else %>
       <img class="marker-img" src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
     <% end %>
