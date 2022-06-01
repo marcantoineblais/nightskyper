@@ -2,7 +2,7 @@ require 'open-uri'
 require 'nokogiri'
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[home result search custom_marker]
+  skip_before_action :authenticate_user!, only: %i[home result search custom_marker marker_info]
   skip_before_action :verify_authenticity_token
 
   def home

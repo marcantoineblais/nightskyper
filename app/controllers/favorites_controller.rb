@@ -42,14 +42,14 @@ class FavoritesController < ApplicationController
         marker = Marker.find(params[:marker_id])
         favorite = Favorite.find_by(marker: marker)
         favorite.destroy
-        redirect_to search_path
+        redirect_to favorites_path
       end
       format.json do
         marker = Marker.find(params[:marker_id])
         favorite = Favorite.find_by(marker: marker)
         favorite.destroy
         marker_card = render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
-        render json: { markerCard: marker_card }
+        render json: { render: marker_card }
       end
     end
   end
