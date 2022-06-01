@@ -34,14 +34,14 @@
           <div class="col-3 d-flex flex-column align-items-center">
             <% phase = jour[:moonphase]%>
             <div class="h-75">
-            <%= image_tag("#{@weather.get_url(phase)}", width: "45%") %>
+            <%= image_tag("#{@weather.get_url(phase)}", width: "60%") %>
             </div>
             <%= "#{@weather.get_moonphase(phase)}" %>
           </div>
 
           <div class="col-3 d-flex flex-column align-items-center">
             <div class="h-75">
-            <%= image_tag("bortle/light-bulb", width: "24%") %>
+            <%= image_tag("bortle/light-bulb", width: "20%") %>
             </div>
             bortle <%= @bortle %>
           </div>
