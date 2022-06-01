@@ -24,11 +24,14 @@ export default class extends Controller {
     const currentElementClick = event.currentTarget;
     const overviewOfCurrentElement = currentElementClick.parentElement.firstElementChild;
     const predictionOfCurrentElement = currentElementClick.parentElement.lastElementChild;
-    console.log(overviewOfCurrentElement.classList);
+    // console.log(overviewOfCurrentElement.classList);
     predictionOfCurrentElement.style.display = 'none';
-    console.log(overviewOfCurrentElement);
+    // console.log(overviewOfCurrentElement);
     overviewOfCurrentElement.style.display = 'block';
-    console.log(overviewOfCurrentElement);
+    overviewOfCurrentElement.scrollIntoView({
+      behavior: 'smooth'
+    });
+    // console.log(overviewOfCurrentElement);
   }
 
 }
