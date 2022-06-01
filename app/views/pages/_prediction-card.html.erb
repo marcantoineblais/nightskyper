@@ -4,18 +4,19 @@
       <div class="row">
         <div class="col-3 text-start d-flex align-items-center">
           <% if Date.parse(day[:datetime]) === Date.today %>
-            <p>Today</p>
             <div>
-            <p><%= day[:datetime] %></p>
+            <h5>Today</h5>
+              <p><%= day[:datetime] %></p>
             </div>
           <% elsif Date.parse(day[:datetime]) === Date.tomorrow %>
-            <p>Tomorrow</p>
             <div>
-            <p><% day[:datetime] %></p>
+            <h5>Tomorrow</h5>
+              <p><%= day[:datetime] %></p>
             </div>
           <% else %>
             <div>
-            <p><%= day[:datetime] %></p>
+            <h5><%= Date::DAYNAMES[Date.parse(day[:datetime]).wday] %></h5>
+              <p><%= day[:datetime] %></p>
             </div>
           <% end %>
         </div>
