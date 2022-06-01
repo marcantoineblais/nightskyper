@@ -1,7 +1,7 @@
 <div class="markers d-flex flex-column">
   <div class="marker-container d-flex">
-    <% if marker.photo %>
-      <%= cl_image_tag marker.photo, class: 'marker-img' %>
+    <% if marker.photo.present? %>
+      <img class="marker-img" src="<%= marker.photo %>" alt="">
     <% else %>
       <img class="marker-img" src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
     <% end %>
@@ -10,16 +10,18 @@
         <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
         <h3><%= marker.description %></h3>
           <div class="marker-bottom">
-            <p> <%= marker.address.split(", ")[-6]%>, <%= marker.address.split(", ")[-3]%>, <%= marker.address.split(", ")[-2]%></p>
+            <p><em>Long: <%= marker.longitude %> | Lat: <%= marker.latitude %></em></p>
+
             <div class= "rating">
               <% marker.average_rating.times do %>
                 <span class="fa fa-star checked"></span>
               <% end %>
             </div>
+
           </div>
       </div>
     </div>
   </div>
 </div>
-
-<%# marker.address.split(", ")[-7] %> <%#= marker.address.split(", ").last(2).join(", ") %>
+<
+<%# <i class="fa-solid fa-star-half-stroke"></i> %>
