@@ -1,6 +1,6 @@
 <div class="markers d-flex flex-column">
   <div class="marker-container d-flex">
-    <% if marker&.photo.attached? %>
+    <% if marker.photo.attached? %>
       <%= cl_image_tag marker.photo.key, class: 'marker-img' %>
     <% else %>
       <img class="marker-img" src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
@@ -12,7 +12,7 @@
           <div class="marker-bottom">
             <p> <%= marker.address.split(", ")[-6]%>, <%= marker.address.split(", ")[-3]%>, <%= marker.address.split(", ")[-2]%></p>
             <div class= "rating">
-              <% (marker.average_rating&.to_i || 0).times do %>
+              <% marker.average_rating.times do %>
                 <span class="fa fa-star checked"></span>
               <% end %>
             </div>
