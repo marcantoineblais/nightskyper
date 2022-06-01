@@ -7,27 +7,41 @@
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
   margin-bottom: 10px;
-    & a {
-      color: $NS-darkblue;
-      font-size: 24px;
-      margin-top: 10px;
-      text-decoration: none;
-      border-bottom: 2px solid $NS-orange;
-    }
 
-    & h3 {
-      font-size: 14px;
-      font-weight: 400;
+  a {
+    color: $NS-darkblue;
+    font-size: 24px;
+    margin-top: 10px;
+    text-decoration: none;
+    border-bottom: 2px solid $NS-orange;
+  }
 
-    }
+  h3 {
+    font-size: 14px;
+    font-weight: 400;
 
-    & p {
-      font-size: 12px;
-    }
+  }
 
-    & h2, h3, p {
-    font-family: $body-font;
-    }
+  p {
+    font-size: 12px;
+  }
+
+  h2, h3, p {
+  font-family: $body-font;
+  }
+
+  .add {
+    border-bottom: none!important;
+    padding-right: 0.5em;
+    padding-bottom: 0.5em;
+
+  }
+
+  .remove {
+    border-bottom: none!important;
+    padding-right: 0.5em;
+    padding-bottom: 0.5em;
+  }
 }
 
 .marker-content {
