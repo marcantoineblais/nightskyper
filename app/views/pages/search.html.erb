@@ -6,6 +6,8 @@
   <%= render 'overview', day: @meteo_prediction.first, marker: @marker, place_name: @place_name, bortle: @bortle %>
 <% end %>
 
+<%= render 'new_marker_modal', marker: @marker, coordinates: [0.0, 1.1]  %>
+
 <div class="d-flex justify-content-between">
 
   <div class="cards cards-container">

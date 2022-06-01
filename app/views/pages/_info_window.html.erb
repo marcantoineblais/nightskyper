@@ -5,7 +5,14 @@
   <% else %>
     <div class="d-flex flex-column">
       <%= link_to 'Show more', result_path(coordinates: [marker.longitude, marker.latitude]) %>
-      <%= link_to 'Add this marker', new_marker_path(coordinates: [marker.longitude, marker.latitude]) %>
+      <%= link_to 'Add this marker',
+          # "##{(coordinates: [marker.longitude, marker.latitude])}"
+          # new_marker_path(coordinates: [marker.longitude, marker.latitude])
+          data: { data_bs_toggle: "modal", bs_target: "#exampleModal" } %>
+      <%# replace line 8 with modal button %>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
     </div>
   <% end %>
 </div>
