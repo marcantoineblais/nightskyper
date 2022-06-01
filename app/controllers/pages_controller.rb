@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require_relative '../../weather-conditions'
 
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home result search custom_marker]
@@ -122,6 +123,7 @@ class PagesController < ApplicationController
     doc = JSON.parse(URI.open(visualcrossing_url).read)
     # index 0 is today - index 14 is in 2 weeks
     @meteo_prediction = doc['days'].map(&:symbolize_keys)
+    @weather = WeatherCondition.new
   end
 
   def fetch_bortle(latitude, longitude)
