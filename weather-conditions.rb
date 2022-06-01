@@ -1,123 +1,120 @@
-#  <div>
-#   <% condition = jour[:conditions].split(",")[0]%>
-#   <% if condition == "#{jour[:conditions]}" %>
-#   <%= image_tag "images/weather/#{jour[:conditions]}"%>
-#   <% end %>
-#   <%= jour[:conditions]%>
-#  </div>
+class WeatherCondition
+  def initialize
+    @conditions = {
+      ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "Light Drizzle/Rain"] => "weather/Drizzle",
+      ["Partially cloudy", "Duststorm", "Fog"] => "weather/Fog",
+      ["Funnel Cloud/Tornado"] => "weather/Tornado",
+      ["Hail Showers", "Ice", "Hail"] => "weather/Ice",
+      ["Freezing Drizzle/Freezing Rain", "Heavy Freezing Drizzle/Freezing Rain", "Light Freezing Drizzle/Freezing Rain", "Heavy Freezing Rain", "Light Freezing Rain", "Heavy Rain And Snow", "Light Rain And Snow"] => "weather/Freezing_snow_rain",
+      ["Mist", "Precipitation In Vicinity", "Rain", "Rain Showers", "Heavy Rain", "Light Rain"] => "weather/Rain",
+      ["Sky Coverage Decreasing", "Sky Coverage Increasing", "Smoke Or Haze", "Overcast", "Partially cloudy"] => "weather/Cloudy",
+      ["Blowing Or Drifting Snow", "Freezing Fog", "Snow", "Snow And Rain Showers", "Snow Showers", "Heavy Snow", "Light Snow"] => "weather/Snow",
+      ["Squalls"] => "weather/Squalls",
+      ["Lightning Without Thunder", "Thunderstorm", "Thunderstorm Without Precipitation"] => "weather/Thunder",
+      ["Diamond Dust"] => "weather/Diamond_dust",
+      ["Clear"] => "weather/Clear",
+      (O..0.11) => "moonphase/New_moon",
+      (O.12..0.24) => "moonphase/Waxing_crescent",
+      (0.25..0.36) => "moonphase/First_quarter",
+      (0.37..0.49) => "moonphase/Waxing_gibbous",
+      (0.50..0.62) => "moonphase/Full_moon",
+      (O.63..0.74) => "moonphase/Waning_gibbous",
+      (0.75..0.87) => "moonphase/Third_quarter",
+      (0.88..1) => "moonphase/New_moon1"
+    }
+  end
 
-def condition_image
-  if drizzle.include?(jour[:conditions])
-    image_tag "images/weather/Drizzle"
-  elsif fog.include?(jour[:conditions] )
-    image_tag "images/weather/Fog"
-  elsif tornado == jour[:conditions]
-    image_tag "images/weather/Tornado"
-  elsif ice.include?(jour[:conditions])
-    image_tag "images/weather/Ice"
-  elsif freezing_snow_rain.include?(jour[:conditions])
-    image_tag "images/weather/Freezing_snow_rain"
-  elsif rain.include?(jour[:conditions])
-    image_tag "images/weather/Rain"
-  elsif cloudy.include?(jour[:conditions])
-    image_tag "images/weather/Cloudy"
-  elsif snow.include?(jour[:conditions])
-    image_tag "images/weather/Snow"
-  elsif squalls == jour[:conditions]
-    image_tag "images/weather/Squalls"
-  elsif thunder.include?(jour[:conditions])
-    image_tag "images/weather/Thunder"
-  elsif diamond_dust == jour[:conditions]
-    image_tag "images/weather/Diamond_dust"
-  elsif sunny == jour[:conditions]
-    image_tag "images/weather/Sunny"
+  def get_url(condition)
+    result = @conditions.find{ |key, value| key.include?(condition) }
+    result[1]
   end
 end
 
-# WEATHER CONDITION
-drizzle = ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "Light Drizzle/Rain"]
-# type_2	Drizzle
-# type_3	Heavy Drizzle
-# type_4	Light Drizzle
-# type_5	Heavy Drizzle/Rain
-# type_6	Light Drizzle/Rain
+#  WEATHER CONDITION
 
-fog = ["Duststorm", "Fog"]
-# type_7	Duststorm
-# type_8	Fog
+# drizzle = ["Drizzle", "Heavy Drizzle", "Light Drizzle", "Heavy Drizzle/Rain", "Light Drizzle/Rain"]
+#  type_2	Drizzle
+#  type_3	Heavy Drizzle
+#  type_4	Light Drizzle
+#  type_5	Heavy Drizzle/Rain
+#  type_6	Light Drizzle/Rain
 
-tornado = "Funnel Cloud/Tornado"
-# type_15	Funnel Cloud/Tornado
+# fog = ["Duststorm", "Fog"]
+#  type_7	Duststorm
+#  type_8	Fog
 
-ice = ["Hail Showers", "Ice", "Hail"]
-# type_16	Hail Showers
-# type_17	Ice
-# type_40	Hail
+# tornado = "Funnel Cloud/Tornado" **
+#  type_15	Funnel Cloud/Tornado
 
-freezing_snow_rain = ["Freezing Drizzle/Freezing Rain", "Heavy Freezing Drizzle/Freezing Rain", "Light Freezing Drizzle/Freezing Rain", "Heavy Freezing Rain", "Light Freezing Rain", "Heavy Rain And Snow", "Light Rain And Snow"]
-# type_9	Freezing Drizzle/Freezing Rain
-# type_10	Heavy Freezing Drizzle/Freezing Rain
-# type_11	Light Freezing Drizzle/Freezing Rain
-# type_13	Heavy Freezing Rain
-# type_14	Light Freezing Rain
-# type_22	Heavy Rain And Snow
-# type_23	Light Rain And Snow
+# ice = ["Hail Showers", "Ice", "Hail"]
+#  type_16	Hail Showers
+#  type_17	Ice
+#  type_40	Hail
 
-rain = ["Mist", "Precipitation In Vicinity", "Rain", "Rain Showers", "Heavy Rain", "Light Rain"]
-# type_19	Mist
-# type_20	Precipitation In Vicinity
-# type_21	Rain
-# type_24	Rain Showers
-# type_25	Heavy Rain
-# type_26	Light Rain
+# freezing_snow_rain = ["Freezing Drizzle/Freezing Rain", "Heavy Freezing Drizzle/Freezing Rain", "Light Freezing Drizzle/Freezing Rain", "Heavy Freezing Rain", "Light Freezing Rain", "Heavy Rain And Snow", "Light Rain And Snow"]
+#  type_9	Freezing Drizzle/Freezing Rain
+#  type_10	Heavy Freezing Drizzle/Freezing Rain
+#  type_11	Light Freezing Drizzle/Freezing Rain
+#  type_13	Heavy Freezing Rain
+#  type_14	Light Freezing Rain
+#  type_22	Heavy Rain And Snow
+#  type_23	Light Rain And Snow
 
-cloudy = ["Sky Coverage Decreasing", "Sky Coverage Increasing", "Smoke Or Haze", "Overcast", "Partially cloudy"]
-# type_27	Sky Coverage Decreasing
-# type_28	Sky Coverage Increasing
-# type_30	Smoke Or Haze
-# type_41	Overcast
-# type_42	Partially cloudy
-# type_29	Sky Unchanged
+# rain = ["Mist", "Precipitation In Vicinity", "Rain", "Rain Showers", "Heavy Rain", "Light Rain"]
+#  type_19	Mist
+#  type_20	Precipitation In Vicinity
+#  type_21	Rain
+#  type_24	Rain Showers
+#  type_25	Heavy Rain
+#  type_26	Light Rain
 
-snow = ["Blowing Or Drifting Snow", "Freezing Fog", "Snow", "Snow And Rain Showers", "Snow Showers", "Heavy Snow", "Light Snow"]
-# type_1	Blowing Or Drifting Snow
-# type_12	Freezing Fog
-# type_31	Snow
-# type_32	Snow And Rain Showers
-# type_33	Snow Showers
-# type_34	Heavy Snow
-# type_35	Light Snow
+# cloudy = ["Sky Coverage Decreasing", "Sky Coverage Increasing", "Smoke Or Haze", "Overcast", "Partially cloudy"]
+#  type_27	Sky Coverage Decreasing
+#  type_28	Sky Coverage Increasing
+#  type_30	Smoke Or Haze
+#  type_41	Overcast
+#  type_42	Partially cloudy
+#  type_29	Sky Unchanged
 
-squalls = "Squalls"
-# type_36	Squalls
+# snow = ["Blowing Or Drifting Snow", "Freezing Fog", "Snow", "Snow And Rain Showers", "Snow Showers", "Heavy Snow", "Light Snow"]
+#  type_1	Blowing Or Drifting Snow
+#  type_12	Freezing Fog
+#  type_31	Snow
+#  type_32	Snow And Rain Showers
+#  type_33	Snow Showers
+#  type_34	Heavy Snow
+#  type_35	Light Snow
 
-thunder = ["Lightning Without Thunder", "Thunderstorm", "Thunderstorm Without Precipitation"]
-# type_18	Lightning Without Thunder
-# type_37	Thunderstorm
-# type_38	Thunderstorm Without Precipitation
+# squalls = "Squalls" **
+#  type_36	Squalls
 
-diamond_dust = ["Diamond Dust"]
-# type_39	Diamond Dust (sparkles)
+# thunder = ["Lightning Without Thunder", "Thunderstorm", "Thunderstorm Without Precipitation"]
+#  type_18	Lightning Without Thunder
+#  type_37	Thunderstorm
+#  type_38	Thunderstorm Without Precipitation
 
-sunny = "Clear"
-# type_43	Clear
+# diamond_dust = ["Diamond Dust"] **
+#  type_39	Diamond Dust (sparkles)
 
-# MOONPHASES
+# sunny = ["Clear"]
+#  type_43	Clear
+
+# # MOONPHASES
 # case :moonphase
-# when (O..0.11)
-#   :moonphase = New moon
-# when (O.12..0.24)
-#   :moonphase = Waxing crescent
-# when (0.25..0.36)
-#   :moonphase = First quarter
-# when (0.36..0.49)
-#   :moonphase = Waxing gibbous
-# when (0.50..0.62)
-#   :moonphase = Full moon
-# when (O.63..0.74)
-#   :moonphase = Waning gibbous
-# when (0.75..0.87)
-#   :moonphase = Third quarter
-# else (0.88..1)
-#   :moonphase = New moon
-# end
+#  when (O..0.11)
+#    :moonphase = New moon
+#  when (O.12..0.24)
+#    :moonphase = Waxing crescent
+#  when (0.25..0.36)
+#    :moonphase = First quarter
+#  when (0.36..0.49)
+#    :moonphase = Waxing gibbous
+#  when (0.50..0.62)
+#    :moonphase = Full moon
+#  when (O.63..0.74)
+#    :moonphase = Waning gibbous
+#  when (0.75..0.87)
+#    :moonphase = Third quarter
+#  else (0.88..1)
+#    :moonphase = New moon
+#  end

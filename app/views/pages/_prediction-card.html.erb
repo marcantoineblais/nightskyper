@@ -16,24 +16,20 @@
             <% end %>
           </div>
 
-          <div class="col-3">
-            <div>
+          <div class="col-3 d-flex flex-column align-items-center">
             <% condition = jour[:conditions].split(",")[0]%>
-            <% <% if condition == "#{jour[:conditions]}" %>
-            <% <%= image_tag("weather/#{jour[:conditions]}")%>
-            <% <% end %>
-            <% <%= jour[:conditions]%>
-            </div>
+            <%= image_tag("#{@weather.get_url(condition)}", width: "30%") %>
+            <%= jour[:conditions]%>
           </div>
 
-          <div class="col-3">
+          <div class="col-3 d-flex flex-column align-items-center">
             <div>
             <img src="" alt="">
             <p>moonphase: <%= jour[:moonphase] %></p>
             </div>
           </div>
 
-          <div class="col-3">
+          <div class="col-3 d-flex flex-column align-items-center">
             <div>
             <img src="" alt="">
             <p>bortle: <%= @bortle %></p>
