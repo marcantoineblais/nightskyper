@@ -23,17 +23,14 @@
           </div>
 
           <div class="col-3 d-flex flex-column align-items-center">
-            <div>
-            <img src="" alt="">
-            <p>moonphase: <%= jour[:moonphase] %></p>
-            </div>
+            <% condition = jour[:moonphase]%>
+            <%= image_tag("#{@weather.get_url(condition)}", width: "27%") %>
+            <%= jour[:moonphase]%>
           </div>
 
           <div class="col-3 d-flex flex-column align-items-center">
-            <div>
-            <img src="" alt="">
+            <%= image_tag("bortle/light-bulb", width: "27%") %>
             <p>bortle: <%= @bortle %></p>
-            </div>
           </div>
 
         </div>

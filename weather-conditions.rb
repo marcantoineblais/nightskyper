@@ -13,12 +13,12 @@ class WeatherCondition
       ["Lightning Without Thunder", "Thunderstorm", "Thunderstorm Without Precipitation"] => "weather/Thunder",
       ["Diamond Dust"] => "weather/Diamond_dust",
       ["Clear"] => "weather/Clear",
-      (O..0.11) => "moonphase/New_moon",
-      (O.12..0.24) => "moonphase/Waxing_crescent",
+      (0..0.11) => "moonphase/New_Moon",
+      (0.12..0.24) => "moonphase/Waxing_crescent",
       (0.25..0.36) => "moonphase/First_quarter",
       (0.37..0.49) => "moonphase/Waxing_gibbous",
       (0.50..0.62) => "moonphase/Full_moon",
-      (O.63..0.74) => "moonphase/Waning_gibbous",
+      (0.63..0.74) => "moonphase/Waning_gibbous",
       (0.75..0.87) => "moonphase/Third_quarter",
       (0.88..1) => "moonphase/New_moon1"
     }
