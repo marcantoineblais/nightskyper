@@ -18,4 +18,8 @@ class Marker < ApplicationRecord
   def average_rating
     ratings.present? ? (ratings.sum / ratings.count).to_i : 0
   end
+
+  def favorite?(current_user)
+    current_user ? current_user.favorites.any? { |favorite| favorite.marker == self } : false
+  end
 end

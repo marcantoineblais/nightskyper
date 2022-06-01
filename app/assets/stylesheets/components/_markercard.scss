@@ -1,33 +1,63 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $NS-orange;
+  border-radius: 20px;
+}
+
+.cards {
+  overflow-y: scroll;
+  overflow-x: visible;
+  padding: 0.5em;
+}
 .cards-container {
-  margin-right: 20px;
+  margin-right: 3em;
+  height: 600px;
 }
 .marker-container {
-  height: auto;
+  flex-grow: 2;
+  height: 129px;
   width: 100%;
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
   margin-bottom: 10px;
-    & a {
-      color: $NS-darkblue;
-      font-size: 24px;
-      margin-top: 10px;
-      text-decoration: none;
-      border-bottom: 2px solid $NS-orange;
-    }
+  a {
+    color: $NS-darkblue;
+    font-size: 24px;
+    margin-top: 10px;
+    text-decoration: none;
+    border-bottom: 2px solid $NS-orange;
+  }
 
-    & h3 {
-      font-size: 14px;
-      font-weight: 400;
+  h3 {
+    font-size: 14px;
+    font-weight: 400;
 
-    }
+  }
 
-    & p {
-      font-size: 12px;
-    }
+  p {
+    font-size: 12px;
+  }
 
-    & h2, h3, p {
-    font-family: $body-font;
-    }
+  h2, h3, p {
+  font-family: $body-font;
+  }
+
+  .add {
+    border-bottom: none!important;
+    padding-right: 0.5em;
+    padding-bottom: 0.5em;
+
+  }
+
+  .remove {
+    border-bottom: none!important;
+    padding-right: 0.5em;
+    padding-bottom: 0.5em;
+  }
+
 }
 
 .marker-content {
@@ -45,7 +75,7 @@
 
 .marker-img {
   width: auto;
-  height: 119px;
+  height: 129px;
   margin-right: 1.8rem;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
   border-radius: 8px 0 0 8px;

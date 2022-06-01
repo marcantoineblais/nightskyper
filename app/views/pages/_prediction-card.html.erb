@@ -5,43 +5,48 @@
     <div class="card mb-4 box-shadow">
       <div class="card-body text-center">
         <div class="row">
-          <div class="col-3 text-start">
+          <div class="col-3 text-start d-flex align-items-center">
             <% if Date.parse(jour[:datetime]) === Date.today %>
-            <p>Today</p>
-            <div><p><%= jour[:datetime] %></p></div>
+              <p>Today</p>
+              <div>
+              <p><%= jour[:datetime] %></p>
+              </div>
             <% elsif Date.parse(jour[:datetime]) === Date.tomorrow %>
-            <div><p><% jour[:datetime] %></p></div>
+              <p>Tomorrow</p>
+              <div>
+              <p><% jour[:datetime] %></p>
+              </div>
             <% else %>
-            <div><p><%= jour[:datetime] %></p></div>
+              <div>
+              <p><%= jour[:datetime] %></p>
+              </div>
             <% end %>
           </div>
 
-          <div class="col-3">
-            <div>
-            <%# <% condition = jour[:conditions].split(",")[0]%>
-            <%# <% if condition == "#{jour[:conditions]}" %>  %>
-            <%# <%= image_tag("weather/#{jour[:conditions]}")%> %>
-            <%# <% end %> %>
-            <%# <%= jour[:conditions]%> %> %>
+          <div class="col-3 d-flex flex-column align-items-center">
+            <% condition = jour[:conditions].split(",")[0]%>
+            <div class="h-75">
+            <%= image_tag("#{@weather.get_url(condition)}", width: "30%") %>
             </div>
+            <%= jour[:conditions]%>
           </div>
 
-          <div class="col-3">
-            <div>
-            <img src="" alt="">
-            <p>moonphase: <%= jour[:moonphase] %></p>
+          <div class="col-3 d-flex flex-column align-items-center">
+            <% phase = jour[:moonphase]%>
+            <div class="h-75">
+            <%= image_tag("#{@weather.get_url(phase)}", width: "45%") %>
             </div>
+            <%= "#{@weather.get_moonphase(phase)}" %>
           </div>
 
-          <div class="col-3">
-            <div>
-            <img src="" alt="">
-            <p>bortle: <%= @bortle %></p>
+          <div class="col-3 d-flex flex-column align-items-center">
+            <div class="h-75">
+            <%= image_tag("bortle/light-bulb", width: "24%") %>
             </div>
+            bortle <%= @bortle %>
           </div>
-
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
