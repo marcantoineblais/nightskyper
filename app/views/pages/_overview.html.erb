@@ -69,11 +69,10 @@
               <h3><%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
             </div>
             <div class="flip-card-back p-3 text-center">
-              <div>tempmax: <%= (((today[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>tempmin: <%= (((today[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>temp: <%= (((today[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>humidity: <%= today[:humidity] %> %</div>
-              <div>cloudcover: <%= today[:cloudcover] %> %</div>
+              <div>bortle: <%= @bortle %></div>
+              <p>Bortle class is a light pollution scale from 0 to 10.</p>
+              <p>0 is : pure sky without any light pollution</p>
+              <p>10 is : saturated sky by light pollution</p>
             </div>
           </div>
         </div>
@@ -88,7 +87,7 @@
   <% end %>
   <% if today %>
     <div class="add-favorites d-flex justify-content-center <%= @noaddfav %>">
-      <%= link_to "Add to favorites", favorites_path, class:"NS-button" %>
+      <a href=<%=favorites_path %>> <i class="fa-solid fa-heart fav-icon"></i></a>
     </div>
   <% end %>
 </div>

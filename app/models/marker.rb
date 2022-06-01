@@ -2,7 +2,6 @@ class Marker < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_one_attached :photo, dependent: :destroy
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
@@ -17,6 +16,6 @@ class Marker < ApplicationRecord
   end
 
   def average_rating
-    (ratings.sum.to_f / ratings.count).round(1)
+    ratings.present? ? (ratings.sum / ratings.count).to_i : 0
   end
 end

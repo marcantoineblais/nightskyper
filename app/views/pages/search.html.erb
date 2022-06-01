@@ -4,9 +4,9 @@
 
 <%= render 'overview', today: @meteo_prediction&.first, marker: @center, place_name: @place_name, bortle: @bortle %>
 
-<div class="d-flex">
+<div class="d-flex justify-content-between">
 
-  <div class="cards cards-container flex-grow-1">
+  <div class="cards cards-container">
 
     <div id="marker-cards" class="cards">
       <% @markers&.each do |marker| %>
