@@ -20,8 +20,8 @@
             <%= link_to "Messages", "#", class: "nav-link" %>
           <%# </li> %>
           <li class="nav-item dropdown pe-5">
-            <% if current_user.photo.attached? %>
-              <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% if current_user.photo.present? %>
+              <img src="<%= current_user.photo %>" class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
             <% elsif %>
               <img class= "avatar drop-down-toggle" id="navbarDropdown" data-bs-toggle= "dropdown" aria-haspopup= "true" aria-expanded= "false" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="">
             <% end %>

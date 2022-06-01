@@ -1,14 +1,32 @@
 <div class= "hero-banner">
-    <div class="hero-content container">
-      <div class="hero-title w-100 pb-5">
-        <h1>Nightskyper</h1>
-        <p>Find the perfect place to shoot the stars in the best conditions.</p>
+  <% if user_signed_in? %>
+    <div class="dropdown home-login">
+      <% if current_user.photo.present? %>
+        <img src="<%= current_user.photo %>" class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup"true" aria-expanded="false"/>
+      <% elsif %>
+        <img class="avatar drop-down-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="">
+      <% end %>
+      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <%= link_to "My profile", edit_user_registration_path, class: "dropdown-item" %>
+        <%= link_to "My favorites", favorites_path, class: "dropdown-item" %>
+        <%= link_to "My reviews", reviews_path, class: "dropdown-item" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
       </div>
-      <div class='pt-5 d-flex justify-content-end'>
-        <%= form_with class:'w-50 d-flex text-end', url: search_path, method: 'GET' do |f| %>
-          <%= f.text_field :query, class: 'form-control searchbar-input', placeholder: 'Search an area' %>
-          <%= f.submit 'Search', name: nil, class:'search-btn' %>
-        <% end %>
+    </div>
+  <% else %>
+      <div class="home-login">
+        <%= link_to "Login", new_user_session_path, class:"home-btn" %>
       </div>
+  <% end %>
+  <div class="hero-content container">
+    <div class="hero-title w-100 pb-5">
+      <h1>Nightskyper</h1>
+      <p>Find the perfect place to shoot the stars in the best conditions.</p>
+    </div>
+    <div class='pt-5 d-flex justify-content-end'>
+      <%= form_with class:'w-50 d-flex text-end', url: search_path, method: 'GET' do |f| %>
+        <%= f.text_field :query, class: 'form-control searchbar-input', placeholder: 'Search an area' %>
+        <%= f.submit 'Search', name: nil, class:'search-btn' %>
+      <% end %>
     </div>
   </div>

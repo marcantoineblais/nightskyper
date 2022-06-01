@@ -19,3 +19,20 @@
   color: white;
   font-size: 20px;
 }
+
+.home-login {
+  position: absolute;
+  top: 8px;
+  right: 10.2%;
+
+.home-btn {
+    text-decoration: none;
+    font-family: $body-font;
+    color: $NS-offwhite;
+    font-weight: bolder;
+
+    &:hover {
+      color: $NS-orange;
+    }
+  }
+}

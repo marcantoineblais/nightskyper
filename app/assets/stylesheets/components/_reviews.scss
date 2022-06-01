@@ -6,6 +6,7 @@
   margin-bottom: 20px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+  background-color: #ffffff;
 
   .review-content {
     flex-grow: 1;
@@ -63,4 +64,8 @@
 
 .checked {
   color: $NS-orange;
+}
+
+.unchecked {
+  opacity: 0.3;
 }

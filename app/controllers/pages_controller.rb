@@ -21,6 +21,7 @@ class PagesController < ApplicationController
           search_by_address
           load_weather_by_coordinates(*@center)
           fetch_bortle(@center.last, @center.first)
+          @marker = Marker.new(longitude: @center.first, latitude: @center.last)
         else
           @map_boundaries = [-200, -73, 200, 73]
         end
@@ -74,22 +75,39 @@ class PagesController < ApplicationController
   def markers_by_location
     @markers = Marker.where('longitude < ? AND latitude < ? AND longitude > ? AND latitude > ?', *@map_boundaries)
     @map_markers = @markers.map do |marker|
-      { lon: marker.longitude, lat: marker.latitude, info_window: render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: marker }) }
+      { id: marker.id, lon: marker.longitude, lat: marker.latitude, info_window: render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: marker }) }
     end
   end
 
   # when putting a custom marker on the map, updates the overview, the map boundaries and all related components use marker's position
+  def marker_info
+    respond_to do |format|
+      format.json do
+        @marker = Marker.find(params[:id].to_i)
+        load_weather_by_coordinates(@marker.longitude, @marker.latitude)
+        info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: @marker })
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker })
+        marker = {
+          id: @marker.id,
+          lon: @marker.longitude,
+          lat: @marker.latitude,
+          info_window: info_window
+        }
+        render json: { marker: marker, overview: overview }
+      end
+    end
+  end
+
   def custom_marker
     respond_to do |format|
       format.json do
-        coordinates = params[:coordinates]
-        load_weather_by_coordinates(*coordinates)
-        marker_info = { title: 'Custom marker', longitude: coordinates[0], latitude: coordinates[1] }
-        info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: Marker.new(marker_info) })
-        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { today: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: coordinates })
+        @marker = Marker.new(title: 'Custom marker', longitude: params[:coordinates][0].to_f, latitude: params[:coordinates][1].to_f)
+        load_weather_by_coordinates(@marker.longitude, @marker.latitude)
+        info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: @marker })
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker })
         custom_marker = {
-          lon: coordinates[0],
-          lat: coordinates[1],
+          lon: @marker.longitude,
+          lat: @marker.latitude,
           info_window: info_window
         }
         render json: { customMarker: custom_marker, overview: overview }

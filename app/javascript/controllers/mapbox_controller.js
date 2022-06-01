@@ -6,6 +6,7 @@ export default class extends Controller {
   static values = {
     apiKey: String,
     searchPath: String,
+    markerInfoPath: String,
     customMarkerPath: String,
     bounds: Array
   }
@@ -20,10 +21,9 @@ export default class extends Controller {
     // Resize the map after page load (solve display bug)
     window.addEventListener("load", () => {
       window.dispatchEvent(new Event('resize'))
+      this.#fitMapToBoundaries()
+      this.#updateMarkers()
     })
-
-    this.#fitMapToBoundaries()
-    this.#updateMarkers()
     // fit the map to the boundaries
     // When done moving, load the markers
     this.map.doubleClickZoom.disable()
@@ -59,7 +59,7 @@ export default class extends Controller {
 
     if (cssClass == 'pin-marker') {
       mapMarker.getElement().addEventListener('click', (e) => {
-        this.#getMarkerInfos([marker.lon, marker.lat])
+        this.#getMarkerInfos(marker.id)
       })
     }})
   }
@@ -68,7 +68,6 @@ export default class extends Controller {
     // fit the map with the given boundaries and adjust zoom level
 
     const bounds = new mapboxgl.LngLatBounds(this.boundsValue)
-    console.log(bounds)
     this.map.fitBounds(bounds, { padding: 0, duration: 0 })
   }
 
@@ -138,15 +137,15 @@ export default class extends Controller {
     })
   }
 
-  #getMarkerInfos(coordinates) {
+  #getMarkerInfos(id) {
   // get the popup and coordinates of the updated markers visible on the map.
   // control the zoom level when clicking same marker multiple times
 
-    fetch(this.customMarkerPathValue, {
+    fetch(this.markerInfoPathValue, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
       body: JSON.stringify({
-        coordinates: coordinates
+        id: id
       })
     })
     .then(res => res.json())
@@ -166,7 +165,7 @@ export default class extends Controller {
         zoom = this.map.getZoom()
       }
 
-      this.#recenterMapToBondaries(data.customMarker, zoom)
+      this.#recenterMapToBondaries(data.marker, zoom)
 
       if (document.getElementById('overview') && data.overview != document.getElementById('overview').outerHTML) {
         document.getElementById('overview').outerHTML = data.overview
