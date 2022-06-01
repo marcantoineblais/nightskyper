@@ -1,10 +1,8 @@
-<% @nodetails %>
-
-<h2>Search page</h2>
-
-<% if @meteo_prediction.present? %>
-  <%= render 'overview', day: @meteo_prediction.first, marker: @marker, place_name: @place_name, bortle: @bortle %>
-<% end %>
+<div id="overview">
+  <% if @meteo_prediction.present? %>
+    <%= render 'overview', day: @meteo_prediction.first, marker: @marker, place_name: @place_name, bortle: @bortle %>
+  <% end %>
+</div>
 
 <div class="d-flex justify-content-between">
 
