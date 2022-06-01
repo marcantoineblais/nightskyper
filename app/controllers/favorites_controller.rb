@@ -1,4 +1,7 @@
 class FavoritesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :create
+  skip_before_action :verify_authenticity_token
+
   def index
     @favorites = current_user.favorites
   end
@@ -10,15 +13,44 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    marker = Marker.find(params[:marker_id])
-    Favorite.create(marker: marker, user: current_user)
-    redirect_back(fallback_location: search_path)
+    respond_to do |format|
+
+      format.html do
+        marker = Marker.find(params[:marker_id])
+        Favorite.create(marker: marker, user: current_user)
+        redirect_to favorites_path
+      end
+
+      format.json do
+        marker = Marker.find(params[:marker_id])
+        favorite = Favorite.new(marker: marker, user: current_user)
+        if favorite.save
+          render = render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
+          saved = true
+        else
+          render = new_user_session_path
+          saved = false
+        end
+        render json: { saved: saved, render: render }
+      end
+    end
   end
 
   def destroy
-    marker = Marker.find(params[:marker_id])
-    favorite = Favorite.find_by(marker: marker)
-    favorite.destroy
-    redirect_back(fallback_location: search_path)
+    respond_to do |format|
+      format.html do
+        marker = Marker.find(params[:marker_id])
+        favorite = Favorite.find_by(marker: marker)
+        favorite.destroy
+        redirect_to favorites_path
+      end
+      format.json do
+        marker = Marker.find(params[:marker_id])
+        favorite = Favorite.find_by(marker: marker)
+        favorite.destroy
+        marker_card = render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
+        render json: { render: marker_card }
+      end
+    end
   end
 end

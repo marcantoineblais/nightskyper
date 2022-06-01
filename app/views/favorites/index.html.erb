@@ -3,7 +3,7 @@
 <% if @favorites.present? %>
   <div class="cards"></div>
   <% @favorites.each do |favorite| %>
-    <%= render '/pages/marker-card', marker: favorite.marker %>
+    <%= render '/pages/marker-card', marker: favorite.marker, path: marker_favorites_path(favorite.marker) %>
     <% if favorite.note.present? %>
       <h3>Personnal notes: </h3>
       <p><%= marker.favorite.note %></p>
