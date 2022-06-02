@@ -85,7 +85,7 @@ class PagesController < ApplicationController
         @marker = Marker.find(params[:id].to_i)
         load_weather_by_coordinates(@marker.longitude, @marker.latitude)
         info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: @marker })
-        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker })
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker, path: marker_favorites_path(@marker) })
         marker = {
           id: @marker.id,
           lon: @marker.longitude,
@@ -103,7 +103,7 @@ class PagesController < ApplicationController
         @marker = Marker.new(title: 'Custom marker', longitude: params[:coordinates][0].to_f, latitude: params[:coordinates][1].to_f)
         load_weather_by_coordinates(@marker.longitude, @marker.latitude)
         info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: @marker })
-        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker })
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker, path: marker_favorites_path(@marker) })
         custom_marker = {
           lon: @marker.longitude,
           lat: @marker.latitude,
