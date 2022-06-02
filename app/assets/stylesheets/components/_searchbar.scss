@@ -11,6 +11,8 @@
 }
 
 .search-btn {
+  padding: 0 10px;
+  width: 85px;
   margin-left: 0.1rem;
   font-family: $body-font;
   color: $NS-darkblue;
@@ -20,6 +22,12 @@
   border-radius: 8px;
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
 
+  &:hover {
+    background-color: $NS-darkblue;
+    color: $NS-orange;
+    transition: 0.5s;
+    border: 1px solid $NS-orange;
+  }
 }
 
 .home-search-btn {
@@ -41,5 +49,6 @@
     background-color: $NS-darkblue;
     color: $NS-orange;
     transition: 0.5s;
+    border: 1px solid $NS-orange;
   }
 }

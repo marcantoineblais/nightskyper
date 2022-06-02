@@ -7,7 +7,7 @@
         <% if current_user.photo.present? %>
           <img src="<%= current_user.photo %>" class="avatar-btn avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup"true" aria-expanded="false"/>
         <% elsif %>
-          <img class="avatar drop-down-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="">
+          <img class="avatar drop-down-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://res.cloudinary.com/diiu2j0fw/image/upload/v1654177959/samples/placeholder_b5vap2.png" alt="">
         <% end %>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
           <%= link_to "My profile", edit_user_registration_path, class: "dropdown-item" %>
