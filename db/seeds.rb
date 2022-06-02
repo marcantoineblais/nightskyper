@@ -1,52 +1,205 @@
 Review.destroy_all
-puts "Reviews detroyed"
+puts "Reviews destroyed"
 Marker.destroy_all
 puts "Markers destroyed"
 # User.destroy_all
 # puts "Users destroyed"
-# Favorite.destroy_all
-# puts "Favorites destroyed"
+Favorite.destroy_all
+puts "Favorites destroyed"
 
-def select_title_data(inst)
-  if(inst.town)
-    inst.town
-  elsif(inst.postal_code)
-    inst.postal_code
-  elsif(inst.county)
-    inst.county
-  elsif(inst.city)
-    inst.city
-  else
-    inst.state
-  end
-end
+# def select_title_data(inst)
+#   if(inst.town)
+#     inst.town
+#   elsif(inst.postal_code)
+#     inst.postal_code
+#   elsif(inst.county)
+#     inst.county
+#   elsif(inst.city)
+#     inst.city
+#   else
+#     inst.state
+#   end
+# end
+
+photos_list = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-nicole-avagliano-2312040_wntmeh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-rachel-claire-7263774_lqyobu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195547/samples/landscapes/pexels-markus-spiske-1679701_qsqrjh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195545/samples/landscapes/pexels-romario-roges-9582923_ymo2az.jpg"]
 
 unless User.count.positive?
-  User.create!(email: 'a@a.com', username: 'Atest', password: '123456')
-  User.create!(email: 'b@b.com', username: 'Btest', password: '123456')
-  User.create!(email: 'c@c.com', username: 'Ctest', password: '123456')
+  User.create!(email: 'a@a.com', username: 'James', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654035245/users/yu2lfyywjmiyyzexogzp.jpg")
+  User.create!(email: 'florent@gilet.com', username: 'Florent_G', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654089313/users/ncp1nyrdwhshrydnen1z.jpg")
+  User.create!(email: 'c@c.com', username: 'Stephane', password: '123456', photo: "https://avatars.githubusercontent.com/u/37821714?v=4")
+  User.create!(email: 'd@d.com', username: 'Aurelien', password: '123456', photo: "https://avatars.githubusercontent.com/u/25286237?v=4")
+  User.create!(email: 'e@e.com', username: 'Robert', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972088/samples/people/kitchen-bar.jpg")
+  User.create!(email: 'f@f.com', username: 'Linda', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972094/samples/people/bicycle.jpg")
+  User.create!(email: 'g@g.com', username: 'Sophie', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972092/samples/people/boy-snow-hoodie.jpg")
+  User.create!(email: 'blaisma@live.fr', username: 'Marc', password: '123456', photo: "https://avatars.githubusercontent.com/u/90230008?v=4")
 end
 
-user_list = [User.first, User.second, User.last]
-
-letter_array = ['a', 'b', 'c', 'd', 'e']
-
-letter_array.each do |letter|
-  @list_search = Geocoder.search(letter, params: { countrycodes: "ca"})
-  @list_search.each do |search|
-    Marker.create!(
-      title: select_title_data(search),
-      description: search.address,
-      latitude: search.latitude + rand(0.0001..0.0005),
-      longitude: search.longitude + rand(0.0001..0.0005),
-      user_id: user_list.sample.id
-    )
-  end
+user_list = []
+User.last(8).each do |user|
+  user_list << user
 end
+
+# letter_array = ['a', 'b', 'c', 'd', 'e']
+
+# letter_array.each do |letter|
+#   @list_search = Geocoder.search(letter, params: { countrycodes: "ca"})
+#   @list_search.each do |search|
+#     Marker.create!(
+#       title: select_title_data(search),
+#       description: search.address,
+#       latitude: search.latitude + rand(0.0001..0.0005),
+#       longitude: search.longitude + rand(0.0001..0.0005),
+#       user_id: user_list.sample.id
+#     )
+#   end
+# end
+photos_city = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/c_scale,w_800/v1654199906/samples/landscapes/pexels-dan-hadley-6017481_lgf5zl.jpg"]
+photos_countryside = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654192455/samples/landscapes/231242581_10159585695944914_8405464899740385571_n_sdmraf.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/196352919_10159478328024914_148844767911404191_n_pglvzg.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/198260987_10159478328019914_5744544668368853112_n_n6vn2s.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-nicole-avagliano-2312040_wntmeh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-rachel-claire-7263774_lqyobu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195547/samples/landscapes/pexels-markus-spiske-1679701_qsqrjh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195545/samples/landscapes/pexels-romario-roges-9582923_ymo2az.jpg"]
+
+Marker.create!(
+  title: "Mont Sugar Loaf",
+  description: "Go to the top and explore this awesome clear sky!",
+  latitude: 46.879179,
+  longitude: -70.397598,
+  user_id: user_list.sample.id,
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654192455/samples/landscapes/231242581_10159585695944914_8405464899740385571_n_sdmraf.jpg"
+)
+
+Marker.create!(
+  title: "Lac Ha-Ha",
+  description: "Park your car on the parking, go to the stairs and ENJOY!",
+  latitude: 47.997191,
+  longitude: -70.780145,
+  user_id: user_list.sample.id,
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/196352919_10159478328024914_148844767911404191_n_pglvzg.jpg"
+)
+
+patrie = Marker.create!(
+  title: "La Patrie",
+  description: "Close to Mont Megantic, INTERNATIONAL DARK SKY RESERVE",
+  latitude: 45.401821,
+  longitude: -71.252853,
+  user_id: user_list.sample.id,
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/198260987_10159478328019914_5744544668368853112_n_n6vn2s.jpg"
+)
+
+patrie_review = Review.new(user: user_list.sample, rating: rand(3..5), content: 'Did I see aliens?', date: Date.today, photos: photos_list.sample(4).join(", "))
+patrie_review.marker = patrie
+patrie_review.save
+
+
+Marker.create!(
+  title: "Mont-Royal",
+  description: "In front of Le Chalet du Mont-Royal, beautiful see on the Moon and the city",
+  latitude: 45.507485,
+  longitude: -73.590005,
+  user_id: user_list.sample.id,
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg"
+)
+
+Marker.create!(
+  title: "Laval",
+  description: "In the field behind my house, perfect to look at the moon!",
+  latitude: 45.630760,
+  longitude: -73.730225,
+  user_id: user_list.sample.id,
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg"
+)
+
+Marker.create!(
+  title: "Brossard",
+  description: "In the park here, perfect spot to look the full Moon or any eclipses.",
+  latitude: 45.445452,
+  longitude: -73.417758,
+  user_id: user_list.sample.id,
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/c_scale,w_800/v1654199906/samples/landscapes/pexels-dan-hadley-6017481_lgf5zl.jpg"
+)
+
+Marker.create!(
+  title: "Saint Jerome",
+  description: "There is a hill here where you can install yourself and explore the sky. Not much light around.",
+  latitude: 45.778488,
+  longitude: -74.002609,
+  user_id: user_list.sample.id,
+  photo: photos_countryside.sample
+)
+
+Marker.create!(
+  title: "Trois-Rivieres",
+  description: "Park just there to check to the moon!",
+  latitude: 46.343461,
+  longitude: -72.543602,
+  user_id: user_list.sample.id,
+  photo: photos_city.sample
+)
+
+Marker.create!(
+  title: "Magog",
+  description: "Have a seat on the border of the lake and watch to the moon with the Mont Orford.",
+  latitude: 45.266178,
+  longitude: -72.153381,
+  user_id: user_list.sample.id,
+  photo: photos_city.sample
+)
+
+Marker.create!(
+  title: "Chambly",
+  description: "Take a good beer and watch to the moon near the Fort de Chambly.",
+  latitude: 45.445080,
+  longitude: -73.287666,
+  user_id: user_list.sample.id,
+  photo: photos_city.sample
+)
+
+Marker.create!(
+  title: "Saint Donat de Mont-Calm",
+  description: "Good Bortle there, easy to observe the milky way during new moon.",
+  latitude: 46.267760,
+  longitude: -74.224200,
+  user_id: user_list.sample.id,
+  photo: photos_countryside.sample
+)
+
+Marker.create!(
+  title: "Quebec",
+  description: "Look at the moon on the top of Chateau-Frontenac.",
+  latitude: 46.805097,
+  longitude: -71.216281,
+  user_id: user_list.sample.id,
+  photo: photos_city.sample
+)
+
+Marker.create!(
+  title: "Rimouski",
+  description: "Medium Bortle here, if new moon, you can see a bunch of deep sky objects.",
+  latitude: 48.448891,
+  longitude: -68.524033,
+  user_id: user_list.sample.id,
+  photo: photos_countryside.sample
+)
+
+Marker.create!(
+  title: "Tadoussac",
+  description: "You won't see a whale in the sky, but Andromede and the Milky Way pretty well!",
+  latitude: 48.148312,
+  longitude: -69.717957,
+  user_id: user_list.sample.id,
+  photo: photos_countryside.sample
+)
+
+Marker.create!(
+  title: "Ottawa",
+  description: "Go to this park and you will have a beautiful view on the moon with the parlement.",
+  latitude: 45.421532,
+  longitude: -75.697189,
+  user_id: user_list.sample.id,
+  photo: photos_city.sample
+)
+
 
 Marker.all.each do |marker|
   rand(3..5).times do
-    Review.create(user: User.all.sample, marker: marker, rating: rand(3..5), content: ['Nice place!', 'Good location', 'Very enjoyable!', 'I took so many pictures!', 'Very wow'].sample, date: Date.today)
+    Review.create(user: user_list.sample, marker: marker, rating: rand(3..5), content: ['Nice place!', 'Good location', 'Very enjoyable!', 'I took so many pictures!', 'Very wow', 'Did I see aliens?', 'Hard to get there, but awesome spot!', 'Beautiful', 'To infinity and beyond!', 'Houston we have a problem!', 'Looked up to the stars with Dark Side of the Moon album!', 'Took a bunch of nice pictures!', 'Next time, I bring my telescop!'].sample, date: Date.today, photos: photos_list.sample(4).join(", "))
   end
 end
 
