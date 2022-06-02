@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   toggleOverviewPrediction(event) {
-    console.log(event.currentTarget);
+    // console.log(event.currentTarget);
     this.overviewsTargets.forEach(element => {
       element.style.display = 'block';
       element.style.display = 'none';
@@ -32,6 +32,10 @@ export default class extends Controller {
       behavior: 'smooth'
     });
     // console.log(overviewOfCurrentElement);
+  }
+
+  checkForCollapse(event) {
+    event.currentTarget.remove('d-flex');
   }
 
 }
