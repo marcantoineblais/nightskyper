@@ -1,78 +1,76 @@
-<div id="overview">
-  <div class="row mx-5 my-5">
-    <div class="col d-flex justify-content-left align-items-center ">
-      <div class="my-3">
-          <% if Date.parse(day[:datetime]) === Date.today %>
-          <h4 data-date="<%= day[:datetime] %>">Today</h4>
-          <div><%= day[:datetime] %></div>
-          <% elsif Date.parse(day[:datetime]) === Date.tomorrow %>
-          <h4>Tomorrow</h4>
-          <div>datetime: <%= day[:datetime] %></div>
-          <% else %>
-          <h4><%= Date::DAYNAMES[Date.parse(day[:datetime]).wday] %></h4>
-          <div>datetime: <%= day[:datetime] %></div>
-          <% end %>
-      </div>
+<div class="row mx-5 my-5">
+  <div class="col d-flex justify-content-left align-items-center ">
+    <div class="my-3">
+        <% if Date.parse(day[:datetime]) === Date.today %>
+        <h4 data-date="<%= day[:datetime] %>">Today</h4>
+        <div><%= day[:datetime] %></div>
+        <% elsif Date.parse(day[:datetime]) === Date.tomorrow %>
+        <h4>Tomorrow</h4>
+        <div>datetime: <%= day[:datetime] %></div>
+        <% else %>
+        <h4><%= Date::DAYNAMES[Date.parse(day[:datetime]).wday] %></h4>
+        <div>datetime: <%= day[:datetime] %></div>
+        <% end %>
     </div>
-    <div class="col d-flex justify-content-center align-items-center text-center">
-      <h4><%= place_name %></h4>
-    </div>
-    <div class="col d-flex justify-content-end align-items-center">
-      <p class="p-1 m-0">Long : <%= marker.longitude.round(2) %></p>
-      <p class="p-1 m-0">Lat : <%= marker.latitude.round(2) %></p>
-    </div>
-    <div class="row my-4">
-      <div class="col-10 border-bottom m-auto"></div>
-    </div>
-    <div class="row justify-content-around mx-3 my-3">
-      <div class="col-3">
-        <div class="flip-card text-center">
-          <div class="flip-card-inner">
-            <div class="flip-card-front p-3">
-              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
-            </div>
-            <div class="flip-card-back p-3 text-center">
-              <div>tempmax: <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>tempmin: <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>temp: <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>humidity: <%= day[:humidity] %> %</div>
-              <div>cloudcover: <%= day[:cloudcover] %> %</div>
-            </div>
-          </div>
+  </div>
+  <div class="col d-flex justify-content-center align-items-center text-center">
+    <h4><%= place_name %></h4>
+  </div>
+  <div class="col d-flex justify-content-end align-items-center">
+  <p class="p-1 m-0">Long : <%= marker.longitude.round(2) %></p>
+  <p class="p-1 m-0">Lat : <%= marker.latitude.round(2) %></p>
+  </div>
+</div>
+<div class="row my-4">
+  <div class="col-10 border-bottom m-auto"></div>
+</div>
+<div class="row justify-content-around mx-3 my-3">
+  <div class="col-3">
+    <div class="flip-card text-center">
+      <div class="flip-card-inner">
+        <div class="flip-card-front p-3">
+          <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+          <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+        </div>
+        <div class="flip-card-back p-3 text-center">
+          <div>tempmax: <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+          <div>tempmin: <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+          <div>temp: <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+          <div>humidity: <%= day[:humidity] %> %</div>
+          <div>cloudcover: <%= day[:cloudcover] %> %</div>
         </div>
       </div>
-      <div class="col-3">
-        <div class="flip-card text-center">
-          <div class="flip-card-inner">
-            <div class="flip-card-front p-3">
-              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
-            </div>
-            <div class="flip-card-back p-3 text-center">
-              <div>tempmax: <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>tempmin: <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>temp: <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>humidity: <%= day[:humidity] %> %</div>
-              <div>cloudcover: <%= day[:cloudcover] %> %</div>
-            </div>
-          </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="flip-card text-center">
+      <div class="flip-card-inner">
+        <div class="flip-card-front p-3">
+          <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+          <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+        </div>
+        <div class="flip-card-back p-3 text-center">
+          <div>tempmax: <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
+          <div>tempmin: <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
+          <div>temp: <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</div>
+          <div>humidity: <%= day[:humidity] %> %</div>
+          <div>cloudcover: <%= day[:cloudcover] %> %</div>
         </div>
       </div>
-      <div class="col-3">
-        <div class="flip-card text-center">
-          <div class="flip-card-inner">
-            <div class="flip-card-front p-3">
-              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
-            </div>
-            <div class="flip-card-back p-3 text-center">
-              <div>bortle: <%= @bortle %></div>
-              <p>Bortle class is a light pollution scale from 0 to 10.</p>
-              <p>0 is : pure sky without any light pollution</p>
-              <p>10 is : saturated sky by light pollution</p>
-            </div>
-          </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="flip-card text-center">
+      <div class="flip-card-inner">
+        <div class="flip-card-front p-3">
+          <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
+          <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+        </div>
+        <div class="flip-card-back p-3 text-center">
+          <div>bortle: <%= @bortle %></div>
+          <p>Bortle class is a light pollution scale from 0 to 10.</p>
+          <p>0 is : pure sky without any light pollution</p>
+          <p>10 is : saturated sky by light pollution</p>
         </div>
       </div>
     </div>
@@ -80,12 +78,5 @@
 
   <% if day == Date.today %>
     <%= link_to "View details", search_path(coordinates: [marker.longitude, marker.latitude]), class:"NS-button" %>
-
-  <% end %>
-
-  <% if marker.id && !marker.favorite?(current_user) %>
-    <a href=<%= marker_favorites_path(marker) %> class="add" data-method="post"><i class="fa-regular fa-heart fav-icon"></i></a>
-  <% elsif marker.id && marker.favorite?(current_user) %>
-    <a href=<%= marker_favorites_path(marker) %> class="remove" data-method="delete" data-confirm="Delete this marker from you favorites?"> <i class="fa-solid fa-heart fav-icon"></i></a>
   <% end %>
 </div>
