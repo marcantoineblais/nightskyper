@@ -16,9 +16,11 @@
 <div class="row">
   <div class="reviews">
       <% if @marker  %>
-        <div class="d-flex justify-content-end">
+        <div class="review-title d-flex justify-content-between">
+          <h2> Reviews</h2>
           <%= link_to 'Add a review', new_marker_review_path(@marker), class: "NS-button" %>
         </div>
+        <div class="title-line review-line"></div>
         <% @marker.reviews.each do |review|%>
           <%= render 'review-card', review: review %>
         <% end %>

@@ -1,3 +1,30 @@
+.title-review {
+  margin-top: 20px;
+  font-family: $body-font;
+  color: $NS-darkblue;
+  margin-bottom: 0;
+}
+
+.title-line {
+  background-color: $NS-orange;
+  border-bottom: 2px solid $NS-orange;
+  margin-top: 3px;
+}
+
+
+.review-line {
+  margin-bottom: 20px;
+  width: 135px;
+}
+
+.review-title {
+  margin-bottom: -20px;
+  h2 {
+    color: $NS-darkblue;
+    font-family: $body-font;
+  }
+}
+
 .review-container {
   font-family: $body-font;
   display: flex;
