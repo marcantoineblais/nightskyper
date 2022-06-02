@@ -32,7 +32,7 @@ unless User.count.positive?
   User.create(email: 'e@e.com', username: 'Robert', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972088/samples/people/kitchen-bar.jpg")
   User.create(email: 'f@f.com', username: 'Linda', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972094/samples/people/bicycle.jpg")
   User.create(email: 'g@g.com', username: 'Sophie', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972092/samples/people/boy-snow-hoodie.jpg")
-  User.create(email: 'blaisma@live.fr', username: 'Marc', password: '123456', photo: "https://avatars.githubusercontent.com/u/90230008?v=4")
+  User.create(email: 'h@h.com', username: 'Sali', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654205255/samples/landscapes/whatsapp_image_2022-05-02_at_4.09.16_pm__1__trcbc4.jpg")
 end
 
 user_list = []
