@@ -1,18 +1,27 @@
-<div>
+<div data-controller="new-marker">
   <p><%= marker.title %></p>
   <% if marker.description %>
     <%= link_to 'Show more', result_path(coordinates: [marker.longitude, marker.latitude]) %>
   <% else %>
     <div class="d-flex flex-column">
       <%= link_to 'Show more', result_path(coordinates: [marker.longitude, marker.latitude]) %>
-      <%= link_to 'Add this marker',
-          # "##{(coordinates: [marker.longitude, marker.latitude])}"
-          # new_marker_path(coordinates: [marker.longitude, marker.latitude])
-          data: { data_bs_toggle: "modal", bs_target: "#exampleModal" } %>
-      <%# replace line 8 with modal button %>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-      </button>
+      <%= link_to 'Add this marker', "#", id: "add-marker", data: { turbolinks: false } %>
+    </div>
+    <div id="new-marker-modal" class="d-none" data-new-marker-target="modal">
+      <div class="row align-items-center justify-content-center p-5">
+        <div class="col-6 mx-auto border rounded-5 p-3">
+          <%= simple_form_for(marker) do |f| %>
+            <%= f.input :title %>
+            <%= f.input :description, as: :text %>
+            <%= f.input :photo, as: :hidden, value: marker.photo, input_html: { data: { controller: "cloudinary-markers"}} %>
+            <%= f.hidden_field :longitude, value: marker.longitude %>
+            <%= f.hidden_field :latitude, value: marker.latitude %>
+            <div class="d-flex justify-content-center">
+              <%= f.button :submit, class: "btn btn-warning " %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
