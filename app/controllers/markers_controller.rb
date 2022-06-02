@@ -11,7 +11,6 @@ class MarkersController < ApplicationController
     # create method uses coordinates instead of ID for redirection after successful save
     @marker = Marker.new(marker_params)
     @marker.user = current_user
-    raise
     if @marker.save
       redirect_to result_path(coordinates: [@marker.longitude, @marker.latitude])
     else

@@ -7,7 +7,7 @@
       <%= link_to 'Show more', result_path(coordinates: [marker.longitude, marker.latitude]) %>
       <%= link_to 'Add this marker', "#", id: "add-marker", data: { turbolinks: false } %>
     </div>
-    <div id="new-marker-modal" class="d-none" data-new-marker-target="modal">
+    <div id="new-marker-modal" class="marker-modal" data-new-marker-target="modal">
       <div class="row align-items-center justify-content-center p-5">
         <div class="col-6 mx-auto border rounded-5 p-3">
           <%= simple_form_for(marker) do |f| %>
