@@ -61,8 +61,10 @@
   }
 
   .review-image {
+    height: 58px;
     width: 78px;
     margin-right: 20px;
+    object-fit: contain;
   }
 }
 
