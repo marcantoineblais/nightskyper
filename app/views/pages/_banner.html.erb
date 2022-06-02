@@ -22,12 +22,12 @@
         </div>
     <% end %>
   </div>
-  <div class="row row-content">
-    <div class="hero-title w-100 pb-5">
+  <div class="home row align-items-center justify-content-between">
+    <div class="hero-title">
       <h1>Nightskyper</h1>
       <p>Find the perfect place to shoot the stars in the best conditions.</p>
     </div>
-    <div class='pt-5 d-flex justify-content-end'>
+    <div class='d-flex justify-content-end'>
       <%= form_with class:'w-50 d-flex text-end align-items-center', url: search_path, method: 'GET' do |f| %>
         <%= f.text_field :query, class: 'form-control searchbar-input', placeholder: 'Explore an area' %>
         <%= f.submit 'Search', name: nil, class:'home-search-btn' %>
