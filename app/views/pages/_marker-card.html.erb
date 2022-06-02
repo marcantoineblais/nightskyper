@@ -1,9 +1,25 @@
 <div class="markers d-flex flex-column">
   <div class="marker-container d-flex">
     <% if marker.photo.present? %>
-      <img class="marker-img" src="<%= marker.photo %>" alt="">
+      <div data-controller="popup-img">
+        <img class="marker-img popup-img" src="<%= marker.photo %>" data-popup-img-target="img" alt="">
+        <div class="modal" data-popup-img-target="modal">
+          <!-- The Close Button -->
+          <span class="close" data-popup-img-target="close">&times;</span>
+          <!-- Modal Image -->
+          <img class="modal-content" data-popup-img-target="modalImg">
+        </div>
+      </div>
     <% else %>
-      <img class="marker-img" src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+      <div data-controller="popup-img">
+        <img class="marker-img popup-img" src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" data-popup-img-target="img">
+        <div class="modal" data-popup-img-target="modal">
+          <!-- The Close Button -->
+          <span class="close" data-popup-img-target="close">&times;</span>
+          <!-- Modal Image -->
+          <img class="modal-content" data-popup-img-target="modalImg">
+        </div>
+      </div>
     <% end %>
     <div class="marker-card">
       <div class="marker-content">
