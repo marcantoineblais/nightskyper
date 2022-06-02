@@ -21,6 +21,8 @@ puts "Favorites destroyed"
 #   end
 # end
 
+photos_list = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-nicole-avagliano-2312040_wntmeh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-rachel-claire-7263774_lqyobu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195547/samples/landscapes/pexels-markus-spiske-1679701_qsqrjh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195545/samples/landscapes/pexels-romario-roges-9582923_ymo2az.jpg"]
+
 unless User.count.positive?
   User.create!(email: 'a@a.com', username: 'James', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654035245/users/yu2lfyywjmiyyzexogzp.jpg")
   User.create!(email: 'florent@gilet.com', username: 'Florent_G', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654089313/users/ncp1nyrdwhshrydnen1z.jpg")
@@ -72,7 +74,7 @@ Marker.create!(
   photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/196352919_10159478328024914_148844767911404191_n_pglvzg.jpg"
 )
 
-Marker.create!(
+patrie = Marker.create!(
   title: "La Patrie",
   description: "Close to Mont Megantic, INTERNATIONAL DARK SKY RESERVE",
   latitude: 45.401821,
@@ -80,6 +82,11 @@ Marker.create!(
   user_id: user_list.sample.id,
   photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/198260987_10159478328019914_5744544668368853112_n_n6vn2s.jpg"
 )
+
+patrie_review = Review.new(user: user_list.sample, rating: rand(3..5), content: 'Did I see aliens?', date: Date.today, photos: photos_list.sample(4).join(", "))
+patrie_review.marker = patrie
+patrie_review.save
+
 
 Marker.create!(
   title: "Mont-Royal",
@@ -180,8 +187,15 @@ Marker.create!(
   photo: photos_countryside.sample
 )
 
+Marker.create!(
+  title: "Ottawa",
+  description: "Go to this park and you will have a beautiful view on the moon with the parlement.",
+  latitude: 45.421532,
+  longitude: -75.697189,
+  user_id: user_list.sample.id,
+  photo: photos_city.sample
+)
 
-photos_list = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-nicole-avagliano-2312040_wntmeh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-rachel-claire-7263774_lqyobu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195547/samples/landscapes/pexels-markus-spiske-1679701_qsqrjh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195545/samples/landscapes/pexels-romario-roges-9582923_ymo2az.jpg"]
 
 Marker.all.each do |marker|
   rand(3..5).times do
