@@ -1,0 +1,13 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-6 w-75">
+  <%= simple_form_for([@marker, @review]) do |f| %>
+    <%= f.input :rating, collection: (1..5).to_a, label: "Add a rating" %>
+    <%= f.input :date, as: :date, html5: true, label: "When did you go to this place ?" %>
+    <%= f.input :content, as: :text, label: "Your review:" %>
+    <%= f.input :photos, as: :hidden, value: @review.photos, input_html: { data: { controller: 'cloudinary-reviews' } }, class: "cloudinary-button" %>
+    <div class="d-flex justify-content-center">
+    <%= f.button :submit, class: "NS-button" %>
+    </div>
+  <% end %>
+  </div>
+</div>

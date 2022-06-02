@@ -45,6 +45,7 @@ class PagesController < ApplicationController
     load_weather_by_coordinates(*@coordinates)
     # fetch bortle class infos
     fetch_bortle(@coordinates.last, @coordinates.first)
+    @review = Review.new
   end
 
   def search_by_address
