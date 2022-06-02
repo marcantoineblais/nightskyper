@@ -40,6 +40,8 @@ User.last(8).each do |user|
   user_list << user
 end
 
+User.create(email: 'blaisma@live.fr', username: 'Marc', password: 123456, photo: 'https://avatars.githubusercontent.com/u/90230008?v=4')
+
 # letter_array = ['a', 'b', 'c', 'd', 'e']
 
 # letter_array.each do |letter|
