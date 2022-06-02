@@ -9,9 +9,9 @@
       <div class="marker-content">
         <div class="d-flex justify-content-between">
           <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
-          <% if marker.id && !marker.favorite?(current_user) %>
+          <% if current_user && marker.id && !marker.favorite?(current_user) %>
             <%= render '/pages/add_favorites.html.erb', path: path %>
-          <% elsif marker.id && marker.favorite?(current_user) %>
+          <% elsif current_user && marker.id && marker.favorite?(current_user) %>
             <%= render '/pages/remove_favorites.html.erb', path: path %>
           <% end %>
         </div>

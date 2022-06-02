@@ -13,11 +13,7 @@ export default class extends Controller {
       })
       .then(res => res.json())
       .then((data) => {
-        if (data.saved) {
-          this.element.outerHTML = data.render
-        } else {
-          window.location.replace(data.render)
-        }
+        this.element.outerHTML = data.render
       })
     })
   }

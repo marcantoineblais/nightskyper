@@ -23,15 +23,9 @@ class FavoritesController < ApplicationController
 
       format.json do
         marker = Marker.find(params[:marker_id])
-        favorite = Favorite.new(marker: marker, user: current_user)
-        if favorite.save
-          render = render_to_string partial: '/pages/remove_favorites.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
-          saved = true
-        else
-          render = new_user_session_path
-          saved = false
-        end
-        render json: { saved: saved, render: render }
+        Favorite.create(marker: marker, user: current_user)
+        render = render_to_string partial: '/pages/remove_favorites.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
+        render json: { render: render }
       end
     end
   end
