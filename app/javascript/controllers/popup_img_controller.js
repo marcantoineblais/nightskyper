@@ -9,7 +9,6 @@ export default class extends Controller {
   ]
 
   connect() {
-    console.log("Bonjour / Welcome")
     this.imgTarget.addEventListener('click', (e) => {
       this.modalTarget.style.display = "block";
       this.modalImgTarget.src = this.imgTarget.src;
