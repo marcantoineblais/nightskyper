@@ -10,9 +10,9 @@
         <div class="d-flex justify-content-between">
           <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
           <% if marker.id && !marker.favorite?(current_user) %>
-            <a href="<%= marker_favorites_path(marker) %>" data-method="post" class="add"><i class="fa-regular fa-heart fav-icon"></i></a>
+            <p class="add" data-controller="add-favorite" data-add-favorite-path-value="<%= path %>"><i class="fa-regular fa-heart fav-icon"></i></p>
           <% elsif marker.id && marker.favorite?(current_user) %>
-            <a href="<%= marker_favorites_path(marker) %>" class="remove" data-method="delete" data-confirm="Delete this marker from you favorites?"> <i class="fa-solid fa-heart fav-icon"></i></a>
+            <p class="remove" data-controller="remove-favorite" data-remove-favorite-path-value="<%= path %>"><i class="fa-solid fa-heart fav-icon"></i></a>
           <% end %>
         </div>
         <h3><%= marker.description %></h3>

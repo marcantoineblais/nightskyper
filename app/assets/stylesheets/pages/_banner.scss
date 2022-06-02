@@ -12,27 +12,39 @@
 .hero-title h1 {
   color: $NS-orange;
   font-size: 63px;
-  padding-bottom: 40px;
+  padding-bottom: 35px;
 }
 
 .hero-title p {
   color: white;
-  font-size: 20px;
+  font-size: 24px;
+  opacity: 0.8;
 }
 
-.home-login {
-  position: absolute;
-  top: 8px;
-  right: 10.2%;
-
 .home-btn {
-    text-decoration: none;
-    font-family: $body-font;
-    color: $NS-offwhite;
-    font-weight: bolder;
+  // margin-bottom: 50px;
+  text-decoration: none;
+  font-family: $body-font;
+  color: $NS-orange;
+  font-weight: bolder;
 
-    &:hover {
-      color: $NS-orange;
-    }
+  &:hover {
+    color: $NS-offwhite;
   }
+}
+
+.avatar-btn {
+  margin-bottom: 100px;
+}
+
+.hero-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.row-login {
+  margin-top: 20px;
+  margin-bottom: 100px;
 }
