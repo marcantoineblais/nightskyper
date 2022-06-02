@@ -1,4 +1,3 @@
-
 <div class="row mx-5 my-5">
   <div class="col d-flex justify-content-left align-items-center ">
     <div class="my-3">
@@ -79,12 +78,5 @@
 
   <% if day == Date.today %>
     <%= link_to "View details", search_path(coordinates: [marker.longitude, marker.latitude]), class:"NS-button" %>
-
-  <% end %>
-
-  <% if marker.id && !marker.favorite?(current_user) %>
-    <a href=<%= marker_favorites_path(marker) %> class="add" data-method="post"><i class="fa-regular fa-heart fav-icon"></i></a>
-  <% elsif marker.id && marker.favorite?(current_user) %>
-    <a href=<%= marker_favorites_path(marker) %> class="remove" data-method="delete" data-confirm="Delete this marker from you favorites?"> <i class="fa-solid fa-heart fav-icon"></i></a>
   <% end %>
 </div>
