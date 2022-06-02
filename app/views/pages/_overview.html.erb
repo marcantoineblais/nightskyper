@@ -38,15 +38,22 @@
         <div class="flip-card text-center">
           <div class="flip-card-inner">
             <div class="flip-card-front p-3">
-              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+              <% condition = day[:conditions].split(",")[0]%>
+              <div class="my-3">
+                <%= image_tag("#{@weather.get_url(condition)}", width: "50%") %>
+              </div>
+              <%= day[:conditions]%>
+              <div class="my-2">
+                <h4><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h4>
+              </div>
             </div>
             <div class="flip-card-back p-3 text-center">
-              <div>tempmax: <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>tempmin: <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>temp: <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>humidity: <%= day[:humidity] %> %</div>
-              <div>cloudcover: <%= day[:cloudcover] %> %</div>
+              <p><strong>Temp.max :</strong> <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</p>
+              <p><strong>Temp.min :</strong> <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</p>
+              <p><strong>Temp :</strong> <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</p>
+              <p><strong>Humidity :</strong> <%= day[:humidity] %> %</p>
+              <p><strong>Cloudcover :</strong> <%= day[:cloudcover] %> %</p>
+              <p class="font-italic"><%= day[:description] %></p>
             </div>
           </div>
         </div>
@@ -55,15 +62,18 @@
         <div class="flip-card text-center">
           <div class="flip-card-inner">
             <div class="flip-card-front p-3">
-              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+              <% phase = day[:moonphase]%>
+              <div class="my-3">
+                <%= image_tag("#{@weather.get_url(phase)}", width: "50%") %>
+              </div>
+              <h4><%= "#{@weather.get_moonphase(phase)}" %></h4>
             </div>
             <div class="flip-card-back p-3 text-center">
-              <div>tempmax: <%= (((day[:tempmax].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>tempmin: <%= (((day[:tempmin].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>temp: <%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</div>
-              <div>humidity: <%= day[:humidity] %> %</div>
-              <div>cloudcover: <%= day[:cloudcover] %> %</div>
+              <p><strong>Sunrise :</strong> <%= day[:sunrise] %></p>
+              <p><strong>Sunset :</strong> <%= day[:sunset] %></p>
+              <p>-</p>
+              <p><strong>Moonrise :</strong> <%= day[:moonrise] %></p>
+              <p><strong>Moonset :</strong> <%= day[:moonset] %></p>
             </div>
           </div>
         </div>
@@ -72,14 +82,16 @@
         <div class="flip-card text-center">
           <div class="flip-card-inner">
             <div class="flip-card-front p-3">
-              <img src="https://globalnews.ca/wp-content/themes/shaw-globalnews/_img/weather/wx_82.png" alt="Avatar" style="width:100px;height:100px;">
-              <h3><%= (((day[:temp].to_i)-32)/1.8).round(1) %>℃</h3>
+              <div class="my-3">
+                <%= image_tag("bortle/light-bulb", width: "40%") %>
+              </div>
+              <h5>Bortle: <%= @bortle %></h5>
             </div>
-            <div class="flip-card-back p-3 text-center">
-              <div>bortle: <%= @bortle %></div>
+            <div class="flip-card-back bortle-card p-3">
               <p>Bortle class is a light pollution scale from 0 to 10.</p>
-              <p>0 is : pure sky without any light pollution</p>
-              <p>10 is : saturated sky by light pollution</p>
+              <p>0 is a pure sky without any light pollution</p>
+              <p>10 is a saturated sky by light pollution</p>
+              <h6 class="text-center">Bortle: <%= @bortle %></h6>
             </div>
           </div>
         </div>
