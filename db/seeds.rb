@@ -2,8 +2,8 @@ Review.destroy_all
 puts "Reviews destroyed"
 Marker.destroy_all
 puts "Markers destroyed"
-User.destroy_all
-puts "Users destroyed"
+# User.destroy_all
+# puts "Users destroyed"
 # Favorite.destroy_all
 # puts "Favorites destroyed"
 
@@ -29,6 +29,7 @@ unless User.count.positive?
   User.create!(email: 'e@e.com', username: 'Robert', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972088/samples/people/kitchen-bar.jpg")
   User.create!(email: 'f@f.com', username: 'Linda', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972094/samples/people/bicycle.jpg")
   User.create!(email: 'g@g.com', username: 'Sophie', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972092/samples/people/boy-snow-hoodie.jpg")
+  User.create!(email: 'blaisma@live.fr', username: 'Marc', password: '123456', photo: "https://avatars.githubusercontent.com/u/90230008?v=4")
 end
 
 user_list = []
@@ -36,7 +37,7 @@ User.all.each do |user|
   user_list << user
 end
 
-User.create!(email: 'blaisma@live.fr', username: 'Marc', password: '123456', photo: "https://avatars.githubusercontent.com/u/90230008?v=4")
+
 
 # letter_array = ['a', 'b', 'c', 'd', 'e']
 
