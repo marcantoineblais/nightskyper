@@ -5,7 +5,7 @@
   <% else %>
     <div class="d-flex flex-column">
       <%= link_to 'Show more', result_path(coordinates: [marker.longitude, marker.latitude]) %>
-      <%= link_to 'Add this marker', "#", id: "add-marker", data: { turbolinks: false } %>
+      <%= link_to 'Add this marker', "#", id: "add-marker", data: { turbolinks: false, new_marker_target: "btn" } %>
     </div>
     <div id="new-marker-modal" class="marker-modal" data-new-marker-target="modal">
       <div class="row align-items-center justify-content-center p-5">
@@ -17,11 +17,12 @@
             <%= f.hidden_field :longitude, value: marker.longitude %>
             <%= f.hidden_field :latitude, value: marker.latitude %>
             <div class="d-flex justify-content-center">
-              <%= f.button :submit, class: "btn btn-warning " %>
+              <%= f.submit :submit, class: "btn btn-warning" %>
             </div>
           <% end %>
         </div>
       </div>
+       <span class="close" data-new-marker-target="close">&times;</span>
     </div>
   <% end %>
 </div>

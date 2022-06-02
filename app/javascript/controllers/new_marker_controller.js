@@ -2,22 +2,21 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   static values = { coordinates: Array }
-  static targets = ["modal"]
+  static targets = ["modal", "close", 'btn']
 
   connect() {
-    // console.log(this.modalTarget);
+    console.log('hello');
 
-    const link = document.getElementById("add-marker")
-    const modal = this.modalTarget.cloneNode(true)
-
-    link.addEventListener("click", () => {
-      this.modalTarget.remove()
-      document.body.insertAdjacentElement("afterbegin", modal)
-      // modal.classList.remove("d-none");
-      modal.style.display = "block"
+    this.btnTarget.addEventListener('click', (e) => {
+      this.body = document.querySelector('body')
+      this.modalTarget.style.display = "block";
+      this.body.insertAdjacentHTML("afterbegin", this.modalTarget.outerHTML)
+      this.modalTarget.outerHTML = ""
     })
 
-
-
+    this.modalTarget.addEventListener('click', (e) => {
+      this.modalTarget.style.display = "none"
+      document.querySelector('body').outerHTML = this.body.outerHTML
+    })
   }
 }
