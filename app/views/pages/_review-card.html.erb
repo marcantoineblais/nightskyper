@@ -23,7 +23,15 @@
     <div class="review-images d-flex">
       <% if review.photos.present? %>
         <% review.photos.split(',').each do |photo| %>
-          <img src="<%= photo %>" class="review-image"/>
+          <div data-controller="popup-img">
+            <img src="<%= photo %>" class="review-image popup-img" data-popup-img-target="img"/>
+            <div class="modal" data-popup-img-target="modal">
+              <!-- The Close Button -->
+              <span class="close" data-popup-img-target="close">&times;</span>
+              <!-- Modal Image -->
+              <img class="modal-content" data-popup-img-target="modalImg">
+            </div>
+          </div>
         <% end %>
       <% else %>
         <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
