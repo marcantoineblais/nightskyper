@@ -127,6 +127,8 @@ export default class extends Controller {
       if (document.querySelector('.search-marker')) {
         document.querySelector('.search-marker').outerHTML = ""
       }
+      document.querySelector('body').insertAdjacentHTML('beforeend', data.form)
+
       const zoom = this.map.getZoom()
       this.#recenterMapToBondaries(data.customMarker, zoom)
       this.#addMarkersToMap([data.customMarker], 'search-marker')

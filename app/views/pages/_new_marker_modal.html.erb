@@ -1,11 +1,11 @@
 <div class="row align-items-center justify-content-center p-5">
   <div class="col-6 mx-auto border rounded-5 p-3">
-    <%= simple_form_for(@marker) do |f| %>
+    <%= simple_form_for(marker) do |f| %>
       <%= f.input :title %>
       <%= f.input :description, as: :text %>
       <%= f.input :photo, as: :hidden, value: @marker.photo, input_html: { data: { controller: "cloudinary-markers"}} %>
-      <%= f.hidden_field :longitude, value: @coordinates[0] %>
-      <%= f.hidden_field :latitude, value: @coordinates[1] %>
+      <%= f.hidden_field :longitude, value: coordinates[0] %>
+      <%= f.hidden_field :latitude, value: coordinates[1] %>
       <div class="d-flex justify-content-center">
       <%= f.button :submit, class: "btn btn-warning " %>
       </div>

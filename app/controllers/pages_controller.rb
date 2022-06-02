@@ -41,7 +41,8 @@ class PagesController < ApplicationController
     @coordinates = params[:coordinates].map(&:to_f)
     search_by_coordinates
     # find assiciated marker with coordinates
-    @marker = Marker.find_by_coordinates(*@coordinates).first
+    @marker = Marker.find_by_coordinates(*@coordinates).first || Marker.new(title: 'Custom marker', longitude: @coordinates[0], latitude: @coordinates[1])
+    @marker.id ? marker_favorites_path(@marker) : nil
     load_weather_by_coordinates(*@coordinates)
     # fetch bortle class infos
     fetch_bortle(@coordinates.last, @coordinates.first)
@@ -106,12 +107,13 @@ class PagesController < ApplicationController
         info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: @marker })
         path = @marker.id ? marker_favorites_path(@marker) : nil
         overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker, path: path })
+        form = render_to_string partial: '/pages/marker-form.html.erb', locals: { marker: @marker }, layout: false
         custom_marker = {
           lon: @marker.longitude,
           lat: @marker.latitude,
           info_window: info_window
         }
-        render json: { customMarker: custom_marker, overview: overview }
+        render json: { customMarker: custom_marker, overview: overview, form: form }
       end
     end
   end
