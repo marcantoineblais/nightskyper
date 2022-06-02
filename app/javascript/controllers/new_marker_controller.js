@@ -17,9 +17,7 @@ export default class extends Controller {
       modal.style.display = "block"
     })
 
-    document.getElementById("new-marker-modal").addEventListener("click", (e) => {
-      e.currentTarget.style.display = "none"
-    })
+
 
   }
 }

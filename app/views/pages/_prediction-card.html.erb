@@ -1,5 +1,5 @@
 <div class="card mb-4 box-shadow">
-  <div class="card-body text-center">
+  <div class="card-body mb-0 text-center">
     <div class="row">
       <div class="col-3 text-start d-flex align-items-center">
         <% if Date.parse(day[:datetime]) === Date.today %>
@@ -20,27 +20,27 @@
         <% end %>
       </div>
 
-      <div class="col-3 d-flex flex-column align-items-center">
+      <div class="col-3 d-flex flex-column align-items-center justify-content-between">
         <% condition = day[:conditions].split(",")[0]%>
-        <div class="h-75">
+        <div class="h-75 mb-3">
         <%= image_tag("#{@weather.get_url(condition)}", width: "30%") %>
         </div>
-        <%= day[:conditions]%>
+        <p class="mb-0"><%= day[:conditions]%></p>
       </div>
 
-      <div class="col-3 d-flex flex-column align-items-center">
+      <div class="col-3 d-flex flex-column align-items-center justify-content-between">
         <% phase = day[:moonphase]%>
-        <div class="h-75">
+        <div class="h-75 mb-3">
         <%= image_tag("#{@weather.get_url(phase)}", width: "45%") %>
         </div>
-        <%= "#{@weather.get_moonphase(phase)}" %>
+        <p class="mb-0"><%= "#{@weather.get_moonphase(phase)}" %> </p>
       </div>
 
-      <div class="col-3 d-flex flex-column align-items-center">
-        <div class="h-75">
+      <div class="col-3 d-flex flex-column align-items-center justify-content-between">
+        <div class="h-75 mb-3">
         <%= image_tag("bortle/light-bulb", width: "24%") %>
         </div>
-        Bortle: <%= @bortle %>
+        <p class="mb-0">Bortle: <%= @bortle %></p>
       </div>
     </div>
   </div>

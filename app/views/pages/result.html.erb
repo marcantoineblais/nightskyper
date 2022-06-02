@@ -1,9 +1,3 @@
-<% @noaddfav %>
-
-<div class="row">
-  <%= link_to "Back to Search page", search_path %>
-</div>
-
 <div class="row">
   <div class="result-container my-5" data-controller="result">
     <% @meteo_prediction.first(7).each_with_index do |day, index| %>
@@ -11,20 +5,25 @@
         <div class="overview-result pt-3" style="display:none;" data-result-target="overview<%= index %> overviews">
           <%= render 'overview', day: day, marker: @marker, place_name: @place_name, bortle: @bortle %>
         </div>
-        <div class="prediction-result" data-result-target="prediction<%= index %> predictions" data-action="click->result#toggleOverviewPrediction">
+        <div class="prediction-result collapse multiCollapse" data-result-target="prediction<%= index %> predictions" data-action="click->result#toggleOverviewPrediction">
           <%= render 'prediction-card', day: day %>
         </div>
       </div>
     <% end %>
+    <div class="d-flex justify-content-center" data-action="click->result#checkForCollapse">
+      <button class="btn btn-light btn-forecast" type="button" data-bs-toggle="collapse" data-bs-target=".multiCollapse" aria-expanded="false" aria-controls="multiCollapseExample">Forecasts</button>
+    </div>
   </div>
 </div>
 
 <div class="row">
   <div class="reviews">
       <% if @marker  %>
-        <div class="d-flex justify-content-end">
+        <div class="review-title d-flex justify-content-between">
+          <h2> Reviews</h2>
           <%= link_to 'Add a review', new_marker_review_path(@marker), class: "NS-button" %>
         </div>
+        <div class="title-line review-line"></div>
         <% @marker.reviews.each do |review|%>
           <%= render 'review-card', review: review %>
         <% end %>
