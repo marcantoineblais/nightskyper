@@ -3,7 +3,7 @@
     <% @meteo_prediction.first(7).each_with_index do |day, index| %>
       <div class="day-<%= index %>">
         <div class="overview-result pt-3" style="display:none;" data-result-target="overview<%= index %> overviews">
-          <%= render 'overview', day: day, marker: @marker, place_name: @place_name, bortle: @bortle, path: marker_favorites_path(@marker) %>
+          <%= render 'overview', day: day, marker: @marker, place_name: @place_name, bortle: @bortle, path: @path %>
         </div>
         <div class="prediction-result collapse multiCollapse" data-result-target="prediction<%= index %> predictions" data-action="click->result#toggleOverviewPrediction">
           <%= render 'prediction-card', day: day %>
@@ -18,7 +18,7 @@
 
 <div class="row">
   <div class="reviews">
-      <% if @marker  %>
+      <% if @marker.id  %>
         <div class="review-title d-flex justify-content-between">
           <h2> Reviews</h2>
           <%= link_to 'Add a review', new_marker_review_path(@marker), class: "NS-button" %>
@@ -27,8 +27,6 @@
         <% @marker.reviews.each do |review|%>
           <%= render 'review-card', review: review %>
         <% end %>
-      <% else %>
-        <p> No marker</p>
       <% end %>
   </div>
 </div>

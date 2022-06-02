@@ -41,7 +41,8 @@ class PagesController < ApplicationController
     @coordinates = params[:coordinates].map(&:to_f)
     search_by_coordinates
     # find assiciated marker with coordinates
-    @marker = Marker.find_by_coordinates(*@coordinates).first
+    @marker = Marker.find_by_coordinates(*@coordinates).first || Marker.new(title: 'Custom marker', longitude: @coordinates[0], latitude: @coordinates[1])
+    @marker.id ? marker_favorites_path(@marker) : nil
     load_weather_by_coordinates(*@coordinates)
     # fetch bortle class infos
     fetch_bortle(@coordinates.last, @coordinates.first)
