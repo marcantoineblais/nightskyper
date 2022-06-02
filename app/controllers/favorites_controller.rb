@@ -25,7 +25,7 @@ class FavoritesController < ApplicationController
         marker = Marker.find(params[:marker_id])
         favorite = Favorite.new(marker: marker, user: current_user)
         if favorite.save
-          render = render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
+          render = render_to_string partial: '/pages/remove_favorites.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
           saved = true
         else
           render = new_user_session_path
@@ -48,8 +48,8 @@ class FavoritesController < ApplicationController
         marker = Marker.find(params[:marker_id])
         favorite = Favorite.find_by(marker: marker)
         favorite.destroy
-        marker_card = render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
-        render json: { render: marker_card }
+        render = render_to_string partial: '/pages/add_favorites.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
+        render json: { render: render }
       end
     end
   end
