@@ -27,10 +27,10 @@
   </div>
   <div class="row my-2">
     <div class="d-flex justify-content-end">
-      <% if marker.id && !marker.favorite?(current_user) %>
-        <a href=<%= marker_favorites_path(marker) %> class="add" data-method="post"><i class="fa-regular fa-heart fav-icon"></i></a>
-      <% elsif marker.id && marker.favorite?(current_user) %>
-        <a href=<%= marker_favorites_path(marker) %> class="remove" data-method="delete" data-confirm="Delete this marker from you favorites?"> <i class="fa-solid fa-heart fav-icon"></i></a>
+      <% if current_user && marker.id && !marker.favorite?(current_user) %>
+        <%= render '/pages/add_favorites.html.erb', path: path %>
+      <% elsif current_user && marker.id && marker.favorite?(current_user) %>
+        <%= render '/pages/remove_favorites.html.erb', path: path %>
       <% end %>
     </div>
   </div>
