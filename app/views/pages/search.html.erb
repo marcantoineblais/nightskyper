@@ -1,4 +1,4 @@
-<div id="overview">
+<div id="overview" class="my-5">
   <% if @meteo_prediction.present? %>
     <%= render 'overview', day: @meteo_prediction.first, marker: @marker, place_name: @place_name, bortle: @bortle %>
   <% end %>

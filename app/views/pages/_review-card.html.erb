@@ -22,7 +22,6 @@
       </div>
       <p class="review-text"><%= review.content %></p>
     <div class="review-underline"></div>
-    <%# Images Placeholders to not break the view until we have a seed with images %>
     <div class="review-images d-flex align-items-center">
       <% review.photos&.split(',')&.each do |photo| %>
         <div data-controller="popup-img">
