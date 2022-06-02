@@ -4,8 +4,8 @@ Marker.destroy_all
 puts "Markers destroyed"
 # User.destroy_all
 # puts "Users destroyed"
-# Favorite.destroy_all
-# puts "Favorites destroyed"
+Favorite.destroy_all
+puts "Favorites destroyed"
 
 def select_title_data(inst)
   if(inst.town)
