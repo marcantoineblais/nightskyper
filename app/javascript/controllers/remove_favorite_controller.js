@@ -6,7 +6,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.pathValue)
     this.element.addEventListener('click', (e) => {
       fetch(this.pathValue, {
         method: "DELETE",
@@ -14,7 +13,7 @@ export default class extends Controller {
       })
       .then(res => res.json())
       .then((data) => {
-        this.element.parentElement.parentElement.parentElement.parentElement.parentElement.outerHTML = data.render
+        this.element.outerHTML = data.render
       })
     })
   }

@@ -1,18 +1,34 @@
 <div class="markers d-flex flex-column">
   <div class="marker-container d-flex">
     <% if marker.photo.present? %>
-      <img class="marker-img" src="<%= marker.photo %>" alt="">
+      <div data-controller="popup-img">
+        <img class="marker-img popup-img" src="<%= marker.photo %>" data-popup-img-target="img" alt="">
+        <div class="modal" data-popup-img-target="modal">
+          <!-- The Close Button -->
+          <span class="close" data-popup-img-target="close">&times;</span>
+          <!-- Modal Image -->
+          <img class="modal-content" data-popup-img-target="modalImg">
+        </div>
+      </div>
     <% else %>
-      <img class="marker-img" src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="">
+      <div data-controller="popup-img">
+        <img class="marker-img popup-img" src="https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" data-popup-img-target="img">
+        <div class="modal" data-popup-img-target="modal">
+          <!-- The Close Button -->
+          <span class="close" data-popup-img-target="close">&times;</span>
+          <!-- Modal Image -->
+          <img class="modal-content" data-popup-img-target="modalImg">
+        </div>
+      </div>
     <% end %>
     <div class="marker-card">
       <div class="marker-content">
         <div class="d-flex justify-content-between">
           <h2><%= link_to marker.title, result_path(coordinates: [marker.longitude, marker.latitude]) %></h2>
-          <% if marker.id && !marker.favorite?(current_user) %>
-            <p class="add" data-controller="add-favorite" data-add-favorite-path-value="<%= path %>"><i class="fa-regular fa-heart fav-icon"></i></p>
-          <% elsif marker.id && marker.favorite?(current_user) %>
-            <p class="remove" data-controller="remove-favorite" data-remove-favorite-path-value="<%= path %>"><i class="fa-solid fa-heart fav-icon"></i></a>
+          <% if current_user && marker.id && !marker.favorite?(current_user) %>
+            <%= render '/pages/add_favorites.html.erb', path: path %>
+          <% elsif current_user && marker.id && marker.favorite?(current_user) %>
+            <%= render '/pages/remove_favorites.html.erb', path: path %>
           <% end %>
         </div>
         <h3><%= marker.description %></h3>
@@ -23,12 +39,11 @@
               <% marker.average_rating.times do %>
                 <span class="fa fa-star checked"></span>
               <% end %>
-              <% unchecked = 5 - marker.average_rating %>
-              <% unchecked.times do %>
+
+              <% (5 - marker.average_rating).times do %>
                 <span class="fa-solid fa-star unchecked"></span>
               <% end %>
             </div>
-
           </div>
       </div>
     </div>

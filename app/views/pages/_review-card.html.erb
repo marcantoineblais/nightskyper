@@ -11,24 +11,28 @@
 
       <div class="review-top d-flex justify-content-between">
         <h3><%= review.date %></h3>
-        <p class="rating">
-        <%review.rating.times do %>
-          <span class="fa fa-star checked"></span>
-        <% end %>
+        <p class="rating text-end">
+          <% review.rating.times do %>
+            <span class="fa fa-star checked"></span>
+          <% end %>
+          <% (5 - review.rating).times do %>
+            <span class="fa-solid fa-star unchecked"></span>
+          <% end %>
         </p>
       </div>
       <p class="review-text"><%= review.content %></p>
     <div class="review-underline"></div>
-    <%# Images Placeholders to not break the view until we have a seed with images %>
-    <div class="review-images d-flex">
-      <% if review.photos.present? %>
-        <% review.photos.split(',').each do |photo| %>
-          <img src="<%= photo %>" class="review-image"/>
-        <% end %>
-      <% else %>
-        <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
-        <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
-        <img class= "review-image" src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg" alt="">
+    <div class="review-images d-flex align-items-center">
+      <% review.photos&.split(',')&.each do |photo| %>
+        <div data-controller="popup-img">
+          <img src="<%= photo %>" class="review-image popup-img" data-popup-img-target="img"/>
+          <div class="modal" data-popup-img-target="modal">
+            <!-- The Close Button -->
+            <span class="close" data-popup-img-target="close">&times;</span>
+            <!-- Modal Image -->
+            <img class="modal-content" data-popup-img-target="modalImg">
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
