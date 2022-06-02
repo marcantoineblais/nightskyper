@@ -1,7 +1,11 @@
 <h1 class="title-review" >My reviews</h1>
 <div class="title-line"></div>
 
-<% @reviews.each do |review| %>
-  <%= render '/pages/marker-card', marker: review.marker %>
-  <%= render '/pages/review-card', review: review %>
-<% end %>
+<div class="cards mt-3">
+  <% @reviews.reverse.each do |review| %>
+    <%= render '/pages/marker-card', marker: review.marker, path: marker_favorites_path(review.marker) %>
+    <div class="w-75 mb-5">
+      <%= render '/pages/review-card', review: review %>
+    </div>
+  <% end %>
+</div>
