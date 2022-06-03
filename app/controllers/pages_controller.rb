@@ -3,7 +3,7 @@ require 'nokogiri'
 require_relative '../../weather-conditions'
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[home result search custom_marker marker_info]
+  skip_before_action :authenticate_user!, only: %i[home result search custom_marker marker_info overview render_overview]
   skip_before_action :verify_authenticity_token
 
   def home
