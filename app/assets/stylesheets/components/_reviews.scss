@@ -88,14 +88,13 @@
   .review-images {
     height: 50px;
     width: 60px;
-    object-fit: cover;
   }
 
   .review-image {
     height: 58px;
     width: 78px;
     margin-right: 20px;
-    object-fit: contain;
+    object-fit: cover;
   }
 }
 
