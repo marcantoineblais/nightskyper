@@ -15,7 +15,7 @@ export default class extends Controller {
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10",
+      style: "mapbox://styles/marcantblais/cl3xsip73001b14p8pjts4ql3"
     })
 
     // Resize the map after page load (solve display bug)
