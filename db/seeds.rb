@@ -56,7 +56,7 @@ User.create(email: 'blaisma@live.fr', username: 'Marc', password: 123456, photo:
 #     )
 #   end
 # end
-photos_city = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg", "https://images.pexels.com/photos/1482777/pexels-photo-1482777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "https://images.pexels.com/photos/3799176/pexels-photo-3799176.jpeg", "https://images.pexels.com/photos/993019/pexels-photo-993019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "https://images.pexels.com/photos/89573/pexels-photo-89573.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"]
+photos_city = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg"]
 photos_countryside = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654192455/samples/landscapes/231242581_10159585695944914_8405464899740385571_n_sdmraf.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/196352919_10159478328024914_148844767911404191_n_pglvzg.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/198260987_10159478328019914_5744544668368853112_n_n6vn2s.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-nicole-avagliano-2312040_wntmeh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-rachel-claire-7263774_lqyobu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195547/samples/landscapes/pexels-markus-spiske-1679701_qsqrjh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195545/samples/landscapes/pexels-romario-roges-9582923_ymo2az.jpg"]
 
 Marker.create!(
@@ -83,7 +83,7 @@ Marker.create!(
   latitude: 45.630760,
   longitude: -73.730225,
   user_id: user_list.sample.id,
-  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg"
+  photo: photos_city.sample
 )
 
 Marker.create!(
@@ -199,7 +199,7 @@ montroyal = Marker.create!(
   latitude: 45.507485,
   longitude: -73.590005,
   user_id: user_list.sample.id,
-  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg"
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654272915/samples/landscapes/pexels-photo-993019_ufngvm.jpg"
 )
 
 mont_review = Review.new(user: User.last, rating: 3, content: 'Sit on the Chalet steps, and enjoy the moon with our beautiful downtown.', date: Date.yesterday, photos: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg")
@@ -235,11 +235,11 @@ patrie_review = Review.new(user: User.first, rating: 5, content: 'Did I see alie
 patrie_review.marker = patrie
 patrie_review.save
 
-patrie_review = Review.new(user: User.fifth, rating: 4, content: 'You can have a sit in the middle of that crop-circle to get great stars shots!', date: Date.today, photos: "https://images.pexels.com/photos/8703568/pexels-photo-8703568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2, https://images.pexels.com/photos/35888/amazing-beautiful-breathtaking-clouds.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+patrie_review = Review.new(user: User.fifth, rating: 4, content: 'You can have a sit in the middle of that crop-circle to get great stars shots!', date: Date.today, photos: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654273108/samples/landscapes/pexels-photo-8703568_tuczcp.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654273146/samples/landscapes/amazing-beautiful-breathtaking-clouds_zqojhy.jpg")
 patrie_review.marker = patrie
 patrie_review.save
 
-patrie_review = Review.new(user: User.last, rating: 5, content: 'You can park your car at the field entrance. You can see the Milky Way with your naked eye!', date: Date.today, photos: photos_countryside.sample(6).join(", "))
+patrie_review = Review.new(user: User.last, rating: 5, content: 'You can park your car at the field entrance. You can see the Milky Way with your naked eye!', date: Date.today, photos: photos_countryside.sample(5).join(", "))
 patrie_review.marker = patrie
 patrie_review.save
 
