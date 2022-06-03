@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/search', to: 'pages#search'
   post '/marker-info', to: 'pages#marker_info', as: 'marker_info'
   post '/custom-marker', to: 'pages#custom_marker', as: 'custom_marker'
+  patch '/custom-marker', to: 'pages#render_overview'
   get '/result/', to: 'pages#result', as: :result
   delete '/markers/:marker_id/favorites', to: 'favorites#destroy'
 
