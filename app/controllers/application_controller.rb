@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_timezone
 
   def default_url_options
     { host: ENV["DOMAIN"] || "localhost:3000" }
@@ -14,5 +15,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :photo])
   end
 
-
+  def set_timezone
+    Time.zone = 'Eastern Time (US & Canada)'
+  end
 end

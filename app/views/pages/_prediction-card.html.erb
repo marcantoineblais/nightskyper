@@ -2,12 +2,12 @@
   <div class="card-body mb-0 text-center">
     <div class="row">
       <div class="col-3 text-start d-flex align-items-center">
-        <% if Date.parse(day[:datetime]) === Date.today %>
+        <% if Date.parse(day[:datetime]) == Date.today %>
           <div>
           <h5>Today</h5>
             <p><%= day[:datetime] %></p>
           </div>
-        <% elsif Date.parse(day[:datetime]) === Date.tomorrow %>
+        <% elsif Date.parse(day[:datetime]) == Date.tomorrow %>
           <div>
           <h5>Tomorrow</h5>
             <p><%= day[:datetime] %></p>
