@@ -83,7 +83,7 @@ Marker.create!(
   latitude: 45.630760,
   longitude: -73.730225,
   user_id: user_list.sample.id,
-  photo: photos_city.sample
+  photo: "https://images.pexels.com/photos/2244823/pexels-photo-2244823.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 )
 
 Marker.create!(
@@ -202,7 +202,7 @@ montroyal = Marker.create!(
   photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654272915/samples/landscapes/pexels-photo-993019_ufngvm.jpg"
 )
 
-mont_review = Review.new(user: User.last, rating: 3, content: 'Sit on the Chalet steps, and enjoy the moon with our beautiful downtown.', date: Date.yesterday, photos: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg")
+mont_review = Review.new(user: User.last, rating: 3, content: 'Sit on the Chalet steps, and enjoy the moon with our beautiful downtown.', date: Date.yesterday, photos: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654283914/samples/landscapes/pexels-photo-11739980_fsf6vd.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg")
 mont_review.marker = montroyal
 mont_review.save
 
