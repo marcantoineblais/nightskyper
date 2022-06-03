@@ -18,8 +18,7 @@ class PagesController < ApplicationController
       format.html do
         if params[:query].present?
           search_by_address
-          load_weather_by_coordinates(*@center)
-          fetch_bortle(@center.last, @center.first)
+          overview(*@center)
           @marker = Marker.new(longitude: @center.first, latitude: @center.last)
         else
           @map_boundaries = [-200, -73, 200, 73]
@@ -39,13 +38,11 @@ class PagesController < ApplicationController
   def result
     # convert coordinates from string to float, returns an array
     @coordinates = params[:coordinates].map(&:to_f)
-    search_by_coordinates
+    search_by_coordinates(*@coordinates)
     # find assiciated marker with coordinates
     @marker = Marker.find_by_coordinates(*@coordinates).first || Marker.new(title: 'Custom marker', longitude: @coordinates[0], latitude: @coordinates[1])
     @path = @marker.id ? marker_favorites_path(@marker) : nil
-    load_weather_by_coordinates(*@coordinates)
-    # fetch bortle class infos
-    fetch_bortle(@coordinates.last, @coordinates.first)
+    overview(@marker.longitude, @marker.latitude)
     @review = Review.new
   end
 
@@ -60,15 +57,15 @@ class PagesController < ApplicationController
     @map_boundaries = bounds || [@center[0] - 0.022, @center[1] - 0.022, @center[0] + 0.022, @center[1] + 0.022]
   end
 
-  def search_by_coordinates
-    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{@coordinates[0]},#{@coordinates[1]}.json?access_token=#{ENV['MAPBOX_API_KEY']}"
+  def search_by_coordinates(longitude, latitude)
+    url = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{longitude},#{latitude}.json?access_token=#{ENV['MAPBOX_API_KEY']}"
     doc = JSON.parse(URI.open(url).read)
     @doc = doc['features']
-    place_nam_list = []
+    place_name_list = []
     @doc.each do |feature|
-      place_nam_list << feature['place_name']
+      place_name_list << feature['place_name']
     end
-    @place_name = place_nam_list[-3]
+    @place_name = place_name_list[-3]
   end
 
   # uses the map boundaries to retrieve markers to display from the DB
@@ -85,16 +82,14 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.json do
         @marker = Marker.find(params[:id].to_i)
-        load_weather_by_coordinates(@marker.longitude, @marker.latitude)
         info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: @marker })
-        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker, path: marker_favorites_path(@marker) })
         marker = {
           id: @marker.id,
           lon: @marker.longitude,
           lat: @marker.latitude,
           info_window: info_window
         }
-        render json: { marker: marker, overview: overview }
+        render json: { marker: marker }
       end
     end
   end
@@ -103,17 +98,14 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.json do
         @marker = Marker.new(title: 'Custom marker', longitude: params[:coordinates][0].to_f, latitude: params[:coordinates][1].to_f)
-        load_weather_by_coordinates(@marker.longitude, @marker.latitude)
         info_window = render_to_string(partial: "/pages/info_window.html.erb", locals: { marker: @marker })
-        path = @marker.id ? marker_favorites_path(@marker) : nil
-        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker, path: path })
         form = render_to_string partial: '/pages/marker-form.html.erb', locals: { marker: @marker }, layout: false
         custom_marker = {
           lon: @marker.longitude,
           lat: @marker.latitude,
           info_window: info_window
         }
-        render json: { customMarker: custom_marker, overview: overview, form: form }
+        render json: { customMarker: custom_marker, form: form }
       end
     end
   end
@@ -129,7 +121,7 @@ class PagesController < ApplicationController
     @weather = WeatherCondition.new
   end
 
-  def fetch_bortle(latitude, longitude)
+  def fetch_bortle(longitude, latitude)
     bortle_url = "https://clearoutside.com/forecast/#{latitude}/#{longitude}"
 
     selector = "span[class*=btn-bortle] strong:nth-child(3)"
@@ -144,5 +136,29 @@ class PagesController < ApplicationController
       render_to_string partial: '/pages/marker-card.html.erb', locals: { marker: marker, path: marker_favorites_path(marker) }, layout: false
     end
     markers.join
+  end
+
+  def overview(longitude, latitude)
+    load_weather_by_coordinates(longitude, latitude)
+    fetch_bortle(longitude, latitude)
+    search_by_coordinates(longitude, latitude)
+  end
+
+  def render_overview
+    respond_to do |format|
+      format.json do
+        marker = params[:marker]
+        coordinates = marker['lon'].to_f, marker['lat'].to_f
+        if marker['id']
+          @marker = Marker.find(marker[:id])
+        else
+          @marker = Marker.new(title: 'Custom marker', longitude: coordinates[0], latitude: coordinates[1])
+        end
+        overview(*coordinates)
+        path = @marker.id ? marker_favorites_path(@marker) : nil
+        overview = render_to_string(partial: '/pages/overview.html.erb', locals: { day: @meteo_prediction.first, place_name: @place_name, bortle: @bortle, marker: @marker, path: path})
+        render json: { overview: overview }
+      end
+    end
   end
 end

@@ -132,10 +132,7 @@ export default class extends Controller {
       const zoom = this.map.getZoom()
       this.#recenterMapToBondaries(data.customMarker, zoom)
       this.#addMarkersToMap([data.customMarker], 'search-marker')
-
-      if (document.getElementById('overview') && data.overview != document.getElementById('overview').innerHTML) {
-        document.getElementById('overview').innerHTML = data.overview
-      }
+      this.#renderOverview(data.customMarker)
     })
   }
 
@@ -168,8 +165,21 @@ export default class extends Controller {
       }
 
       this.#recenterMapToBondaries(data.marker, zoom)
+      this.#renderOverview(data.marker)
+    })
+  }
 
-      if (document.getElementById('overview') && data.overview != document.getElementById('overview').innerHTML) {
+  #renderOverview(marker) {
+    fetch(this.customMarkerPathValue, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", "Accept": "application/json", charset: "UTF-8" },
+      body: JSON.stringify({
+        marker: marker
+      })
+    })
+    .then(res => res.json())
+    .then((data) => {
+      if (document.getElementById('overview')) {
         document.getElementById('overview').innerHTML = data.overview
       }
     })
