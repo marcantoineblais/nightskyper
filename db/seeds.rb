@@ -24,14 +24,14 @@ puts "Users destroyed"
 photos_list = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-nicole-avagliano-2312040_wntmeh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-rachel-claire-7263774_lqyobu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195547/samples/landscapes/pexels-markus-spiske-1679701_qsqrjh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195545/samples/landscapes/pexels-romario-roges-9582923_ymo2az.jpg"]
 
 unless User.count.positive?
-  puts "user created"
-  User.create(email: 'a@a.com', username: 'James', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654035245/users/yu2lfyywjmiyyzexogzp.jpg")
+  puts "Demo users created"
+  User.create(email: 'e@e.com', username: 'James', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654035245/users/yu2lfyywjmiyyzexogzp.jpg")
+  User.create(email: 'a@a.com', username: 'Marc', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652993315/production/vmmdg658dl3sjz12miv0s2hag31o.jpg")
   User.create(email: 'florent@gilet.com', username: 'Florent_G', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654089313/users/ncp1nyrdwhshrydnen1z.jpg")
   User.create(email: 'c@c.com', username: 'Stephane', password: '123456', photo: "https://avatars.githubusercontent.com/u/37821714?v=4")
   User.create(email: 'd@d.com', username: 'Aurelien', password: '123456', photo: "https://avatars.githubusercontent.com/u/25286237?v=4")
-  User.create(email: 'e@e.com', username: 'Robert', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972088/samples/people/kitchen-bar.jpg")
-  User.create(email: 'f@f.com', username: 'Linda', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972094/samples/people/bicycle.jpg")
-  User.create(email: 'g@g.com', username: 'Sophie', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972092/samples/people/boy-snow-hoodie.jpg")
+  linda = User.create(email: 'f@f.com', username: 'Linda', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972094/samples/people/bicycle.jpg")
+  sophie = User.create(email: 'g@g.com', username: 'Sophie', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1652972092/samples/people/boy-snow-hoodie.jpg")
   User.create(email: 'h@h.com', username: 'Sali', password: '123456', photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654205255/samples/landscapes/whatsapp_image_2022-05-02_at_4.09.16_pm__1__trcbc4.jpg")
 end
 
@@ -56,7 +56,7 @@ User.create(email: 'blaisma@live.fr', username: 'Marc', password: 123456, photo:
 #     )
 #   end
 # end
-photos_city = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/c_scale,w_800/v1654199906/samples/landscapes/pexels-dan-hadley-6017481_lgf5zl.jpg"]
+photos_city = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg", "https://images.pexels.com/photos/1482777/pexels-photo-1482777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "https://images.pexels.com/photos/3799176/pexels-photo-3799176.jpeg", "https://images.pexels.com/photos/993019/pexels-photo-993019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "https://images.pexels.com/photos/89573/pexels-photo-89573.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"]
 photos_countryside = ["https://res.cloudinary.com/diiu2j0fw/image/upload/v1654192455/samples/landscapes/231242581_10159585695944914_8405464899740385571_n_sdmraf.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/196352919_10159478328024914_148844767911404191_n_pglvzg.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/198260987_10159478328019914_5744544668368853112_n_n6vn2s.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-nicole-avagliano-2312040_wntmeh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195557/samples/landscapes/pexels-rachel-claire-7263774_lqyobu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195547/samples/landscapes/pexels-markus-spiske-1679701_qsqrjh.jpg", "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195545/samples/landscapes/pexels-romario-roges-9582923_ymo2az.jpg"]
 
 Marker.create!(
@@ -75,29 +75,6 @@ Marker.create!(
   longitude: -70.780145,
   user_id: user_list.sample.id,
   photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/196352919_10159478328024914_148844767911404191_n_pglvzg.jpg"
-)
-
-patrie = Marker.create!(
-  title: "La Patrie",
-  description: "Close to Mont Megantic, INTERNATIONAL DARK SKY RESERVE",
-  latitude: 45.401821,
-  longitude: -71.252853,
-  user_id: user_list.sample.id,
-  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/198260987_10159478328019914_5744544668368853112_n_n6vn2s.jpg"
-)
-
-patrie_review = Review.new(user: user_list.sample, rating: rand(3..5), content: 'Did I see aliens?', date: Date.today, photos: photos_list.sample(4).join(", "))
-patrie_review.marker = patrie
-patrie_review.save
-
-
-Marker.create!(
-  title: "Mont-Royal",
-  description: "In front of Le Chalet du Mont-Royal, beautiful see on the Moon and the city",
-  latitude: 45.507485,
-  longitude: -73.590005,
-  user_id: user_list.sample.id,
-  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg"
 )
 
 Marker.create!(
@@ -199,12 +176,75 @@ Marker.create!(
   photo: photos_city.sample
 )
 
+Marker.create!(
+  title: "Jardin Botanique",
+  description: "Observe the moon at the top of the Parc Olympique. Beautiful!",
+  latitude: 45.560422,
+  longitude: -73.555343,
+  user_id: user_list.sample.id,
+  photo: photos_city.sample
+)
+
 
 Marker.all.each do |marker|
-  rand(3..5).times do
-    Review.create(user: user_list.sample, marker: marker, rating: rand(3..5), content: ['Nice place!', 'Good location', 'Very enjoyable!', 'I took so many pictures!', 'Very wow', 'Did I see aliens?', 'Hard to get there, but awesome spot!', 'Beautiful', 'To infinity and beyond!', 'Houston we have a problem!', 'Looked up to the stars with Dark Side of the Moon album!', 'Took a bunch of nice pictures!', 'Next time, I bring my telescop!'].sample, date: Date.today, photos: photos_list.sample(4).join(", "))
+  rand(1..6).times do
+    Review.create(user: user_list.sample, marker: marker, rating: rand(3..5), content: ['Nice place!', 'Good location', 'Very enjoyable!', 'I took so many pictures!', 'Very wow', 'Hard to get there, but awesome spot!', 'Beautiful', 'To infinity and beyond!', 'Houston we have a problem!', 'Looked up to the stars with Dark Side of the Moon album!', 'Took a bunch of nice pictures!', 'Next time, I bring my telescop!'].sample, date: Date.today, photos: photos_list.sample(4).join(", "))
   end
 end
 
+
+montroyal = Marker.create!(
+  title: "Mont-Royal",
+  description: "In front of Le Chalet du Mont-Royal, beautiful see on the Moon and the city",
+  latitude: 45.507485,
+  longitude: -73.590005,
+  user_id: user_list.sample.id,
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg"
+)
+
+mont_review = Review.new(user: User.last, rating: 3, content: 'Sit on the Chalet steps, and enjoy the moon with our beautiful downtown.', date: Date.yesterday, photos: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195556/samples/landscapes/pexels-eberhard-grossgasteiger-572897_3_uowk8t.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195554/samples/landscapes/pexels-sindre-str%C3%B8m-958363_xm9qm9.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-sindre-str%C3%B8m-955855_gslb87.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-chait-goli-2666598_xrjnmq.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195550/samples/landscapes/pexels-margerretta-902756_vguexu.jpg")
+mont_review.marker = montroyal
+mont_review.save
+
+mont_review = Review.new(user: User.fourth, rating: 1, content: 'I was attacked by a racoon here!.', date: Date.yesterday, photos: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654194395/samples/landscapes/pexels-alex-andrews-821718_zjqiyx.jpg")
+mont_review.marker = montroyal
+mont_review.save
+
+mont_review = Review.new(user: User.third, rating: 2, content: "I can't see the milky way there!", date: Date.today, photos: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654267278/samples/landscapes/pexels-kelly-leonard-5770637_oukksh.jpg")
+mont_review.marker = montroyal
+mont_review.save
+
+mont_review = Review.new(user: sophie, rating: 3, content: "Good spot to see the moon.", date: Date.today, photos: photos_city.sample(3).join(", "))
+mont_review.marker = montroyal
+mont_review.save
+
+
+puts "Mont-Royal created"
 # http://api.positionstack.com/v1/forward?access_key=a5f3e8675d5ca91c470e9bbdcc288a62&country=CA&query=que
 # http://api.positionstack.com/v1/
+
+patrie = Marker.create!(
+  title: "La Patrie",
+  description: "Close to Mont Megantic, INTERNATIONAL DARK SKY RESERVE",
+  latitude: 45.401821,
+  longitude: -71.252853,
+  user_id: user_list.sample.id,
+  photo: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654193689/samples/landscapes/198260987_10159478328019914_5744544668368853112_n_n6vn2s.jpg"
+)
+patrie_review = Review.new(user: User.first, rating: 5, content: 'Did I see aliens?', date: Date.yesterday, photos: "https://res.cloudinary.com/diiu2j0fw/image/upload/v1654195552/samples/landscapes/pexels-dom-le-roy-4065333_fiq4n6.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654265170/samples/landscapes/pexels-miriam-espacio-365625_lraduk.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654265296/samples/landscapes/pexels-marek-piwnicki-8738454_am7dkz.jpg, https://res.cloudinary.com/diiu2j0fw/image/upload/v1654199906/samples/landscapes/pexels-dan-hadley-6017481_lgf5zl.jpg")
+patrie_review.marker = patrie
+patrie_review.save
+
+patrie_review = Review.new(user: User.fifth, rating: 4, content: 'You can have a sit in the middle of that crop-circle to get great stars shots!', date: Date.today, photos: "https://images.pexels.com/photos/8703568/pexels-photo-8703568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2, https://images.pexels.com/photos/35888/amazing-beautiful-breathtaking-clouds.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+patrie_review.marker = patrie
+patrie_review.save
+
+patrie_review = Review.new(user: User.last, rating: 5, content: 'You can park your car at the field entrance. You can see the Milky Way with your naked eye!', date: Date.today, photos: photos_countryside.sample(6).join(", "))
+patrie_review.marker = patrie
+patrie_review.save
+
+patrie_review = Review.new(user: linda, rating: 5, content: 'Definitiely my favorite spot in the area!', date: Date.today, photos: photos_countryside.sample(4).join(", "))
+patrie_review.marker = patrie
+patrie_review.save
+
+puts "La Patrie created"
