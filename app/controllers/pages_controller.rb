@@ -115,20 +115,28 @@ class PagesController < ApplicationController
     api_key = ENV['visual_crossing']
     optional_element = "datetime,moonphase,sunrise,sunset,moonrise,moonset,temp,humidity,conditions,description,tempmax,tempmin,cloudcover"
     visualcrossing_url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/#{latitude},#{longitude}?key=#{api_key}&include=days&elements=#{optional_element}"
-    doc = JSON.parse(URI.open(visualcrossing_url).read)
-    # index 0 is today - index 14 is in 2 weeks
-    @meteo_prediction = doc['days'].map(&:symbolize_keys)
-    @weather = WeatherCondition.new
+    begin
+      doc = JSON.parse(URI.open(visualcrossing_url).read)
+      # index 0 is today - index 14 is in 2 weeks
+      @meteo_prediction = doc['days'].map(&:symbolize_keys)
+      @weather = WeatherCondition.new
+    rescue
+      flash[:notice] = "Meteo data currently unavailable"
+    end
   end
 
   def fetch_bortle(longitude, latitude)
     bortle_url = "https://clearoutside.com/forecast/#{latitude}/#{longitude}"
 
     selector = "span[class*=btn-bortle] strong:nth-child(3)"
-    html_file = URI.open(bortle_url).read
-    html_doc = Nokogiri::HTML(html_file)
+    begin
+      html_file = URI.open(bortle_url).read
+      html_doc = Nokogiri::HTML(html_file)
 
-    @bortle = html_doc.search(selector).text.strip
+      @bortle = html_doc.search(selector).text.strip
+    rescue
+      flash[:notice] = "Bortle class currently unavailable"
+    end
   end
 
   def marker_partials
